@@ -27,14 +27,14 @@ fs.readdirSync(path.join(__dirname, '/models'))
     modelDefiners.push(require(path.join(__dirname, '/models', file)))
   })
 
-modelDefiners.forEach(model => model(sequelize))
-const entries = Object.entries(sequelize.models)
-const capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].slice(1), entry[1]])
-sequelize.models = Object.fromEntries(capsEntries)
+// modelDefiners.forEach(model => model(sequelize))
+// const entries = Object.entries(sequelize.models)
+// const capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].slice(1), entry[1]])
+// sequelize.models = Object.fromEntries(capsEntries)
 
 const { Users } = sequelize.models
 
-module.exports = {
-  ...sequelize.models,
-  conn: sequelize
-}
+// module.exports = {
+//   ...sequelize.models,
+//   conn: sequelize
+// }
