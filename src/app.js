@@ -1,5 +1,5 @@
-require("./passport/passportGoogle.js");
-require('./db.js');
+// require('./passport/passportGoogle.js')
+require('./db.js')
 
 const express = require('express')
 const cookieParser = require('cookie-parser')
@@ -8,7 +8,7 @@ const morgan = require('morgan')
 const cors = require('cors')
 
 const routes = require('./routes/index.js')
-const passport = require('passport');
+// const passport = require('passport');
 
 const server = express()
 
@@ -16,7 +16,7 @@ server.name = 'NoiLan'
 
 server.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }))
 server.use(bodyParser.json({ limit: '50mb' }))
-server.use(cors({ origin: "http://localhost:3000", credentials: true }))
+server.use(cors({ origin: 'http://localhost:3000', credentials: true }))
 
 server.use(cookieParser())
 server.use(morgan('dev'))
@@ -28,9 +28,8 @@ server.use((req, res, next) => {
   next()
 })
 
-
-server.use(passport.initialize())
-server.use(passport.session())
+// server.use(passport.initialize())
+// server.use(passport.session())
 
 server.use('/', routes)
 
