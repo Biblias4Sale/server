@@ -2,7 +2,7 @@
   "name": "server",
   "version": "0.1.0",
   "private": true,
-  "description": "Server Side e-Commerce",
+  "description": "Noilan Api",
   "main": "index.js",
   "engines": {
     "node": ">=12.18.3",
