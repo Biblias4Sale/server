@@ -1,5 +1,6 @@
 require("./passport/passportGoogle.js");
 require('./db.js');
+
 const express = require('express')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
@@ -8,15 +9,15 @@ const cors = require('cors')
 
 const routes = require('./routes/index.js')
 const passport = require('passport');
-// require('./db.js')
 
 const server = express()
 
-server.name = 'PG'
+server.name = 'NoiLan'
 
 server.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }))
 server.use(bodyParser.json({ limit: '50mb' }))
 server.use(cors({ origin: "http://localhost:3000", credentials: true }))
+
 server.use(cookieParser())
 server.use(morgan('dev'))
 server.use((req, res, next) => {
@@ -30,6 +31,7 @@ server.use((req, res, next) => {
 
 server.use(passport.initialize())
 server.use(passport.session())
+
 server.use('/', routes)
 
 // Error catching endware.

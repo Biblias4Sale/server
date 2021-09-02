@@ -1,12 +1,12 @@
 # Server
  
-## Api stage:
-https://aprendoxd.herokuapp.com/
+## host:
+https://noiloan.herokuapp.com
 
 ## endpoints:
 
-- /category >> todas las categorías
+- /category >> todas las categorías.
 
-- /lesson   >> lista todas las clases con algunas propiedades minimas
-- /lesson/best/:n   >> las 'n' clases mejor puntuadas
-- /lesson/detail/:id    >> una clase por ID con todas sus propiedades
+- /product   >> lista todos los productos con algunas propiedades minimas
+- /product/best/:n   >> los 'n' productos mejor puntuados
+- /product/detail/:id   >> un producto por ID con todas sus propiedades

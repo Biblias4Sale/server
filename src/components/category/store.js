@@ -1,4 +1,5 @@
-const Categories = ['JavaScript', 'React', 'Redux', 'Express']
+
+const Categories = ['Camaras Digitales', 'Lentes', 'Iluminación', 'Accesorios']
 
 const getAll = () => {
   return Categories
