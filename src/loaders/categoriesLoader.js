@@ -1,5 +1,6 @@
 const { Categories } = require('../db.js')
 const { categoriesList } = require('../../config')
+
 const categoriesLoader = async () => {
   const categoriesInDB = await Categories.findAndCountAll()
   if (categoriesInDB.count === 0) {
