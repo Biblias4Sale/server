@@ -42,7 +42,8 @@ const addProduct = async (newProduct) => {
     price,
     points
   })
-  return newProd
+  // console.log(newProd, 'NEWPROD')
+  return await newProd
 }
 
 const getAll = () => {

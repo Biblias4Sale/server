@@ -14,8 +14,9 @@ router.get('/detail/:id', (req, res) => {
   res.json(getDetail(req.params.id))
 })
 
-router.post('/add', (req, res) => {
-  res.json(addProduct(req.body))
+router.post('/add', async (req, res) => {
+  const response = await (addProduct(req.body))
+  res.json(response)
 })
 
 module.exports = router
