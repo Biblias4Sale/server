@@ -6,6 +6,10 @@ const { force } = require('./config.js')
 
 const PORT = process.env.PORT || 3001
 
+const { DATABASE_URL } = process.env
+
+console.log('>>>>>>>>>>>>>>>>>>>>>>>>>', DATABASE_URL)
+
 process.stdout.write('\u001b[2J\u001b[0;0H') // limpia pantalla de la consola
 
 server.set('port', process.env.PORT || 3001)
