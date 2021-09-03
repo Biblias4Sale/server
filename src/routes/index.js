@@ -6,8 +6,8 @@ const login = require('../components/auth/login')
 const logout = require('../components/auth/logout')
 const user = require('../components/auth/user')
 
-router.use('/category', networkCategory)
-router.use('/product', networkProduct)
+router.use('/categories', networkCategory)
+router.use('/products', networkProduct)
 
 // auth
 router.use('/api/v1/', login)
