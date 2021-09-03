@@ -1,15 +1,7 @@
 const store = require('./store')
 
-const getAll = () => {
-  return store.getAll().map(product => {
-    return (
-      {
-        id: product.id,
-        name: product.name,
-        points: product.points
-      }
-    )
-  })
+const getAll = async () => {
+  return await store.getAll()
 }
 
 const getBest = (qty) => {

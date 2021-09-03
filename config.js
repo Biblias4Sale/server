@@ -1,6 +1,6 @@
 
 const config = {
-  force: false,
+  force: true,
   categoriesList: ['Camaras', 'Lentes', 'Accesorios']
 }
 

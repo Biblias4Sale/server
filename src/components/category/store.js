@@ -6,7 +6,6 @@ const getAllCategories = async () => {
 }
 
 const addCategory = async (newCategory) => {
-  console.log(newCategory)
   try {
     const newCat = await Categories.create({ name: newCategory })
     return newCat
@@ -30,15 +29,6 @@ const addSubCategory = async (category, subCategory) => {
   } catch (e) {
     return e.name
   }
-
-  // const selectAll = await Categories.findAll({
-  //   include: {
-  //     model: SubCategories
-  //   }
-  // })
-  // console.log(selectAll)
-  // console.log(cat)
-  // console.log(subCat)
 }
 
 const getAllSubCategories = async () => {
