@@ -30,6 +30,21 @@ const Product = [
   { id: 29, name: 'Producto', points: 3.7, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' }
 ]
 
+const { Products, SubCategories } = require('../../db')
+
+const addProduct = async (newProduct) => {
+  const { brand, model, img, description, price, points } = newProduct
+  const newProd = await Products.create({
+    brand,
+    model,
+    img,
+    description,
+    price,
+    points
+  })
+  return newProd
+}
+
 const getAll = () => {
   return Product // FindALL
 }
@@ -40,5 +55,6 @@ const findById = (id) => {
 
 module.exports = {
   getAll,
-  findById
+  findById,
+  addProduct
 }

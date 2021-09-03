@@ -26,6 +26,10 @@ module.exports = (sequelize) => {
     price: {
       type: DataTypes.INTEGER,
       allowNull: false
+    },
+    points: {
+      type: DataTypes.FLOAT,
+      allowNull: false
     }
   }, {
     freezeTableName: true,
