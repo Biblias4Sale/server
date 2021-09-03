@@ -1,7 +1,8 @@
 const store = require('./store')
 
 const getAllCategories = async () => {
-  return await store.getAllCategories()
+  const response = await store.getAllCategories()
+  return (response.map(object => object.dataValues.name))
 }
 
 const addCategory = async (newCategory) => {
