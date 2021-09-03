@@ -11,11 +11,10 @@ process.stdout.write('\u001b[2J\u001b[0;0H') // limpia pantalla de la consola
 
 // COMENTAR CONN.SYNC PARA PRODUCCION
 
-// conn.sync({ force }).then(() => {
-//   console.log('base de datos conectada')
-// })
-
-server.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`)
-  console.log(DATABASE_URL)
+conn.sync({ force }).then(() => {
+  console.log('base de datos conectada')
+  server.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`)
+    console.log(DATABASE_URL)
+  })
 })
