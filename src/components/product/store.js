@@ -34,16 +34,21 @@ const { Products, SubCategories } = require('../../db')
 
 const addProduct = async (newProduct) => {
   const { brand, model, img, description, price, points } = newProduct
-  const newProd = await Products.create({
-    brand,
-    model,
-    img,
-    description,
-    price,
-    points
-  })
-  // console.log(newProd, 'NEWPROD')
-  return await newProd
+
+  try {
+    const newProd = await Products.create({
+      brand,
+      model,
+      img,
+      description,
+      price,
+      points
+    })
+    // console.log(newProd, 'NEWPROD')
+    return await newProd
+  } catch (e) {
+    return e.name
+  }
 }
 
 const getAll = () => {
