@@ -6,37 +6,35 @@ const getAllCategories = async () => {
 }
 
 const addCategory = async (newCategory) => {
-  console.log(newCategory)
-  const newCat = await Categories.create({ name: newCategory })
-  return newCat
+  try {
+    const newCat = await Categories.create({ name: newCategory })
+    return newCat
+  } catch (e) {
+    return e.name
+  }
 }
 
 const addSubCategory = async (category, subCategory) => {
-  const subCat = await SubCategories.create({
-    name: subCategory
-  })
-  const cat = await Categories.findOne({
-    where: {
-      name: category
-    }
-  })
-  // const selectAll = await Categories.findAll({
-  //   include: {
-  //     model: SubCategories
-  //   }
-  // })
-  // console.log(selectAll)
-// console.log(cat)
-// console.log(subCat)
-  await cat.addSubCategories(subCat)
-  return subCat
+  try {
+    const subCat = await SubCategories.create({
+      name: subCategory
+    })
+    const cat = await Categories.findOne({
+      where: {
+        name: category
+      }
+    })
+    await cat.addSubCategories(subCat)
+    return subCat
+  } catch (e) {
+    return e.name
+  }
 }
 
 const getAllSubCategories = async () => {
   const subcats = await SubCategories.findAll({ attributes: ['name', 'id_cat'] })
   return subcats
 }
-
 
 module.exports = {
   getAllCategories,
