@@ -1,9 +1,14 @@
 const store = require('./store')
 
-const getAll = () => {
-  return store.getAll()
+const getAllCategories = () => {
+  return store.getAllCategories()
+}
+
+const addCategory = (newCategory) => {
+  return store.addCategory(newCategory)
 }
 
 module.exports = {
-  getAll
+  getAllCategories,
+  addCategory
 }
