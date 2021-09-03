@@ -23,8 +23,12 @@ const getDetail = (id) => {
   return store.findById(id)
 }
 
+const addProduct = (newProduct) => {
+  return store.addProduct(newProduct)
+}
 module.exports = {
   getAll,
   getBest,
-  getDetail
+  getDetail,
+  addProduct
 }
