@@ -13,9 +13,10 @@ server.set('port', process.env.PORT || 3001)
 
 // COMENTAR CONN.SYNC PARA PRODUCCION
 
-conn.sync({ force }).then(() => {
-  console.log('base de datos conectada')
-  server.listen(server.get('port'), () => {
-    console.log('server on PORT', server.get('port'))
-  })
+// conn.sync({ force }).then(() => {
+//   console.log('base de datos conectada')
+// })
+
+server.listen(server.get('port'), () => {
+  console.log('server on PORT', server.get('port'))
 })

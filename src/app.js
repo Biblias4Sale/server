@@ -18,7 +18,7 @@ server.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }))
 server.use(bodyParser.json({ limit: '50mb' }))
 
 server.use(cors())
-// server.use(cors({ origin: 'http://localhost:3000', credentials: true }))   << OJO CON ESTO
+// server.use(cors({ origin: 'http://localhost:3000', credentials: true }))   << OJO CON ESTO PARA PRODUCCION
 
 server.use(cookieParser())
 server.use(morgan('dev'))
