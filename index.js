@@ -7,7 +7,6 @@ const { DATABASE_URL } = process.env
 
 process.stdout.write('\u001b[2J\u001b[0;0H') // limpia pantalla de la consola
 
-// server.set('port', PORT)
 // STARTING
 
 // COMENTAR CONN.SYNC PARA PRODUCCION
@@ -18,6 +17,5 @@ process.stdout.write('\u001b[2J\u001b[0;0H') // limpia pantalla de la consola
 
 server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
+  console.log(DATABASE_URL)
 })
-
-console.log(DATABASE_URL)
