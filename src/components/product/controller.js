@@ -23,8 +23,8 @@ const getDetail = (id) => {
   return store.findById(id)
 }
 
-const addProduct = (newProduct) => {
-  return store.addProduct(newProduct)
+const addProduct = async (newProduct) => {
+  return await store.addProduct(newProduct)
 }
 module.exports = {
   getAll,

@@ -1,6 +1,7 @@
 
 const config = {
-  force: true
+  force: true,
+  categoriesList: ['Reflex', 'Lentes', 'Accesorios']
 }
 
 module.exports = config
