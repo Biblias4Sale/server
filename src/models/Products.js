@@ -1,31 +1,35 @@
 const { DataTypes } = require('sequelize')
 
 module.exports = (sequelize) => {
-  const Users = sequelize.define('Users', {
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    familyName: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
+  const Products = sequelize.define('products', {
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV1,
       primaryKey: true
     },
-    email: {
+    brand: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    picture: {
+    model: {
       type: DataTypes.STRING,
+      allowNull: false
+    },
+    img: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    description: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    price: {
+      type: DataTypes.INTEGER,
       allowNull: false
     }
   }, {
     freezeTableName: true,
     sequelize,
-    tableName: 'Users'
+    tableName: 'products'
   })
 }
