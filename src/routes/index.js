@@ -9,6 +9,8 @@ const user = require('../components/auth/user')
 router.use('/categories', networkCategory)
 router.use('/products', networkProduct)
 
+// hola Diego
+
 // auth
 router.use('/api/v1/', login)
 router.use('/logout', logout)
