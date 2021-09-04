@@ -10,7 +10,7 @@ const newUser = async ({ name, lastName, email, password }) => {
     password: bcryptjs.hashSync(password, salt)
   }
 
-  await store.newUser(user)
+  return await store.newUser(user)
 }
 
 const editUser = async () => await store.editUser()

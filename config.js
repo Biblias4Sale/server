@@ -1,6 +1,6 @@
 
 const config = {
-  force: true,
+  alter: true,
   categoriesList: ['Accesorios', 'Camaras', 'Soportes', 'Luces', 'Cagadores y baterías']
 }
 

@@ -5,6 +5,7 @@ const express = require('express')
 const cookieParser = require('cookie-parser')
 const morgan = require('morgan')
 const cors = require('cors')
+require('colors')
 
 const routes = require('./routes')
 // const passport = require('passport');
