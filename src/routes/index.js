@@ -18,6 +18,8 @@ router.use(category, networkCategory)
 router.use(product, networkProduct)
 router.use(user, networkUser)
 
+// hola Diego
+
 // auth
 router.use(googleLogin, authLogin)
 router.use(googleLogout, authLogout)
