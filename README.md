@@ -9,7 +9,7 @@ https://noiloan.herokuapp.com
 - POST /categories/add/  >> crea una nueva categoría (espera un name, por body)
 - POST /categories/addSub >> crea una nueva subCategoría (espera category y subCategory por body)
 - GET /categories/getSub >> todas las subCategorías
-
+- PRUEBA DE COLISION
 - /products   >> lista todos los productos con algunas propiedades minimas
 - /products/best/:n   >> los 'n' productos mejor puntuados
 - /products/detail/:id   >> un producto por ID con todas sus propiedades
