@@ -32,13 +32,22 @@ sequelize.models = Object.fromEntries(capsEntries)
 
 const { Users, Categories, Cart, Orders, SubCategories, Discounts, Products } = sequelize.models
 
-Products.belongsToMany(Orders, { through: 'products_orders' })
-Products.belongsTo(Discounts)
-SubCategories.hasMany(Products, { foreignKey: 'id_subCat' })
-Categories.hasMany(SubCategories, { foreignKey: 'id_cat' })
+Products.hasOne(Discounts)
+Discounts.belongsTo(Products)
+
+SubCategories.hasMany(Products)
+Products.belongsTo(SubCategories)
+Categories.hasMany(SubCategories)
+SubCategories.belongsTo(Categories)
 Cart.hasMany(Orders, { as: 'cart_orders' })
-Cart.belongsToMany(Users, { through: 'cart_users' })
+Orders.belongsTo(Cart)
 Users.hasMany(Products, { as: 'products_user' })
+Products.belongsTo(Users)
+
+Products.belongsToMany(Orders, { through: 'products_orders' })
+Orders.belongsToMany(Products, { through: 'products_orders' })
+Cart.belongsToMany(Users, { through: 'cart_users' })
+Users.belongsToMany(Cart, { through: 'cart_users' })
 
 module.exports = {
   ...sequelize.models,

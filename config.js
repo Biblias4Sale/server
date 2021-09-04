@@ -1,7 +1,7 @@
 
 const config = {
-  force: true,
-  categoriesList: ['Camaras', 'Lentes', 'Accesorios']
+  alter: true,
+  categoriesList: ['Accesorios', 'Camaras', 'Soportes', 'Luces', 'Cagadores y baterías']
 }
 
 module.exports = config

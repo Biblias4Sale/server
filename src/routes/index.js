@@ -2,16 +2,25 @@ const express = require('express')
 const router = express.Router()
 const networkCategory = require('../components/category/network')
 const networkProduct = require('../components/product/network')
-const login = require('../components/auth/login')
-const logout = require('../components/auth/logout')
-const user = require('../components/auth/user')
+const networkUser = require('../components/user/network')
+const authLogin = require('../components/auth/login')
+const authLogout = require('../components/auth/logout')
+const authUser = require('../components/auth/user')
 
-router.use('/categories', networkCategory)
-router.use('/products', networkProduct)
+const category = '/categories'
+const product = '/products'
+const user = '/user'
+const googleLogin = '/api/v1/'
+const googleLogout = '/logout'
+const userLogin = '/login'
+
+router.use(category, networkCategory)
+router.use(product, networkProduct)
+router.use(user, networkUser)
 
 // auth
-router.use('/api/v1/', login)
-router.use('/logout', logout)
-router.use('/user', user)
+router.use(googleLogin, authLogin)
+router.use(googleLogout, authLogout)
+router.use(userLogin, authUser)
 
 module.exports = router

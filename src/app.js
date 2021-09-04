@@ -3,23 +3,20 @@ require('./db.js')
 
 const express = require('express')
 const cookieParser = require('cookie-parser')
-const bodyParser = require('body-parser')
 const morgan = require('morgan')
 const cors = require('cors')
+require('colors')
 
-const routes = require('./routes/index.js')
+const routes = require('./routes')
 // const passport = require('passport');
 
 const server = express()
 
 server.name = 'NoiLan'
 
-server.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }))
-server.use(bodyParser.json({ limit: '50mb' }))
-
 server.use(cors())
 // server.use(cors({ origin: 'http://localhost:3000', credentials: true }))   << OJO CON ESTO PARA PRODUCCION
-
+server.use(express.json())
 server.use(cookieParser())
 server.use(morgan('dev'))
 server.use((req, res, next) => {
