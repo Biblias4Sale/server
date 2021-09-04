@@ -1,3 +1,4 @@
+const express = require('express')
 const router = express.Router()
 const networkCategory = require('../components/category/network')
 const networkProduct = require('../components/product/network')
@@ -7,8 +8,6 @@ const user = require('../components/auth/user')
 
 router.use('/categories', networkCategory)
 router.use('/products', networkProduct)
-
-// hola Diego
 
 // auth
 router.use('/api/v1/', login)
