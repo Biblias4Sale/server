@@ -6,6 +6,7 @@ const categoriesLoader = async () => {
   if (categoriesInDB.count === 0) {
     try {
       categoriesList.forEach(category => Categories.create({ name: category }))
+      console.log('DB filled')
     } catch (error) {
       console.log('Error filling DB')
     }

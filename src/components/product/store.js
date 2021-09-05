@@ -30,10 +30,12 @@ const Product = [
   { id: 29, name: 'Panasonic MDH2', points: 3, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' }
 ]
 
-const { Products, SubCategories } = require('../../db')
+const { categoriesList } = require('../../../config')
+const { Products, SubCategories, Categories } = require('../../db')
 
 const addProduct = async (newProduct) => {
   const { brand, model, img, description, price, points } = newProduct
+  const { subCategory } = newProduct
   try {
     const newProd = await Products.create({
       brand,
@@ -43,24 +45,43 @@ const addProduct = async (newProduct) => {
       price,
       points
     })
+
+    const subCat = await SubCategories.findOne({
+      where: {
+        name: subCategory
+      }
+    })
+
+    await subCat.addProduct(newProd)
+
     return await newProd
   } catch (e) {
+    console.log(e)
     return `${model} ya existe`
   }
 }
 
 const getAll = async () => {
   // ****          👿NO BORRAR👿        ***** //
-  // try {
-  //   const product = await Products.findAll({
-  //     attributes: { exclude: ['createdAt', 'updatedAt'] }
-  //   })
-  //   return product
-  // } catch (e) {
-  //   return e.name
-  // }
+  try {
+    const product = await Products.findAll({
+      attributes: { exclude: ['createdAt', 'updatedAt'] },
+      include: {
+        model: SubCategories,
+        attributes: { exclude: ['createdAt', 'updatedAt', 'subCategoryId'] },
+        include: {
+          model: Categories,
+          attributes: { exclude: ['createdAt', 'updatedAt'] }
+        }
+      }
+    })
 
-  return Product
+    return product
+  } catch (e) {
+    return e.name
+  }
+
+  // return Product
 }
 
 const findById = async (id) => {
