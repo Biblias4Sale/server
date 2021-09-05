@@ -149,7 +149,7 @@ const products = [
     name: 'Sony a6000 + 18-55mm',
     brand: 'Sony',
     model: 'a6000',
-    img: 'https://cdn.alzashop.com/ImgW.ashx?fd=f4&cd=OS073c1&i=1.jpg',
+    img: 'https://camaras.blogdelfotografo.com/wp-content/uploads/2020/10/Sony_Alpha_a6000.png',
     description: 'El visor réflex permite obtener una perspectiva realista y tomar fotografías increíbles con resultados más exactos gracias a la posibilidad de intercambiar objetivos.',
     price: 189000,
     points: 3,
