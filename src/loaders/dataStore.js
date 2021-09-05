@@ -181,7 +181,7 @@ const products = [
     model: '2.4G Wireless Flash',
     img: 'https://m.media-amazon.com/images/I/61q-kYsRKEL._AC_SL1280_.jpg',
     description: 'Powerextra LCD Display Flash Speedlite, 2.4G Wireless Flash Trigger Transmitter Kit for CA Nikon Pentax Panasonic Olympus and Sony DSLR Camera, Digital Cameras with Standard Hot Shoe',
-    price: 1200,
+    price: 900,
     points: 4,
     subCategory: 'Flashes'
   },
