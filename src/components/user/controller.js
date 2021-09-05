@@ -15,7 +15,7 @@ const newUser = async ({ name, lastName, email, password }) => {
 
 const editUser = async () => await store.editUser()
 
-const delUser = async () => await store.delUser()
+const delUser = async (id) => await store.delUser(id)
 
 module.exports = {
   newUser,

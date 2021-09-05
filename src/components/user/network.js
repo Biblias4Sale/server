@@ -30,7 +30,7 @@ router.put('/', (req, res) => {
 
 router.delete('/', (req, res) => {
   controller
-    .delUser()
+    .delUser(req.body.id)
     .then(message => response.success(req, res, 200, message))
     .catch(e => response.error(req, res, 404, e, 'User not found'))
 })
