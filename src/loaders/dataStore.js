@@ -96,9 +96,9 @@ const products = [
     subCategory: 'Fijo'
   },
   {
-    name: 'Nikon 780 Body',
+    name: 'Nikon D780 Body',
     brand: 'Nikon',
-    model: '780',
+    model: 'D780',
     img: 'https://www.digi-zoom.com.ar/images/productos/1979_1_z.jpg',
     description: 'Sensor CMOS BSI de formato FX de 24.5MP Vídeo UHD 4K30; Salida N-Log y HDMI de 10 bit Sistema AF Multi-CAM 3500 II de 51 puntos',
     price: 437000,
@@ -344,7 +344,7 @@ const products = [
     price: 5100,
     points: 2,
     subCategory: 'Modificadores'
-  },
+  }
 
 ]
 
