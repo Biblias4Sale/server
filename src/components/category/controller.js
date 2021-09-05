@@ -18,7 +18,12 @@ const addCategory = async (newCategory) => await store.addCategory(newCategory)
 
 const addSubCategory = async (category, subCategory) => await store.addSubCategory(category, subCategory)
 
-const getAllSubCategories = async () => await store.getAllSubCategories()
+const getAllSubCategories = async (cat) => {
+  const response = await store.getAllSubCategories(cat)
+  const resp = response.map(object => object.dataValues.name)
+
+  return resp
+}
 
 module.exports = {
   getAllCategories,
