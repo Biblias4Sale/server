@@ -228,7 +228,7 @@ const products = [
   {
     name: 'High Power Infrared LED Lights',
     brand: 'ICAMI',
-    model: 'IR Illuminators 96pcs',
+    model: 'IR Illuminators 96',
     img: 'https://m.media-amazon.com/images/I/71s3utXXU6L._AC_SL1500_.jpg',
     description: 'ICAMI IR Illuminators 96pcs,High Power Infrared LED Lights for Camera',
     price: 8000,
