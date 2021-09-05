@@ -1,4 +1,3 @@
-// const store = require('./store')
 const tokenGenerator = require('../../helpers/tokenGenerator')
 const tokenValidators = require('../../helpers/tokenValidators')
 
