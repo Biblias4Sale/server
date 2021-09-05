@@ -228,7 +228,7 @@ const products = [
   {
     name: 'High Power Infrared LED Lights',
     brand: 'ICAMI',
-    model: 'IR Illuminators 96pcs',
+    model: 'IR Illuminators 96',
     img: 'https://m.media-amazon.com/images/I/71s3utXXU6L._AC_SL1500_.jpg',
     description: 'ICAMI IR Illuminators 96pcs,High Power Infrared LED Lights for Camera',
     price: 8000,
@@ -238,7 +238,7 @@ const products = [
   {
     name: 'Illuminator 8-Led Infrared Light',
     brand: 'JC',
-    model: 'IR Illuminators 96pcs',
+    model: 'IR Illuminators',
     img: 'https://m.media-amazon.com/images/I/61hAItJPWML._AC_SL1200_.jpg',
     description: 'JC IR Illuminator 8-Led Infrared Light Wide Angle 90°with Power Adapter for CCTV and IP Cameras',
     price: 9800,
