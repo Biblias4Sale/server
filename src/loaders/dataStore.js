@@ -4,7 +4,7 @@ const products = [
     name: 'Canon EOS M200 kit 15-45mm + 16gb',
     brand: 'Canon',
     model: 'EOS M200',
-    img: 'https://www.cordobadigital.net/wp-content/uploads/2020/06/canon_3699c009_eos_m200_mirrorless_digital_1508687.jpg',
+    img: 'https://www.perozzi.com.ar/23767-large_default/canon-camara-fotografica-eos-m200-15-45-04201933.jpg',
     description: '24,1mp Sensor de tamaño APS-C Vídeos 4K Conexión Bluetooth y Wi-Fi Pantalla táctil abatible Vídeos time-lapse',
     price: 104000,
     points: 4,
@@ -117,7 +117,7 @@ const products = [
   },
   {
     name: 'Canon EOS Rebel T6/1300D (18-55 mm III)',
-    brand: 'Canon ',
+    brand: 'Canon',
     model: ' Rebel T6/1300D',
     img: 'https://www.digi-zoom.com.ar/images/productos/1092_1_z.jpg',
     description: 'Sensor CMOS 18MP APS-C Procesador de imagen DIGIC 4+ Monitor LCD 3.0 920k-Dot Grabación de video Full HD 1080p a 30 fps',
@@ -137,7 +137,7 @@ const products = [
   },
   {
     model: 'SX100',
-    brand: 'Canon ',
+    brand: 'Canon',
     img: 'https://arsonyb2c.vteximg.com.br/arquivos/ids/292451-550-550/ILCE-7M3_Black-1.jpg?v=637123589061300000',
     description: 'Una cámara linda',
     price: 80000,
