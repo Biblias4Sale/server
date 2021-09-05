@@ -167,16 +167,6 @@ const products = [
   },
   {
     name: 'Neewer TT560 Flash Speedlite',
-    brand: 'Nikon',
-    model: 'Neewer TT560',
-    img: 'https://m.media-amazon.com/images/I/617pCDMdiLL._AC_SX615_SY462_.jpg',
-    description: 'Compatible with for Canon Nikon Panasonic Olympus Pentax Fijifilm and Sony with Mi Hot Shoe cameras',
-    price: 9000,
-    points: 3,
-    subCategory: 'Flashes'
-  },
-  {
-    name: 'Neewer TT560 Flash Speedlite',
     brand: 'Powerextra',
     model: '2.4G Wireless Flash',
     img: 'https://m.media-amazon.com/images/I/61q-kYsRKEL._AC_SL1280_.jpg',
