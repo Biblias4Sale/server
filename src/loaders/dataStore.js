@@ -14,7 +14,7 @@ const products = [
     name: 'Canon EOS M50 Mark II kit 15-45mm',
     brand: 'Canon',
     model: 'EOS M50 Mark II',
-    img: 'Canon EOS M50 Mark II kit 15-45mm',
+    img: 'https://http2.mlstatic.com/D_NQ_NP_971032-MLA40041740402_122019-O.webp',
     description: 'Procesador de imagen DIGIC 8 Sensor CMOS (APS-C) de 24.1 megapíxeles ISO 100-25600 (H: 51200)  Vídeo 4K UHD de 24p y HD de 120p para cámara lenta Pantalla táctil LCD de ángulo variable  Conexión Wi-Fi y Bluetooth',
     price: 104999,
     points: 5,
