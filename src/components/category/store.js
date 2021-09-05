@@ -36,17 +36,31 @@ const addSubCategory = async (category, subCategory) => {
   }
 }
 
-const getAllSubCategories = async () => {
-  const subcats = await SubCategories.findAll({
-    attributes: { exclude: ['createdAt', 'updatedAt'] },
-    include: {
-      model: Categories
-    }
-    // attributes: ['name', 'id_subCat']
-  })
-  return subcats
+const getAllSubCategories = async (cat) => {
+  if (cat === 'All') {
+    const subcats = await SubCategories.findAll({
+      attributes: { exclude: ['createdAt', 'updatedAt'] },
+      include: {
+        model: Categories,
+        attributes: { exclude: ['createdAt', 'updatedAt'] }
+      }
+      // attributes: ['name', 'id_subCat']
+    })
+    return subcats
+  } else {
+    const subcats = await SubCategories.findAll({
+      attributes: { exclude: ['createdAt', 'updatedAt'] },
+      include: {
+        model: Categories,
+        attributes: { exclude: ['createdAt', 'updatedAt'] },
+        where: {
+          name: cat
+        }
+      }
+    })
+    return subcats
+  }
 }
-
 module.exports = {
   getAllCategories,
   addCategory,
