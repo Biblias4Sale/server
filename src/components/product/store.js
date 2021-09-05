@@ -51,8 +51,11 @@ const addProduct = async (newProduct) => {
         name: subCategory
       }
     })
-
-    await subCat.addProduct(newProd)
+    try {
+      await subCat.addProduct(newProd)
+    } catch (e) {
+      return e.name
+    }
 
     return await newProd
   } catch (e) {
