@@ -171,7 +171,7 @@ const products = [
     model: '2.4G Wireless Flash',
     img: 'https://m.media-amazon.com/images/I/61q-kYsRKEL._AC_SL1280_.jpg',
     description: 'Powerextra LCD Display Flash Speedlite, 2.4G Wireless Flash Trigger Transmitter Kit for CA Nikon Pentax Panasonic Olympus and Sony DSLR Camera, Digital Cameras with Standard Hot Shoe',
-    price: 900,
+    price: 11900,
     points: 4,
     subCategory: 'Flashes'
   },
@@ -291,7 +291,7 @@ const products = [
     model: 'Mountdog-x',
     img: 'https://m.media-amazon.com/images/I/51RdcFYbuZL._AC_SL1000_.jpg',
     description: 'Mountdog Photography Reflector with Clip 24 Inches/ 60cm 5 in 1 Photo Light Collapsible Diffuser with Bag & Reflector Holder for Studio Photography Outdoor Lighting Translucent Silver Gold White Black',
-    price: 8700,
+    price: 990,
     points: 3,
     subCategory: 'Modificadores'
   },
