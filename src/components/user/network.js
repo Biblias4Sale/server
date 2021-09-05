@@ -4,6 +4,7 @@ const router = express.Router()
 const controller = require('./controller')
 const response = require('../../responses')
 const validation = require('../../middlewares/validation')
+const tokenValidation = require('../../middlewares/tokenValidation')
 const { validationEmail } = require('../../helpers/dbValidators')
 
 router.post('/', [
@@ -21,7 +22,10 @@ router.post('/', [
     .catch(e => response.error(req, res, 404, e, 'User not found'))
 })
 
-router.put('/', (req, res) => {
+router.put('/', [
+  tokenValidation,
+  validation
+], (req, res) => {
   controller
     .editUser()
     .then(message => response.success(req, res, 200, message))
@@ -30,7 +34,7 @@ router.put('/', (req, res) => {
 
 router.delete('/', (req, res) => {
   controller
-    .delUser()
+    .delUser(req.body.id)
     .then(message => response.success(req, res, 200, message))
     .catch(e => response.error(req, res, 404, e, 'User not found'))
 })
