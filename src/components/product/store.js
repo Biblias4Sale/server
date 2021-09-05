@@ -68,7 +68,7 @@ const getAll = async () => {
   // ****          👿NO BORRAR👿        ***** //
   try {
     const product = await Products.findAll({
-      attributes: { exclude: ['createdAt', 'updatedAt'] },
+      attributes: { exclude: ['createdAt', 'updatedAt', 'description'] },
       include: {
         model: SubCategories,
         attributes: { exclude: ['createdAt', 'updatedAt', 'subCategoryId'] },
@@ -88,20 +88,16 @@ const getAll = async () => {
 }
 
 const findById = async (id) => {
-  // ****          👿NO BORRAR👿        ***** //
-  // try {
-  //   const product = await Products.findAll({
-  //     where: {
-  //       id
-  //     },
-  //     attributes: { exclude: ['createdAt', 'updatedAt'] }
-  //   })
-  //   return product
-  // } catch (e) {
-  //   return e.name
-  // }
+  try {
+    const product = await Products.findByPk(id, {
+      attributes: { exclude: ['createdAt', 'updatedAt'] }
+    })
+    return product
+  } catch (e) {
+    return e.name
+  }
 
-  return Product.find(product => product.id === parseInt(id)) // Debe buscar en la DB por ID
+  // return Product.find(product => product.id === parseInt(id)) // Debe buscar en la DB por ID
 }
 
 module.exports = {
