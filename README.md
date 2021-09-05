@@ -31,7 +31,13 @@ https://noiloan.herokuapp.com
 
 <hr>
 
+<br>
 
-- En server/Loader/dataStore.js Hay un objeto donde pueden agregar todos los productos que quieran, repitiendo el patrón de los productos que ya están creados. <<>, la Key subCategory tiene que tener una subCategoría EXISTENTE ( Las pueden encontrar en server/config.js )
+<hr>  
+
+En server/Loader/dataStore.js 
+Hay un objeto donde pueden agregar todos los productos que quieran, repitiendo el patrón de los productos que ya están creados.
+<<<CUIDADO>>, la Key subCategory tiene que tener una subCategoría EXISTENTE ( Las pueden encontrar en server/config.js )
+
 
 <hr>
