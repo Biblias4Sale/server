@@ -2,7 +2,7 @@ require('dotenv').config()
 const server = require('./src/app.js')
 const { categoriesLoader } = require('./src/loaders/categoriesLoader')
 const { subCategoriesLoader } = require('./src/loaders/subcategoriesLoader')
-const { subCategoryCamaras, subCategoryLentes, subCategoryLuces, subCategoryAccesorios } = require('./config')
+const { subCategoryCamaras, subCategoryLentes, subCategoryLuces, subCategoryAccesorios, subCategoryCargaYbat } = require('./config')
 
 const { conn } = require('./src/db.js')
 const { force } = require('./config.js')
@@ -24,6 +24,7 @@ const runServer = async () => {
   await subCategoriesLoader('Lentes', subCategoryLentes)
   await subCategoriesLoader('Luces', subCategoryAccesorios)
   await subCategoriesLoader('Accesorios', subCategoryLuces)
+  await subCategoriesLoader('Cargadores y baterías', subCategoryCargaYbat)
   server.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
   })
