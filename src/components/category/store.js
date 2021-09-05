@@ -1,7 +1,12 @@
 const { Categories, SubCategories } = require('../../db')
 
 const getAllCategories = async () => {
-  const cat = await Categories.findAll({ attributes: ['name', 'id_cat'] })
+  const cat = await Categories.findAll({
+    include: {
+      model: SubCategories
+    }
+  })
+  console.log(cat)
   return cat
 }
 
@@ -31,11 +36,31 @@ const addSubCategory = async (category, subCategory) => {
   }
 }
 
-const getAllSubCategories = async () => {
-  const subcats = await SubCategories.findAll({ attributes: ['name', 'id_cat'] })
-  return subcats
+const getAllSubCategories = async (cat) => {
+  if (cat === 'All') {
+    const subcats = await SubCategories.findAll({
+      attributes: { exclude: ['createdAt', 'updatedAt'] },
+      include: {
+        model: Categories,
+        attributes: { exclude: ['createdAt', 'updatedAt'] }
+      }
+      // attributes: ['name', 'id_subCat']
+    })
+    return subcats
+  } else {
+    const subcats = await SubCategories.findAll({
+      attributes: { exclude: ['createdAt', 'updatedAt'] },
+      include: {
+        model: Categories,
+        attributes: { exclude: ['createdAt', 'updatedAt'] },
+        where: {
+          name: cat
+        }
+      }
+    })
+    return subcats
+  }
 }
-
 module.exports = {
   getAllCategories,
   addCategory,

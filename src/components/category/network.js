@@ -19,4 +19,8 @@ router.post('/addSub', async (req, res) => {
   res.json(await addSubCategory(category, subCategory))
 })
 
+router.get('/getSub/:cat', async (req, res) => {
+  res.json(await getAllSubCategories(req.params.cat))
+})
+
 module.exports = router
