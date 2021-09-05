@@ -164,7 +164,187 @@ const products = [
     price: 245000,
     points: 5,
     subCategory: 'Mirrorless'
-  }
+  },
+  {
+    name: 'Neewer TT560 Flash Speedlite',
+    brand: 'Nikon',
+    model: 'Neewer TT560',
+    img: 'https://m.media-amazon.com/images/I/617pCDMdiLL._AC_SX615_SY462_.jpg',
+    description: 'Compatible with for Canon Nikon Panasonic Olympus Pentax Fijifilm and Sony with Mi Hot Shoe cameras',
+    price: 9000,
+    points: 3,
+    subCategory: 'Flashes'
+  },
+  {
+    name: 'Neewer TT560 Flash Speedlite',
+    brand: 'Powerextra',
+    model: '2.4G Wireless Flash',
+    img: 'https://m.media-amazon.com/images/I/61q-kYsRKEL._AC_SL1280_.jpg',
+    description: 'Powerextra LCD Display Flash Speedlite, 2.4G Wireless Flash Trigger Transmitter Kit for CA Nikon Pentax Panasonic Olympus and Sony DSLR Camera, Digital Cameras with Standard Hot Shoe',
+    price: 1200,
+    points: 4,
+    subCategory: 'Flashes'
+  },
+  {
+    name: 'High-Speed Sync 1/8000s Li-ion Battery Camera Flash Speedlite Light',
+    brand: 'Godox ',
+    model: 'V860II-F TTL GN60',
+    img: 'https://m.media-amazon.com/images/I/51ngO3AmQiL._AC_SL1000_.jpg',
+    description: 'Godox V860II-F TTL GN60 2.4G High-Speed Sync 1/8000s Li-ion Battery Camera Flash Speedlite Light Compatible for Fujifilm Camera with 15x17cm Softbox & Filter &USB LED',
+    price: 35000,
+    points: 5,
+    subCategory: 'Flashes'
+  },
+  {
+    name: 'NW550 Camera Flash Speedlite',
+    brand: 'Neewer',
+    model: 'NW550',
+    img: 'https://m.media-amazon.com/images/I/71DlRl4LEHL._AC_SL1500_.jpg',
+    description: 'Neewer NW550 Camera Flash Speedlite, Compatible with Canon Nikon Panasonic Olympus Pentax, Sony with Mi Hot Shoe and Other DSLRs and Mirrorless Cameras with Standard Hot Shoe',
+    price: 7000,
+    points: 2,
+    subCategory: 'Flashes'
+  },
+  {
+    name: 'MEIKE 320S Mini TTL Speedlite Automatic',
+    brand: 'MEIKE',
+    model: '20S Mini ',
+    img: 'https://m.media-amazon.com/images/I/61u8WmczHFL._AC_SL1200_.jpg',
+    description: 'Neewer NW550 Camera Flash Speedlite, Compatible with Canon Nikon Panasonic Olympus Pentax, Sony with Mi Hot Shoe and Other DSLRs and Mirrorless Cameras with Standard Hot Shoe',
+    price: 8500,
+    points: 3,
+    subCategory: 'Flashes'
+  },
+  {
+    name: 'TTL GN36 Wireless Speedlite Flash',
+    brand: 'Godox',
+    model: 'EACHSHOT TT350S',
+    img: 'https://m.media-amazon.com/images/I/41U-yjaOjQL._AC_.jpg',
+    description: 'EACHSHOT Godox TT350S 2.4G HSS 1/8000s TTL GN36 Wireless Speedlite Flash for Sony Mirrorless DSLR A7 A7R A7S A7-II A7-III A7R-II A7R-III A7S-II A6300 A6000 w/Color Filter',
+    price: 14400,
+    points: 4,
+    subCategory: 'Flashes'
+  },
+  {
+    name: 'High Power Infrared LED Lights',
+    brand: 'ICAMI',
+    model: 'IR Illuminators 96pcs',
+    img: 'https://m.media-amazon.com/images/I/71s3utXXU6L._AC_SL1500_.jpg',
+    description: 'ICAMI IR Illuminators 96pcs,High Power Infrared LED Lights for Camera',
+    price: 8000,
+    points: 3,
+    subCategory: 'Iluminadores Led'
+  },
+  {
+    name: 'Illuminator 8-Led Infrared Light',
+    brand: 'JC',
+    model: 'IR Illuminators 96pcs',
+    img: 'https://m.media-amazon.com/images/I/61hAItJPWML._AC_SL1200_.jpg',
+    description: 'JC IR Illuminator 8-Led Infrared Light Wide Angle 90°with Power Adapter for CCTV and IP Cameras',
+    price: 9800,
+    points: 4,
+    subCategory: 'Iluminadores Led'
+  },
+  {
+    name: 'LED Video Light and Stand Lighting Kit',
+    brand: 'Neewer',
+    model: 'Bi-Color 480 LED',
+    img: 'https://m.media-amazon.com/images/I/71+6TnrbygL._AC_SL1500_.jpg',
+    description: 'Neewer 2 Packs Dimmable Bi-Color 480 LED Video Light and Stand Lighting Kit Includes: 3200-5600K CRI 96+ LED Panel with U Bracket, 75 inches Light Stand for YouTube Studio Photography, Video Shooting',
+    price: 21000,
+    points: 5,
+    subCategory: 'Iluminadores Led'
+  },
+  {
+    name: 'IR Illuminator',
+    brand: 'IR',
+    model: '850nm 6-LED IR Illuminators',
+    img: 'https://m.media-amazon.com/images/I/71+6TnrbygL._AC_SL1500_.jpg',
+    description: 'IR Illuminator,850nm 6-LED IR Illuminators,Ir Lights for Security Cameras,Long Range Infrared Light,Outdoor Infrared Illuminator for CCTV IP Camera Night Vision,Ir Floodlight Wide Angle Ir Light',
+    price: 6000,
+    points: 2,
+    subCategory: 'Iluminadores Led'
+  },
+  {
+    name: 'Ultra High Power Panel Digital Camera',
+    brand: 'IR',
+    model: '160 LED CN-160',
+    img: 'https://m.media-amazon.com/images/I/81zzhw6KrAL._AC_SL1500_.jpg',
+    description: 'NEEWER 160 LED CN-160 Dimmable Ultra High Power Panel Digital Camera / Camcorder Video Light, LED Light for Canon, Nikon, Pentax, Panasonic,SONY, Samsung and Olympus Digital SLR Cameras',
+    price: 11300,
+    points: 3,
+    subCategory: 'Iluminadores Led'
+  },
+  {
+    name: 'LED Video Light, Portable Camera Photo Light Panel',
+    brand: 'VILTROX',
+    model: 'VL-162T CRI95+',
+    img: 'https://m.media-amazon.com/images/I/81zzhw6KrAL._AC_SL1500_.jpg',
+    description: 'VILTROX VL-162T CRI95+ LED Video Light, Portable Camera Photo Light Panel Dimmable for DSLR Camera Camcorder with Battery, Charger, High Brightness, 3300K-5600K Bi-Color, White Filter and LCD Display',
+    price: 20600,
+    points: 4,
+    subCategory: 'Iluminadores Led'
+  },
+  {
+    name: 'Standard Reflector Diffuser Lamp Shade ',
+    brand: 'Soonpho',
+    model: 'Soonpho 7',
+    img: 'https://m.media-amazon.com/images/I/717XORMkKgL._AC_SL1000_.jpg',
+    description: 'Soonpho 7" Standard Reflector Diffuser Lamp Shade Dish with 10° /30°/ 50° Degree Honeycomb Grid White Soft Cloth for Bowens Mount Studio Strobe Flash Light Speedlite',
+    price: 7200,
+    points: 4,
+    subCategory: 'Modificadores'
+  },
+  {
+    name: 'Mountdog Photography Reflector with Clip 24 Inches',
+    brand: 'Mountdog',
+    model: 'Mountdog-x',
+    img: 'https://m.media-amazon.com/images/I/51RdcFYbuZL._AC_SL1000_.jpg',
+    description: 'Mountdog Photography Reflector with Clip 24 Inches/ 60cm 5 in 1 Photo Light Collapsible Diffuser with Bag & Reflector Holder for Studio Photography Outdoor Lighting Translucent Silver Gold White Black',
+    price: 8700,
+    points: 3,
+    subCategory: 'Modificadores'
+  },
+  {
+    name: 'Bowens Mount Softbox',
+    brand: 'Bowens',
+    model: 'Bowens-xxx',
+    img: 'https://m.media-amazon.com/images/I/71BJLdp3H8S._AC_SL1500_.jpg',
+    description: 'Bowens Mount Softbox, 25 inch Umbrella Octagon Softbox Reflector with Carrying Bag, for Speedlite Studio Flash Monolight Portrait and Product Photography',
+    price: 18800,
+    points: 5,
+    subCategory: 'Modificadores'
+  },
+  {
+    name: 'HPUSN Softbox Lighting Kit',
+    brand: 'HPUSN',
+    model: 'HPUSN 3300',
+    img: 'https://m.media-amazon.com/images/I/71Hkk8shljS._AC_SL1500_.jpg',
+    description: 'HPUSN Softbox Lighting Kit 2x76x76cm Photography Continuous Lighting System Photo Studio Equipment with 2pcs E27 Socket 85W 5400K Bulbs for Portrait Product Fashion Photography',
+    price: 23100,
+    points: 5,
+    subCategory: 'Modificadores'
+  },
+  {
+    name: 'ICOE Softbox Lighting Kit Photography',
+    brand: 'YICOE',
+    model: 'YICOE 3.0',
+    img: 'https://m.media-amazon.com/images/I/71dDC+zt3pL._AC_SL1500_.jpg',
+    description: 'YICOE Softbox Lighting Kit Photography Photo Studio Equipment Continuous Lighting System with 5700K Energy Saving Light Bulb for Portraits Fashion, Advertising Photo Shooting YouTube Video',
+    price: 24900,
+    points: 4,
+    subCategory: 'Modificadores'
+  },
+  {
+    name: 'Neewer 2-Pack Dimmable 5600K USB LED Video Light with Adjustable Tripod',
+    brand: 'Neewer',
+    model: 'Neewer 5600',
+    img: 'https://m.media-amazon.com/images/I/619GKUSuxCL._AC_SL1500_.jpg',
+    description: 'Neewer 2-Pack Dimmable 5600K USB LED Video Light with Adjustable Tripod Stand and Color Filters for Tabletop/Low-Angle Shooting, Zoom/Video Conference Lighting/Game Streaming/YouTube Video Photography',
+    price: 5100,
+    points: 2,
+    subCategory: 'Modificadores'
+  },
 
 ]
 
