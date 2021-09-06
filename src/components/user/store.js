@@ -11,7 +11,12 @@ const newUser = async (user) => {
 
 const editUser = () => { }
 
-const delUser = () => { }
+const delUser = async (id) => {
+  const user = await Users.findByPk(id)
+  user.status = false
+  await user.save()
+  console.log(user)
+}
 
 module.exports = {
   newUser,

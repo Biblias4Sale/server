@@ -10,8 +10,7 @@ const validationEmail = async (email) => {
   }
 }
 
-const validationPassword = async ({ email, password }) => {
-  console.log(email)
+const validationPassword = async (email, password) => {
   const user = await Users.findOne({ where: { email } })
   const userPassword = bcryptjs.compareSync(password, user.password)
   if (!userPassword) {
@@ -19,7 +18,15 @@ const validationPassword = async ({ email, password }) => {
   }
 }
 
+const validationActive = async (email) => {
+  const user = await Users.findOne({ where: { email: email } })
+  if (!user.status) {
+    return 'User not active. Contact support'
+  }
+}
+
 module.exports = {
   validationEmail,
-  validationPassword
+  validationPassword,
+  validationActive
 }

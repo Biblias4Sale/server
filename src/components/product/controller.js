@@ -11,9 +11,7 @@ const getBest = (qty) => {
     .slice(0, qty)
 }
 
-const getDetail = (id) => {
-  return store.findById(id)
-}
+const getDetail = (id) => store.findById(id)
 
 const addProduct = async (newProduct) => {
   return await store.addProduct(newProduct)

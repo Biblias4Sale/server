@@ -68,7 +68,7 @@ const getAll = async () => {
   // ****          👿NO BORRAR👿        ***** //
   try {
     const product = await Products.findAll({
-      attributes: { exclude: ['createdAt', 'updatedAt'] },
+      attributes: { exclude: ['createdAt', 'updatedAt', 'description'] },
       include: {
         model: SubCategories,
         attributes: { exclude: ['createdAt', 'updatedAt', 'subCategoryId'] },
@@ -88,12 +88,8 @@ const getAll = async () => {
 }
 
 const findById = async (id) => {
-  // ****          👿NO BORRAR👿        ***** //
   try {
-    const product = await Products.findAll({
-      where: {
-        id
-      },
+    const product = await Products.findByPk(id, {
       attributes: { exclude: ['createdAt', 'updatedAt'] }
     })
     return product

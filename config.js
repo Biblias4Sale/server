@@ -8,7 +8,6 @@ const config = {
   subCategoryAccesorios: ['Filtros', 'Protectores', 'Cuidado y Limpieza'],
   subCategoryLuces: ['Flashes', 'Iluminadores Led', 'Modificadores'],
   subCategoryCargaYbat: ['Original', 'Alternativo']
-
 }
 
 module.exports = config
