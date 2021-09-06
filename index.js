@@ -27,11 +27,11 @@ const runServer = async () => {
   await subCategoriesLoader('Luces', subCategoryAccesorios)
   await subCategoriesLoader('Accesorios', subCategoryLuces)
   await subCategoriesLoader('Cargadores y baterías', subCategoryCargaYbat)
-  // products.map(prod => {
-  //   return (
-  //     addProduct(prod)
-  //   )
-  // })
+  products.map(prod => {
+    return (
+      addProduct(prod)
+    )
+  })
 
   server.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
