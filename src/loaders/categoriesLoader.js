@@ -11,7 +11,7 @@ const categoriesLoader = async () => {
       console.log('Error filling DB')
     }
   } else {
-    console.log('Table allready has data... loader skipped')
+    console.log('Categories table allready has data... loader skipped')
   }
 }
 
