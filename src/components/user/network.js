@@ -18,7 +18,10 @@ router.post('/', [
 ], (req, res) => {
   controller
     .newUser(req.body)
-    .then(message => response.success(req, res, 200, message))
+    .then(message => {
+      res.cookie('nToken', message.token, { maxAge: 900000, httpOnly: true })
+      response.success(req, res, 201, message)
+    })
     .catch(e => response.error(req, res, 404, e, 'User not found'))
 })
 
@@ -27,7 +30,7 @@ router.put('/', [
   validation
 ], (req, res) => {
   controller
-    .editUser()
+    .editUser(req.uid)
     .then(message => response.success(req, res, 200, message))
     .catch(e => response.error(req, res, 404, e, 'User not found'))
 })
