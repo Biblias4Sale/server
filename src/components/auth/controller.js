@@ -12,6 +12,16 @@ const getToken = async ({ email, password }) => {
   }
 }
 
+const getTokenGoogle = async ({ email }) => {
+  try {
+    const token = await tokenGenerator(email)
+    return token
+  } catch (err) {
+    return err
+  }
+}
+
 module.exports = {
-  getToken
+  getToken,
+  getTokenGoogle
 }

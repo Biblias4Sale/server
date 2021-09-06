@@ -20,8 +20,8 @@ router.post('/', [
   controller
     .newUser(req.body)
     .then(message => {
-      console.log(message)
-      response.success(req, res, 200, message)
+      res.cookie('nToken', message.token, { maxAge: 900000, httpOnly: true })
+      response.success(req, res, 201, message.user)
     })
     .catch(e => response.error(req, res, 404, e, 'User not found'))
 })
@@ -31,12 +31,15 @@ router.put('/', [
   validation
 ], (req, res) => {
   controller
-    .editUser()
+    .editUser(req.body)
     .then(message => response.success(req, res, 200, message))
     .catch(e => response.error(req, res, 404, e, 'User not found'))
 })
 
-router.delete('/', (req, res) => {
+router.delete('/', [
+  tokenValidation,
+  validation
+], (req, res) => {
   controller
     .delUser(req.body.id)
     .then(message => response.success(req, res, 200, message))
