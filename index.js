@@ -2,9 +2,8 @@ require('dotenv').config()
 const server = require('./src/app.js')
 const { categoriesLoader } = require('./src/loaders/categoriesLoader')
 const { subCategoriesLoader } = require('./src/loaders/subcategoriesLoader')
+const { productLoader } = require('./src/loaders/productLoader')
 const { subCategoryCamaras, subCategoryLentes, subCategoryLuces, subCategoryAccesorios, subCategoryCargaYbat } = require('./config')
-const { addProduct } = require('./src/components/product/store')
-const { products } = require('./src/loaders/dataStore')
 
 const { conn } = require('./src/db.js')
 const { force } = require('./config.js')
@@ -27,11 +26,7 @@ const runServer = async () => {
   await subCategoriesLoader('Luces', subCategoryAccesorios)
   await subCategoriesLoader('Accesorios', subCategoryLuces)
   await subCategoriesLoader('Cargadores y baterías', subCategoryCargaYbat)
-  products.map(prod => {
-    return (
-      addProduct(prod)
-    )
-  })
+  await productLoader()
 
   server.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
