@@ -12,7 +12,7 @@ router.post('/', [
   check('lastName', 'lastName is required').notEmpty(),
   check('email', 'Mail is required').notEmpty(),
   check('email', 'Mail is not validate').isEmail(),
-  check('email', 'email exist').custom(validationEmail),
+  check('email').custom(validationEmail),
   check('password', 'Password is required and must be more than 6 letters').isLength({ min: 6 }).notEmpty(),
   validation
 ], (req, res) => {
