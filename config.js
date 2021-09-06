@@ -1,7 +1,7 @@
 
 const config = {
   alter: true,
-  force: true,
+  force: false,
   categoriesList: ['Accesorios', 'Camaras', 'Lentes', 'Luces', 'Cargadores y baterías'],
   subCategoryCamaras: ['Reflex', 'Mirrorless', 'Compacta', 'Semi-Reflex'],
   subCategoryLentes: ['Zoom', 'Fijo'],

@@ -6,11 +6,17 @@ const getAllCategories = async () => {
       model: SubCategories
     }
   })
-  console.log(cat)
+  // console.log(cat)
   return cat
 }
 
 const addCategory = async (newCategory) => {
+  const category = await Categories.findOne({
+    where: {
+      name: newCategory
+    }
+  })
+  if (category != null) return 'La categoría ya existe'
   try {
     const newCat = await Categories.create({ name: newCategory })
     return newCat
@@ -20,6 +26,14 @@ const addCategory = async (newCategory) => {
 }
 
 const addSubCategory = async (category, subCategory) => {
+  const subCat = await SubCategories.findOne({
+    where: {
+      name: subCategory
+    }
+  })
+
+  if (subCat !== null) return 'La SubCategoría ya existe'
+
   try {
     const subCat = await SubCategories.create({
       name: subCategory
