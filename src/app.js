@@ -14,8 +14,8 @@ const server = express()
 
 server.name = 'NoiLan'
 
-// server.use(cors())
-server.use(cors({ origin: 'https://noiloan.web.app/', credentials: true })) //  << OJO CON ESTO PARA PRODUCCION
+server.use(cors())
+// server.use(cors({ origin: 'https://noiloan.web.app/', credentials: true })) //  << OJO CON ESTO PARA PRODUCCION
 server.use(express.json())
 server.use(cookieParser())
 server.use(morgan('dev'))
