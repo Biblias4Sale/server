@@ -199,7 +199,7 @@ const products = [
     name: 'MEIKE 320S Mini TTL Speedlite Automatic',
     brand: 'MEIKE',
     model: '20S Mini ',
-    img: 'https://m.media-amazon.com/images/I/61u8WmczHFL._AC_SL1200_.jpg',
+    img: 'https://blog.foto24.com/wp-content/uploads/2017/08/mk-320_7.png',
     description: 'Neewer NW550 Camera Flash Speedlite, Compatible with Canon Nikon Panasonic Olympus Pentax, Sony with Mi Hot Shoe and Other DSLRs and Mirrorless Cameras with Standard Hot Shoe',
     price: 8500,
     points: 3,
