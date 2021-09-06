@@ -16,9 +16,13 @@ router.post('/', [
   check('password', 'Password is required and must be more than 6 letters').isLength({ min: 6 }).notEmpty(),
   validation
 ], (req, res) => {
+  console.log('Body in back', req.body)
   controller
     .newUser(req.body)
-    .then(message => response.success(req, res, 200, message))
+    .then(message => {
+      console.log(message)
+      response.success(req, res, 200, message)
+    })
     .catch(e => response.error(req, res, 404, e, 'User not found'))
 })
 

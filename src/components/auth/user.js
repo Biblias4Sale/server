@@ -13,10 +13,10 @@ router.get('/', [
   check('email').custom(validationActive),
   validation
 ], (req, res) => {
+  console.log('body in back', req.body)
   controller
     .getToken(req.body)
     .then(message => response.success(req, res, 201, message))
     .catch(e => response.error(req, res, 404, e, 'No session'))
 })
-
 module.exports = router
