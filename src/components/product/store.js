@@ -41,9 +41,8 @@ const addProduct = async (newProduct) => {
       model
     }
   })
-  if (prod !== null) {
-    return 'El producto ya existe'
-  }
+
+  if (prod !== null) return 'El producto ya existe'
 
   try {
     const newProd = await Products.create({
@@ -60,6 +59,7 @@ const addProduct = async (newProduct) => {
         name: subCategory
       }
     })
+
     if (subCat === null) return 'No se encontró la SubCategoría'
     try {
       await subCat.addProduct(newProd)
@@ -109,8 +109,39 @@ const findById = async (id) => {
   // return Product.find(product => product.id === parseInt(id)) // Debe buscar en la DB por ID
 }
 
+// REVIEWS
+
+const reviews = [
+  {
+    user: 'Lina',
+    points: 4,
+    tittle: 'Muy lindo',
+    description: 'El producto tiene muchas luces, me encanta!',
+    fecha: '07/09/2021'
+  },
+  {
+    user: 'Diego',
+    points: 5,
+    tittle: 'Bacano',
+    description: 'Es un producto que no deja de sorprenderme, realmente esto muy satisfecho con la compra que he realizado. Lo recomiendo ampliamente.',
+    fecha: '16/08/2021'
+  },
+  {
+    user: 'Andrés',
+    points: 3,
+    tittle: 'Cumple con lo justo',
+    description: 'La verdad es que por el precio está muy bien, hay un mundo mejor pero es más caro.',
+    fecha: '20/4/2021'
+  }
+]
+
+const getReview = () => {
+  return reviews
+}
+
 module.exports = {
   getAll,
   findById,
-  addProduct
+  addProduct,
+  getReview
 }
