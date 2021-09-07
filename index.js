@@ -1,13 +1,35 @@
 require('dotenv').config()
 const server = require('./src/app.js')
+const { categoriesLoader } = require('./src/loaders/categoriesLoader')
+const { subCategoriesLoader } = require('./src/loaders/subcategoriesLoader')
+const { productLoader } = require('./src/loaders/productLoader')
+const { subCategoryCamaras, subCategoryLentes, subCategoryLuces, subCategoryAccesorios, subCategoryCargaYbat } = require('./config')
 
-// const { conn } = require('./src/db.js')
-// const { force } = require('./config.js')
-
+const { conn } = require('./src/db.js')
+const { force } = require('./config.js')
 const PORT = process.env.PORT || 3001
 
-process.stdout.write('\u001b[2J\u001b[0;0H') // limpia pantalla de la consola
+process.stdout.write('\u001b[2J\u001b[0;0H') // clear the screen on the console
 
-server.listen(PORT, () => {
-  console.log('Server running at', PORT || '3001')
-})
+// STARTING
+
+const runServer = async () => {
+  try {
+    await conn.sync({ force })
+    console.log('db connected')
+  } catch (error) {
+    console.log(error)
+  }
+  await categoriesLoader()
+  await subCategoriesLoader('Camaras', subCategoryCamaras)
+  await subCategoriesLoader('Lentes', subCategoryLentes)
+  await subCategoriesLoader('Luces', subCategoryAccesorios)
+  await subCategoriesLoader('Accesorios', subCategoryLuces)
+  await subCategoriesLoader('Cargadores y baterías', subCategoryCargaYbat)
+  await productLoader()
+
+  server.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`)
+  })
+}
+runServer()

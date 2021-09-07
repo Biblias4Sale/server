@@ -1,28 +1,34 @@
+// require('./passport/passportGoogle.js')
+require('./db.js')
+
 const express = require('express')
 const cookieParser = require('cookie-parser')
-const bodyParser = require('body-parser')
 const morgan = require('morgan')
-const routes = require('./routes/routes.js')
 const cors = require('cors')
+require('colors')
 
-require('./db.js')
+const routes = require('./routes')
+// const passport = require('passport');
 
 const server = express()
 
 server.name = 'NoiLan'
 
-server.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }))
-server.use(bodyParser.json({ limit: '50mb' }))
 server.use(cors())
+// server.use(cors({ origin: 'https://noiloan.web.app/', credentials: true })) //  << OJO CON ESTO PARA PRODUCCION
+server.use(express.json())
 server.use(cookieParser())
 server.use(morgan('dev'))
 server.use((req, res, next) => {
-  // res.header('Access-Control-Allow-Origin', 'pokemon-client.web.app') // update to match the domain you will make the request from
+  // res.header('Access-Control-Allow-Origin', 'dominio.web.app') // update to match the domain you will make the request from
   res.header('Access-Control-Allow-Credentials', 'true')
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE')
   next()
 })
+
+// server.use(passport.initialize())
+// server.use(passport.session())
 
 server.use('/', routes)
 
