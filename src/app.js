@@ -1,11 +1,13 @@
 // require('./passport/passportGoogle.js')
-require('./db.js')
-
 const express = require('express')
 const cookieParser = require('cookie-parser')
 const morgan = require('morgan')
 const cors = require('cors')
+require('./db.js')
 require('colors')
+const { frontEndHost } = require('../config.js')
+
+// const { categoriesList } = require('../../config')
 
 const routes = require('./routes')
 // const passport = require('passport');
@@ -14,8 +16,11 @@ const server = express()
 
 server.name = 'NoiLan'
 
+console.log('hola')
+console.log(frontEndHost())
+
 // server.use(cors({ credentials: true }))
-server.use(cors({ origin: 'https://noiloan.web.app', credentials: true })) //  << OJO CON ESTO PARA PRODUCCION
+server.use(cors({ origin: frontEndHost(), credentials: true })) //  << OJO CON ESTO PARA PRODUCCION
 server.use(express.json())
 server.use(cookieParser())
 server.use(morgan('dev'))
