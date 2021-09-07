@@ -7,6 +7,20 @@ https://noiloan.herokuapp.com
 
 <hr>
 
+### LOGIN Y LOGOUT:
+
+- POST /login >> Login con correo y contraseña, guarda token en cookie 
+```javascript
+req.body.email
+req.body.password
+```
+- GET /logout >> Cierra sesión eliminando el token del navegador _**No recibe parametros**_
+Debe venir la petición con `{ withCredentials: true }`
+
+<hr>
+
+### CATEGORÍAS:
+
 - GET /categories >> todas las categorías
 - POST /categories/add/  >> crea una nueva categoría (espera un name, por body)
 - POST /categories/addSub >> crea una nueva subCategoría (espera category y subCategory por body)
@@ -14,6 +28,8 @@ https://noiloan.herokuapp.com
 - GET /categories/getSub/:Category >> devuelve un array con todas las SubCategorías de esa Categoría
 
 <hr>
+
+### PRODUCTOS:
 
 - GET /products   >> lista todos los productos con algunas propiedades minimas
 - GET /products/best/:n   >> los 'n' productos mejor puntuados
@@ -31,19 +47,7 @@ https://noiloan.herokuapp.com
 ```
 <hr>
 
-### Login y Logout:
-
-- POST /login >> Login con correo y contraseña, guarda token en cookie 
-```javascript
-req.body.email
-req.body.password
-```
-- GET /logout >> Cierra sesión eliminando el token del navegador _**No recibe parametros**_
-Debe venir la petición con `{ withCredentials: true }`
-
-<hr>
-
-### CRUD de USER:
+### USUARIOS:
 
 - POST /user >> Crea una cuenta nueva
  ```javascript
@@ -55,6 +59,12 @@ req.body.password
 
 <hr>
 
+### ADMINISTRADOR:
+
+- GET /admin >> Obtiene todos los usuarios _**No recibe parametros**_
+
+<hr>
+
 <br>
 
 <hr>  
@@ -62,6 +72,3 @@ req.body.password
 En server/Loader/dataStore.js 
 Hay un objeto donde pueden agregar todos los productos que quieran, repitiendo el patrón de los productos que ya están creados.
 <<<CUIDADO>>, la Key subCategory tiene que tener una subCategoría EXISTENTE ( Las pueden encontrar en server/config.js )
-
-
-<hr>
