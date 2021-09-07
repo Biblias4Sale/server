@@ -130,6 +130,11 @@ const editProduct = async (prod) => {
   product.price = price
   product.points = points
 
+  const subCat = await SubCategories.findByPk(subCategoryId)
+  if (!subCat) return 'No se encontró la subcategoría'
+
+  product.subCategoryId = subCategoryId
+
   await product.save()
   return product
 }
