@@ -1,6 +1,7 @@
 require('dotenv').config()
 
-const isProduction = process.env.NODE_ENV === 'production'
+const { DB_PG_USER, DB_PG_PASSWORD, DB_PG_HOST, DB_PG_PORT, DB_PG_DATABASE, DATABASE_URL } = process.env
+const Environment = process.env.NODE_ENV
 
 const config = {
   alter: true,
@@ -13,7 +14,11 @@ const config = {
   subCategoryCargaYbat: ['Original', 'Alternativo'],
 
   frontEndHost: () => {
-    return isProduction ? 'https://noiloan.web.app' : 'http://localhost:3000'
+    return Environment === 'production' ? 'https://noiloan.web.app' : 'http://localhost:3000'
+  },
+
+  connectionString: () => {
+    return Environment === 'production' ? DATABASE_URL : `postgres://${DB_PG_USER}:${DB_PG_PASSWORD}@${DB_PG_HOST}:${DB_PG_PORT}/${DB_PG_DATABASE}`
   }
 }
 
