@@ -25,7 +25,7 @@ const newUser = async ({ name, lastName, email, password }) => {
 
 const editUser = async () => {
   return 'hi'
-  await store.editUser()
+  // await store.editUser()
 }
 
 const delUser = async (id) => await store.delUser(id)
