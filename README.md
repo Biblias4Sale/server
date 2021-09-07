@@ -62,6 +62,14 @@ req.body.password
 ### ADMINISTRADOR:
 
 - GET /admin >> Obtiene todos los usuarios _**No recibe parametros**_
+- DELETE /admin >> Elimina un usuario 
+ ```javascript
+req.body.id
+```
+- POST /admin >> Activa un usuario 
+ ```javascript
+req.body.id
+```
 
 <hr>
 
