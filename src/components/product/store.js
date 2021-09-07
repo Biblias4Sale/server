@@ -116,8 +116,7 @@ const getReview = () => {
 }
 
 const editProduct = async (prod) => {
-// FALTA MODIFICAR LA RELACIÓN CON LA SUBCATEGORÍA
-  const { id, brand, model, img, description, price, points, subCategoryId } = prod
+  const { id, brand, model, img, description, price, points, subCategory } = prod
 
   const product = await Products.findByPk(id)
 
@@ -130,10 +129,15 @@ const editProduct = async (prod) => {
   product.price = price
   product.points = points
 
-  const subCat = await SubCategories.findByPk(subCategoryId)
+  const subCat = await SubCategories.findOne({
+    where: {
+      name: subCategory
+    }
+  })
+
   if (!subCat) return 'No se encontró la subcategoría'
 
-  product.subCategoryId = subCategoryId
+  product.subCategoryId = subCat.id
 
   await product.save()
   return product
