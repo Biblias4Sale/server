@@ -1,6 +1,6 @@
 const { Router } = require('express')
 const router = Router()
-const passport = require('passport')
+// const passport = require('passport')
 
 // router.get('/login/google',
 //   passport.authenticate('google', { scope: ['profile', 'email'] }))
