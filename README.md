@@ -19,7 +19,7 @@ https://noiloan.herokuapp.com
 - GET /products/best/:n   >> los 'n' productos mejor puntuados
 - GET /products/detail/:id   >> un producto por ID con todas sus propiedades
 - POST /products >>> recibe por body un objeto con estas características:
-
+```JSON
 - { 
 -  "model": "SX100", 
 - "brand": "Canon ",
@@ -28,6 +28,30 @@ https://noiloan.herokuapp.com
 - "price": 800, "points": 5,
 - "subCategory": "Semi-Reflex"
 - } 
+```
+<hr>
+
+### Login y Logout:
+
+- POST /login >> Login con correo y contraseña, guarda token en cookie 
+```javascript
+req.body.email
+req.body.password
+```
+- GET /logout >> Cierra sesión eliminando el token del navegador _**No recibe parametros**_
+Debe venir la petición con `{ withCredentials: true }`
+
+<hr>
+
+### CRUD de USER:
+
+- POST /user >> Crea una cuenta nueva
+ ```javascript
+req.body.name
+req.body.lastName
+req.body.email
+req.body.password
+```
 
 <hr>
 
