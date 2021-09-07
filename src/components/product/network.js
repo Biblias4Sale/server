@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
-const { getAll, getBest, getDetail, addProduct } = require('./controller')
+const { getAll, getBest, getDetail, addProduct, getReview } = require('./controller')
+
 
 router.get('/', async (req, res) => {
   const response = await getAll()
@@ -18,6 +19,11 @@ router.get('/detail/:id', async (req, res) => {
 
 router.post('/add', async (req, res) => {
   const response = await (addProduct(req.body))
+  res.json(response)
+})
+
+router.get('/reviews', async (req, res) => {
+  const response = await (getReview())
   res.json(response)
 })
 

@@ -16,9 +16,14 @@ const getDetail = (id) => store.findById(id)
 const addProduct = async (newProduct) => {
   return await store.addProduct(newProduct)
 }
+
+const getReview = async () => {
+  return await store.getReview()
+}
 module.exports = {
   getAll,
   getBest,
   getDetail,
-  addProduct
+  addProduct,
+  getReview
 }
