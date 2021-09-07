@@ -1,10 +1,26 @@
 const express = require('express')
 const router = express.Router()
-const { getAll } = require('./controller')
+const { getAllCategories, addCategory, addSubCategory, getAllSubCategories } = require('./controller')
 
-router.get('/', (req, res) => {
-  console.log('endpoint category')
-  res.json(getAll())
+router.get('/', async (req, res) => {
+  res.json(await getAllCategories())
+})
+
+router.post('/add', async (req, res) => {
+  res.json(await addCategory(req.body.name))
+})
+
+router.get('/getSub', async (req, res) => {
+  res.json(await getAllSubCategories())
+})
+
+router.post('/addSub', async (req, res) => {
+  const { category, subCategory } = req.body
+  res.json(await addSubCategory(category, subCategory))
+})
+
+router.get('/getSub/:cat', async (req, res) => {
+  res.json(await getAllSubCategories(req.params.cat))
 })
 
 module.exports = router
