@@ -10,4 +10,18 @@ router.get('/', (req, res) => {
     .catch(e => response.error(req, res, 404, e, 'Not users'))
 })
 
+router.delete('/', (req, res) => {
+  controller
+    .delUser(req.body.id)
+    .then(message => response.success(req, res, 201, message))
+    .catch(e => response.error(req, res, 404, e, 'Not users'))
+})
+
+router.post('/', (req, res) => {
+  controller
+    .activeUser(req.body.id)
+    .then(message => response.success(req, res, 201, message))
+    .catch(e => response.error(req, res, 404, e, 'Not users'))
+})
+
 module.exports = router
