@@ -78,7 +78,7 @@ const products = [
     name: 'Lente Canon EF 75-300mm f/4-5.6 III',
     brand: 'Canon',
     model: 'EF 75-300mm f/4-5.6 III',
-    img: 'https://www.cordobadigital.net/wp-content/uploads/2018/07/EF_75-300mm_f4-5.6_III_Default_tcm86-939770.jpg',
+    img: 'https://http2.mlstatic.com/D_NQ_NP_737723-MLA45295416537_032021-O.webp',
     description: `Teleobjetivo zoom de precio asequible Motor de autoenfoque DC Revestimientos Súper Spectra
     Diseño ligero Tamaño de filtro de 58 mm Distancia mínima de enfoque de 1,5 m`,
     price: 37000,
