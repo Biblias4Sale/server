@@ -12,6 +12,29 @@ const config = {
   subCategoryAccesorios: ['Filtros', 'Protectores', 'Cuidado y Limpieza'],
   subCategoryLuces: ['Flashes', 'Iluminadores Led', 'Modificadores'],
   subCategoryCargaYbat: ['Original', 'Alternativo'],
+  reviews: [
+    {
+      user: 'Lina',
+      points: 4,
+      tittle: 'Muy Lindo',
+      description: 'El producto tiene muchas luces, me encanta!',
+      fecha: '07/09/2021'
+    },
+    {
+      user: 'Diego',
+      points: 5,
+      tittle: 'Bacano',
+      description: 'Es un producto que no deja de sorprenderme gratamente, estoy muy satisfecho con la compra que he realizado. Lo recomiendo ampliamente.',
+      fecha: '16/08/2021'
+    },
+    {
+      user: 'Andrés',
+      points: 3,
+      tittle: 'Cumple con lo justo',
+      description: 'La verdad es que por el precio está muy bien, hay un mundo mejor pero es más caro',
+      fecha: '16/08/2021'
+    }
+  ],
 
   frontEndHost: () => {
     return Environment === 'production' ? 'https://noiloan.web.app' : 'http://localhost:3000'
