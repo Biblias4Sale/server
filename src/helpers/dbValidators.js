@@ -20,6 +20,9 @@ const validationPassword = async (email, password) => {
 
 const validationActive = async (email) => {
   const user = await Users.findOne({ where: { email: email } })
+  if (!user) {
+    return 'User not exist'
+  }
   if (!user.status) {
     return 'User not active. Contact support'
   }
