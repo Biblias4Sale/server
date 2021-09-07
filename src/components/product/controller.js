@@ -11,7 +11,7 @@ const getBest = (qty) => {
     .slice(0, qty)
 }
 
-const getDetail = (id) => store.findById(id)
+const getDetail = (id) => store.getDetail(id)
 
 const addProduct = async (newProduct) => {
   return await store.addProduct(newProduct)
@@ -20,10 +20,16 @@ const addProduct = async (newProduct) => {
 const getReview = async () => {
   return await store.getReview()
 }
+
+const editProduct = async (prod) => {
+  console.log('soy controller')
+  return await store.editProduct(prod)
+}
 module.exports = {
   getAll,
   getBest,
   getDetail,
   addProduct,
-  getReview
+  getReview,
+  editProduct
 }

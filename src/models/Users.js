@@ -20,8 +20,7 @@ module.exports = (sequelize) => {
       allowNull: false
     },
     password: {
-      type: DataTypes.STRING,
-      allowNull: false
+      type: DataTypes.STRING
     },
     picture: {
       type: DataTypes.STRING
@@ -29,6 +28,15 @@ module.exports = (sequelize) => {
     status: {
       type: DataTypes.BOOLEAN,
       defaultValue: true
+    },
+    type: {
+      type: DataTypes.ENUM({
+        values: ['User', 'Admin']
+      }),
+      allowNull: false
+    },
+    googleId: {
+      type: DataTypes.STRING
     }
   }, {
     freezeTableName: true,
