@@ -66,9 +66,18 @@ req.body.password
  ```javascript
 req.body.id
 ```
-- POST /admin >> Activa un usuario 
+- PUT /admin >> Activa un usuario 
  ```javascript
 req.body.id
+```
+- PUT /admin/resetpassword >> Resetea el password del usuario 
+ ```javascript
+req.body.id
+```
+- PUT /admin/resetpassword >> Cambia password del usuario
+ ```javascript
+req.body.id,
+req.body.password
 ```
 
 <hr>

@@ -14,14 +14,28 @@ router.delete('/', (req, res) => {
   controller
     .delUser(req.body.id)
     .then(message => response.success(req, res, 201, message))
-    .catch(e => response.error(req, res, 404, e, 'Not users'))
+    .catch(e => response.error(req, res, 404, e, 'User not deleted'))
 })
 
-router.post('/', (req, res) => {
+router.put('/', (req, res) => {
   controller
     .activeUser(req.body.id)
     .then(message => response.success(req, res, 201, message))
-    .catch(e => response.error(req, res, 404, e, 'Not users'))
+    .catch(e => response.error(req, res, 404, e, 'User not activate'))
+})
+
+router.put('/resetpassword', (req, res) => {
+  controller
+    .resetPassword(req.body.id)
+    .then(message => response.success(req, res, 201, message))
+    .catch(e => response.error(req, res, 404, e, 'Password not changed'))
+})
+
+router.put('/changepassword', (req, res) => {
+  controller
+    .changePassword(req.body.id, req.body.password)
+    .then(message => response.success(req, res, 201, message))
+    .catch(e => response.error(req, res, 404, e, 'Password not changed'))
 })
 
 module.exports = router
