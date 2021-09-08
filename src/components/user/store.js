@@ -9,13 +9,27 @@ const newUser = async (user) => {
   }
 }
 
-const editUser = () => { }
+const editUser = async (id, infoUser) => {
+  const user = await Users.findByPk(id)
+  if (infoUser.name) user.name = infoUser.name
+  if (infoUser.lastName) user.name = infoUser.name
+  if (infoUser.email) user.name = infoUser.name
+  if (infoUser.password) user.name = infoUser.name
+  user.save()
+  const userReturn = {
+    id: user.id,
+    name: user.name,
+    lastName: user.lastName,
+    email: user.email
+  }
+  return userReturn
+}
 
 const delUser = async (id) => {
   const user = await Users.findByPk(id)
   user.status = false
   await user.save()
-  console.log(user)
+  return 'User deleted'
 }
 
 module.exports = {

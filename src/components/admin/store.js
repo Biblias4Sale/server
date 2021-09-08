@@ -5,14 +5,31 @@ const getUsers = async () => {
   return await Users.findAll()
 }
 
+const newUser = async (user) => {
+  try {
+    const userInfo = await Users.create(user)
+    const userReturn = {
+      id: userInfo.id,
+      name: userInfo.name,
+      lastName: userInfo.lastName,
+      email: userInfo.email
+    }
+    return userReturn
+  } catch (error) {
+    console.error(error)
+    return 'User not created'
+  }
+}
+
 const delUser = async (id) => {
   const user = await Users.findByPk(id)
+  console.log(user)
   user.status = false
   await user.save()
   return 'User deleted'
 }
 
-const activeUser = async (id) => {
+const activateUser = async (id) => {
   const user = await Users.findByPk(id)
   user.status = true
   await user.save()
@@ -34,10 +51,19 @@ const changePassword = async (user) => {
   return 'Password modified'
 }
 
+const changeType = async (id, type) => {
+  const user = await Users.findByPk(id)
+  user.type = type
+  user.save()
+  return 'Type modified'
+}
+
 module.exports = {
   getUsers,
+  newUser,
   delUser,
-  activeUser,
+  activateUser,
   resetPassword,
-  changePassword
+  changePassword,
+  changeType
 }
