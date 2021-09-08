@@ -32,6 +32,7 @@ const Product = [
 
 const { categoriesList } = require('../../../config')
 const { Products, SubCategories, Categories } = require('../../db')
+const { reviews } = require('../../../config')
 
 const addProduct = async (newProduct) => {
   const { brand, model, img, description, price, points } = newProduct
@@ -96,11 +97,12 @@ const getAll = async () => {
   // return Product
 }
 
-const findById = async (id) => {
+const getDetail = async (id) => {
   try {
     const product = await Products.findByPk(id, {
       attributes: { exclude: ['createdAt', 'updatedAt'] }
     })
+    if (!product) return 'No se encontró el producto'
     return product
   } catch (e) {
     return e.name
@@ -109,39 +111,42 @@ const findById = async (id) => {
   // return Product.find(product => product.id === parseInt(id)) // Debe buscar en la DB por ID
 }
 
-// REVIEWS
-
-const reviews = [
-  {
-    user: 'Lina',
-    points: 4,
-    tittle: 'Muy lindo',
-    description: 'El producto tiene muchas luces, me encanta!',
-    fecha: '07/09/2021'
-  },
-  {
-    user: 'Diego',
-    points: 5,
-    tittle: 'Bacano',
-    description: 'Es un producto que no deja de sorprenderme, realmente esto muy satisfecho con la compra que he realizado. Lo recomiendo ampliamente.',
-    fecha: '16/08/2021'
-  },
-  {
-    user: 'Andrés',
-    points: 3,
-    tittle: 'Cumple con lo justo',
-    description: 'La verdad es que por el precio está muy bien, hay un mundo mejor pero es más caro.',
-    fecha: '20/4/2021'
-  }
-]
-
 const getReview = () => {
   return reviews
 }
 
+const editProduct = async (prod) => {
+  const { id, brand, model, img, description, price, points, subCategory } = prod
+
+  const product = await Products.findByPk(id)
+
+  if (product === null) return 'No se encontró el producto'
+
+  product.brand = brand
+  product.model = model
+  product.img = img
+  product.description = description
+  product.price = price
+  product.points = points
+
+  const subCat = await SubCategories.findOne({
+    where: {
+      name: subCategory
+    }
+  })
+
+  if (!subCat) return 'No se encontró la subcategoría'
+
+  product.subCategoryId = subCat.id
+
+  await product.save()
+  return product
+}
+
 module.exports = {
   getAll,
-  findById,
+  getDetail,
   addProduct,
-  getReview
+  getReview,
+  editProduct
 }

@@ -26,22 +26,22 @@ router.post('/', [
     .catch(e => response.error(req, res, 404, e, 'User not found'))
 })
 
-router.put('/', [
+router.put('/:id', [
   tokenValidation,
   validation
 ], (req, res) => {
   controller
-    .editUser(req.body)
+    .editUser(req.params.id, req.body)
     .then(message => response.success(req, res, 200, message))
     .catch(e => response.error(req, res, 404, e, 'User not found'))
 })
 
-router.delete('/', [
+router.delete('/:id', [
   tokenValidation,
   validation
 ], (req, res) => {
   controller
-    .delUser(req.body.id)
+    .delUser(req.params.id)
     .then(message => response.success(req, res, 200, message))
     .catch(e => response.error(req, res, 404, e, 'User not found'))
 })

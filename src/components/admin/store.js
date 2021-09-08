@@ -1,0 +1,69 @@
+const bcriptjs = require('bcryptjs')
+const { Users } = require('../../db')
+
+const getUsers = async () => {
+  return await Users.findAll()
+}
+
+const newUser = async (user) => {
+  try {
+    const userInfo = await Users.create(user)
+    const userReturn = {
+      id: userInfo.id,
+      name: userInfo.name,
+      lastName: userInfo.lastName,
+      email: userInfo.email
+    }
+    return userReturn
+  } catch (error) {
+    console.error(error)
+    return 'User not created'
+  }
+}
+
+const delUser = async (id) => {
+  const user = await Users.findByPk(id)
+  console.log(user)
+  user.status = false
+  await user.save()
+  return 'User deleted'
+}
+
+const activateUser = async (id) => {
+  const user = await Users.findByPk(id)
+  user.status = true
+  await user.save()
+  return 'User activate'
+}
+
+const resetPassword = async (id) => {
+  const user = await Users.findByPk(id)
+  const salt = bcriptjs.genSaltSync()
+  user.password = bcriptjs.hashSync(user.email, salt)
+  user.save()
+  return 'Password reset'
+}
+
+const changePassword = async (user) => {
+  const userModified = await Users.findByPk(user.id)
+  userModified.password = user.password
+  userModified.save()
+  return 'Password modified'
+}
+
+const changeType = async (id, type) => {
+  const user = await Users.findByPk(id)
+  user.type = type
+  user.save()
+  return 'Type modified'
+}
+
+module.exports = {
+  getUsers,
+  newUser,
+  delUser,
+  activateUser,
+  resetPassword,
+  changePassword,
+  changeType
+}

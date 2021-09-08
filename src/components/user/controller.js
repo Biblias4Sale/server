@@ -9,6 +9,7 @@ const newUser = async ({ name, lastName, email, password }) => {
     name,
     lastName,
     email,
+    type: 'User',
     password: bcryptjs.hashSync(password, salt)
   }
 
@@ -23,9 +24,13 @@ const newUser = async ({ name, lastName, email, password }) => {
   }
 }
 
-const editUser = async () => {
-  return 'hi'
-  // await store.editUser()
+const editUser = async (id, body) => {
+  const { password, ...infoUser } = body
+  if (password) {
+    const salt = bcryptjs.genSaltSync()
+    infoUser.password = bcryptjs.hashSync(password, salt)
+  }
+  return await store.editUser(id, infoUser)
 }
 
 const delUser = async (id) => await store.delUser(id)

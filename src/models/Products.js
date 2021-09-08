@@ -28,6 +28,10 @@ module.exports = (sequelize) => {
         values: ['1', '2', '3', '4', '5']
       }),
       allowNull: false
+    },
+    stock: {
+      type: DataTypes.INTEGER,
+      allowNull: true
     }
   }, {
     freezeTableName: true,
