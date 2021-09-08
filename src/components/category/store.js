@@ -6,7 +6,6 @@ const getAllCategories = async () => {
       model: SubCategories
     }
   })
-  // console.log(cat)
   return cat
 }
 
