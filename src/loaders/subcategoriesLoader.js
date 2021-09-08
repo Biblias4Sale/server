@@ -5,7 +5,7 @@ const subCategoriesLoader = async (cat, subCat) => {
   const subCategoriesInDB = await SubCategories.findAndCountAll({ where: { name: subCat } })
   if (subCategoriesInDB.count === 0) {
     try {
-      subCat.map(st => {
+      subCat.forEach(st => {
         return (
           store.addSubCategory(cat, st)
         )
@@ -15,7 +15,7 @@ const subCategoriesLoader = async (cat, subCat) => {
       console.log('Error filling DB')
     }
   } else {
-    console.log('Table allready has data... loader skipped')
+    console.log('SubCategories Table allready has data... loader skipped')
   }
 }
 
