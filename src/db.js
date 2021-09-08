@@ -27,24 +27,25 @@ const entries = Object.entries(sequelize.models)
 const capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].slice(1), entry[1]])
 sequelize.models = Object.fromEntries(capsEntries)
 
-const { Users, Categories, Cart, Orders, SubCategories, Discounts, Products } = sequelize.models
+const { User, Category, Cart, Order, SubCategory, Discount, Product } = sequelize.models
 
-Products.hasOne(Discounts)
-Discounts.belongsTo(Products)
+Product.hasOne(Discount)
+Discount.belongsTo(Product)
 
-SubCategories.hasMany(Products)
-Products.belongsTo(SubCategories)
-Categories.hasMany(SubCategories)
-SubCategories.belongsTo(Categories)
-Cart.hasMany(Orders, { as: 'cart_orders' })
-Orders.belongsTo(Cart)
-Users.hasMany(Products, { as: 'products_user' })
-Products.belongsTo(Users)
+SubCategory.hasMany(Product)
+Product.belongsTo(SubCategory)
+Category.hasMany(SubCategory)
+SubCategory.belongsTo(Category)
 
-Products.belongsToMany(Orders, { through: 'products_orders' })
-Orders.belongsToMany(Products, { through: 'products_orders' })
-Cart.belongsToMany(Users, { through: 'cart_users' })
-Users.belongsToMany(Cart, { through: 'cart_users' })
+Order.belongsTo(Cart)
+Cart.hasOne(Order)
+User.hasMany(Product)
+Product.belongsTo(User)
+
+Product.belongsToMany(Order, { through: 'products_orders' })
+Order.belongsToMany(Product, { through: 'products_orders' })
+Cart.belongsToMany(User, { through: 'cart_users' })
+User.belongsToMany(Cart, { through: 'cart_users' })
 
 module.exports = {
   ...sequelize.models,

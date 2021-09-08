@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize')
 
 module.exports = (sequelize) => {
-  const Products = sequelize.define('products', {
+  const Product = sequelize.define('product', {
     brand: {
       type: DataTypes.STRING,
       allowNull: false
@@ -36,6 +36,6 @@ module.exports = (sequelize) => {
   }, {
     freezeTableName: true,
     sequelize,
-    tableName: 'products'
+    tableName: 'product'
   })
 }

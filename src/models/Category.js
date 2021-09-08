@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize')
 
 module.exports = (sequelize) => {
-  const SubCategories = sequelize.define('subCategories', {
+  const Category = sequelize.define('category', {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -10,6 +10,6 @@ module.exports = (sequelize) => {
   }, {
     freezeTableName: true,
     sequelize,
-    tableName: 'subCategories'
+    tableName: 'category'
   })
 }
