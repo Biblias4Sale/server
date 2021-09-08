@@ -25,7 +25,10 @@ router.post('/', [
     .catch(e => response.error(req, res, 404, e, 'User not found'))
 })
 
-router.put('/:id', (req, res) => {
+router.put('/:id', [
+  tokenValidation,
+  validation
+], (req, res) => {
   controller
     .editUser(req.params.id, req.body)
     .then(message => response.success(req, res, 200, message))
