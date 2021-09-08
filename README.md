@@ -85,28 +85,52 @@ req.body.lastName
 req.body.email
 req.body.password
 ```
+- PUT /user/:id >> Editar información del usuario
+ ```javascript
+req.params.id
+req.body.name
+req.body.lastName
+req.body.email
+req.body.password
+```
+- DELETE /user/:id >> Elimina usuario
+ ```javascript
+req.params.id
+```
 
 <hr>
 
 ### ADMINISTRADOR:
 
 - GET /admin >> Obtiene todos los usuarios _**No recibe parametros**_
+-POST /admin >> Crea un usuario
+```javascript
+req.body.name
+req.body.lastName
+req.body.email
+req.body.type
+```
 - DELETE /admin >> Elimina un usuario 
  ```javascript
-req.body.id
+req.params.id,
 ```
-- PUT /admin >> Activa un usuario 
+- PUT /admin/:id >> Activa un usuario 
  ```javascript
-req.body.id
+req.params.id,
 ```
 - PUT /admin/resetpassword >> Resetea el password del usuario 
  ```javascript
-req.body.id
+req.params.id,
 ```
-- PUT /admin/resetpassword >> Cambia password del usuario
+- PUT /admin/changepassword/:id >> Cambia password del usuario
  ```javascript
-req.body.id,
-req.body.password
+req.params.id,
+req.body.password,
+```
+- PUT /admin/changetype/:id >> Cambia password del usuario
+ ```javascript
+req.params.id,
+req.body.type,
 ```
 
 <hr>
