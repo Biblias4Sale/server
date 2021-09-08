@@ -14,7 +14,6 @@ const server = express()
 
 server.name = 'NoiLan'
 
-
 // server.use(cors({ credentials: true }))
 server.use(cors({ origin: frontEndHost(), credentials: true }))
 server.use(express.json())
