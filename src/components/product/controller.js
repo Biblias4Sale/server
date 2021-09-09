@@ -22,7 +22,6 @@ const getReview = async () => {
 }
 
 const editProduct = async (prod) => {
-  console.log('soy controller')
   return await store.editProduct(prod)
 }
 module.exports = {
