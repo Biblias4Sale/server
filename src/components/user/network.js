@@ -35,10 +35,7 @@ router.put('/:id', [
     .catch(e => response.error(req, res, 404, e, 'User not found'))
 })
 
-router.delete('/:id', [
-  tokenValidation,
-  validation
-], (req, res) => {
+router.delete('/:id', (req, res) => {
   controller
     .delUser(req.params.id)
     .then(message => response.success(req, res, 200, message))
