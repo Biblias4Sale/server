@@ -24,6 +24,8 @@ const newUser = async ({ name, lastName, email, password }) => {
   }
 }
 
+console.log('hola')
+
 const editUser = async (id, body) => {
   const { password, ...infoUser } = body
   if (password) {
