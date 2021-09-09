@@ -15,8 +15,8 @@ router.post('/', [
   controller
     .getToken(req.body, res)
     .then(message => {
-      res.cookie('nToken', message.token, { maxAge: 900000, httpOnly: true })
-      response.success(req, res, 201, message.user)
+      // res.cookie('nToken', message.token, { maxAge: 900000, httpOnly: true })
+      response.success(req, res, 201, message)
     })
     .catch(e => response.error(req, res, 400, e, 'No session'))
 })

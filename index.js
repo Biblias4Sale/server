@@ -16,7 +16,7 @@ process.stdout.write('\u001b[2J\u001b[0;0H') // clear the screen on the console
 const runServer = async () => {
   try {
     await conn.sync({ force })
-    console.log('db connected')
+    console.log('DB connected')
   } catch (error) {
     console.log(error)
   }

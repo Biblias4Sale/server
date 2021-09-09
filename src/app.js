@@ -14,12 +14,12 @@ const server = express()
 
 server.name = 'NoiLan'
 
+// server.use(cors())
 // server.use(cors({ credentials: true }))
 server.use(cors({ origin: frontEndHost(), credentials: true }))
 server.use(express.json())
 server.use(cookieParser())
 server.use(morgan('dev'))
-// server.use(cors())
 server.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', frontEndHost()) // update to match the domain you will make the request from
   res.header('Access-Control-Allow-Credentials', 'true')

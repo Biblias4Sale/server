@@ -12,7 +12,7 @@ passport.use(new GoogleStrategy({
   passReqToCallback: true
 },
 async (req, accessToken, refreshToken, profile, cb) => {
-  const user = await Users.findOrCreate({
+  const user = await User.findOrCreate({
     where: {
       name: profile.name.givenName,
       id: profile.id,
@@ -33,7 +33,7 @@ passport.serializeUser((user, cb) => {
 })
 
 passport.deserializeUser(async (id, cb) => {
-  const user = Users.findOne({
+  const user = User.findOne({
     where: {
       id
     }
