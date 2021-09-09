@@ -1,13 +1,13 @@
 const bcriptjs = require('bcryptjs')
-const { Users } = require('../../db')
+const { User } = require('../../db')
 
 const getUsers = async () => {
-  return await Users.findAll()
+  return await User.findAll()
 }
 
 const newUser = async (user) => {
   try {
-    const userInfo = await Users.create(user)
+    const userInfo = await User.create(user)
     const userReturn = {
       id: userInfo.id,
       name: userInfo.name,
@@ -22,7 +22,7 @@ const newUser = async (user) => {
 }
 
 const delUser = async (id) => {
-  const user = await Users.findByPk(id)
+  const user = await User.findByPk(id)
   console.log(user)
   user.status = false
   await user.save()
@@ -30,14 +30,14 @@ const delUser = async (id) => {
 }
 
 const activateUser = async (id) => {
-  const user = await Users.findByPk(id)
+  const user = await User.findByPk(id)
   user.status = true
   await user.save()
   return 'User activate'
 }
 
 const resetPassword = async (id) => {
-  const user = await Users.findByPk(id)
+  const user = await User.findByPk(id)
   const salt = bcriptjs.genSaltSync()
   user.password = bcriptjs.hashSync(user.email, salt)
   user.save()
@@ -45,14 +45,14 @@ const resetPassword = async (id) => {
 }
 
 const changePassword = async (user) => {
-  const userModified = await Users.findByPk(user.id)
+  const userModified = await User.findByPk(user.id)
   userModified.password = user.password
   userModified.save()
   return 'Password modified'
 }
 
 const changeType = async (id, type) => {
-  const user = await Users.findByPk(id)
+  const user = await User.findByPk(id)
   user.type = type
   user.save()
   return 'Type modified'

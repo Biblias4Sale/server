@@ -1,7 +1,7 @@
-const { Users } = require('../../db')
+const { User } = require('../../db')
 
 const getUser = async (email) => {
-  return Users.findOne({ where: { email }, attributes: ['id', 'name', 'lastName', 'email', 'picture'] })
+  return User.findOne({ where: { email }, attributes: ['id', 'name', 'lastName', 'email', 'picture'] })
 }
 
 module.exports = {

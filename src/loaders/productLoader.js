@@ -2,11 +2,12 @@ const { addProduct } = require('../components/product/store')
 const { products } = require('./dataStore')
 
 const productLoader = async () => {
-  products.map(prod => {
+  await products.forEach(product => {
     return (
-      addProduct(prod)
+      addProduct(product)
     )
   })
+  console.log('Products loaded')
 }
 
 module.exports = { productLoader }
