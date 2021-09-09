@@ -26,8 +26,6 @@ router.post('/', [
 })
 
 router.put('/:id', [
-  tokenValidation,
-  validation
 ], (req, res) => {
   controller
     .editUser(req.params.id, req.body)
