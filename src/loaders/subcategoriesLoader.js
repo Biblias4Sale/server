@@ -5,7 +5,7 @@ const subCategoriesLoader = async (cat, subCat) => {
   const subCategoriesInDB = await SubCategory.findAndCountAll({ where: { name: subCat } })
   if (subCategoriesInDB.count === 0) {
     try {
-      subCat.map(st => {
+      subCat.forEach(st => {
         return (
           store.addSubCategory(cat, st)
         )
