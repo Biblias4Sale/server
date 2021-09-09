@@ -11,15 +11,17 @@ router.post('/add', async (req, res) => {
 })
 
 router.get('/getSub', async (req, res) => {
-  res.json(await getAllSubCategories())
+  res.json(await getAllSubCategories('All'))
 })
 
 router.post('/addSub', async (req, res) => {
   const { category, subCategory } = req.body
-  res.json(await addSubCategory(category, subCategory))
+  const response = await addSubCategory(category, subCategory)
+  res.json(response)
 })
 
 router.get('/getSub/:cat', async (req, res) => {
+  if (!req.params.cat) res.json('Debes agregar un Categoría')
   res.json(await getAllSubCategories(req.params.cat))
 })
 

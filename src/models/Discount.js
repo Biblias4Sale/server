@@ -1,15 +1,19 @@
 const { DataTypes } = require('sequelize')
 
 module.exports = (sequelize) => {
-  const Orders = sequelize.define('orders', {
+  const Discount = sequelize.define('discount', {
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV1,
       primaryKey: true
+    },
+    amount: {
+      type: DataTypes.INTEGER,
+      allowNull: false
     }
   }, {
     freezeTableName: true,
     sequelize,
-    tableName: 'orders'
+    tableName: 'discount'
   })
 }
