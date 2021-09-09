@@ -12,9 +12,9 @@ const newUser = async (user) => {
 const editUser = async (id, infoUser) => {
   const user = await Users.findByPk(id)
   if (infoUser.name) user.name = infoUser.name
-  if (infoUser.lastName) user.name = infoUser.name
-  if (infoUser.email) user.name = infoUser.name
-  if (infoUser.password) user.name = infoUser.name
+  if (infoUser.lastName) user.lastName = infoUser.lastName
+  if (infoUser.email) user.email = infoUser.email
+  if (infoUser.password) user.password = infoUser.password
   user.save()
   const userReturn = {
     id: user.id,
