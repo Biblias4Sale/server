@@ -4,6 +4,7 @@ const networkCategory = require('../components/category/network')
 const networkProduct = require('../components/product/network')
 const networkUser = require('../components/user/network')
 const networkAdmin = require('../components/admin/network')
+const networkBot = require('../components/bot/network')
 const authLogin = require('../components/auth/login')
 const authLogout = require('../components/auth/logout')
 const loginUser = require('../components/auth/loginUser')
@@ -14,6 +15,7 @@ const category = '/categories'
 const product = '/products'
 const user = '/user'
 const admin = '/admin'
+const bot = '/bot'
 const googleLogin = '/api/v1/'
 const googleLogout = '/logout'
 const userLogin = '/login'
@@ -24,6 +26,7 @@ router.use(category, networkCategory)
 router.use(product, networkProduct)
 router.use(user, networkUser)
 router.use(admin, networkAdmin)
+router.use(bot, networkBot)
 
 // auth
 router.use(googleLogin, authLogin)

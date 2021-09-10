@@ -24,7 +24,7 @@ router.post('/activate', (req, res) => {
     .catch(e => response.error(req, res, 404, e, 'User not activate'))
 })
 
-router.post('/resetpasswordwithemail', (req, res) => {
+router.post('/reset', (req, res) => {
   controller
     .resetPasswordWithEmail(req.body.email)
     .then(message => response.success(req, res, 201, message))
