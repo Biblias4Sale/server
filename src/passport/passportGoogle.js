@@ -12,7 +12,7 @@ passport.use(new GoogleStrategy({
   passReqToCallback: true
 },
 async (req, accessToken, refreshToken, profile, cb) => {
-  const user = await Users.findOrCreate({
+  const user = await User.findOrCreate({
     where: {
       name: profile.name.givenName,
       googleId: profile.id,

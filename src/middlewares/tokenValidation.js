@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken')
 
 const tokenValidation = (req, res, next) => {
-  const token = req.header('x-token')
+  const token = req.header('nToken')
   if (!token) {
     return res.status(401).json({ msg: 'Without token' })
   }

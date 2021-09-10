@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize')
 
 module.exports = (sequelize) => {
-  const Users = sequelize.define('Users', {
+  const User = sequelize.define('User', {
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV1,
@@ -26,11 +26,11 @@ module.exports = (sequelize) => {
     },
     email: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      unique: true
     },
     password: {
-      type: DataTypes.STRING,
-      allowNull: true
+      type: DataTypes.STRING
     },
     picture: {
       type: DataTypes.STRING
@@ -38,10 +38,36 @@ module.exports = (sequelize) => {
     status: {
       type: DataTypes.BOOLEAN,
       defaultValue: true
+    },
+    type: {
+      type: DataTypes.ENUM({
+        values: ['User', 'Admin']
+      }),
+      allowNull: false
+    },
+    cp: {
+      type: DataTypes.INTEGER,
+      // allowNull: false
+    },
+    address: {
+      type: DataTypes.STRING,
+      // allowNull: false
+    },
+    city: {
+      type: DataTypes.STRING,
+      // allowNull: false
+    },
+    province: {
+      type: DataTypes.STRING,
+      // allowNull: false
+    },
+    phone: {
+      type: DataTypes.INTEGER,
+      // allowNull: false
     }
   }, {
     freezeTableName: true,
     sequelize,
-    tableName: 'Users'
+    tableName: 'User'
   })
 }
