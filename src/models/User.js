@@ -41,23 +41,23 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING
     },
     cp: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.INTEGER
       // allowNull: false
     },
     address: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING
       // allowNull: false
     },
     city: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING
       // allowNull: false
     },
     province: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING
       // allowNull: false
     },
     phone: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.INTEGER
       // allowNull: false
     }
   }, {
