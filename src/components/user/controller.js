@@ -3,14 +3,19 @@ const tokenGenerator = require('../../helpers/tokenGenerator')
 const tokenValidators = require('../../helpers/tokenValidators')
 const store = require('./store')
 
-const newUser = async ({ name, lastName, email, password }) => {
+const newUser = async ({ name, lastName, email, password, cp, address, city, province, phone }) => {
   const salt = bcryptjs.genSaltSync()
   const user = {
     name,
     lastName,
     email,
     type: 'User',
-    password: bcryptjs.hashSync(password, salt)
+    password: bcryptjs.hashSync(password, salt),
+    cp,
+    address,
+    city,
+    province,
+    phone
   }
 
   await store.newUser(user)
