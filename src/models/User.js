@@ -32,9 +32,10 @@ module.exports = (sequelize) => {
     },
     type: {
       type: DataTypes.ENUM({
-        values: ['User', 'Admin']
+        values: ['User', 'Admin', 'Super']
       }),
-      allowNull: false
+      allowNull: false,
+      defaultValue: 'User'
     },
     googleId: {
       type: DataTypes.STRING
