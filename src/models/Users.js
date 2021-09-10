@@ -7,6 +7,15 @@ module.exports = (sequelize) => {
       defaultValue: DataTypes.UUIDV1,
       primaryKey: true
     },
+    googleId: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    googleSession: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
+    },
     name: {
       type: DataTypes.STRING,
       allowNull: false
@@ -21,7 +30,7 @@ module.exports = (sequelize) => {
     },
     password: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     },
     picture: {
       type: DataTypes.STRING

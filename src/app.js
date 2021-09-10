@@ -1,15 +1,14 @@
-// require('./passport/passportGoogle.js')
+require('./passport/passportGoogle')
 const express = require('express')
-const cookieParser = require('cookie-parser')
 const morgan = require('morgan')
 const cors = require('cors')
 require('./db.js')
 require('colors')
 const { frontEndHost } = require('../config.js')
-
 const routes = require('./routes')
-// const passport = require('passport');
-
+const cookieParser = require('cookie-parser')
+const passport = require('passport')
+const session = require('express-session')
 const server = express()
 
 server.name = 'NoiLan'
@@ -17,7 +16,6 @@ server.name = 'NoiLan'
 // server.use(cors({ credentials: true }))
 server.use(cors({ origin: frontEndHost(), credentials: true }))
 server.use(express.json())
-server.use(cookieParser())
 server.use(morgan('dev'))
 server.use((req, res, next) => {
   // res.header('Access-Control-Allow-Origin', 'http://localhost:3000') // update to match the domain you will make the request from
@@ -27,8 +25,10 @@ server.use((req, res, next) => {
   next()
 })
 
-// server.use(passport.initialize())
-// server.use(passport.session())
+server.use(cookieParser())
+server.use(session({ secret: 'anythinglol' }))
+server.use(passport.initialize())
+server.use(passport.session())
 
 server.use('/', routes)
 

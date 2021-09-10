@@ -18,7 +18,7 @@ https://noiloan.herokuapp.com
 - GET /products   >> lista todos los productos con algunas propiedades minimas
 - GET /products/best/:n   >> los 'n' productos mejor puntuados
 - GET /products/detail/:id   >> un producto por ID con todas sus propiedades
-- POST /products >>> recibe por body un objeto con estas características:
+- POST /products/add >>> recibe por body un objeto con estas características:
 
 - { 
 -  "model": "SX100", 
