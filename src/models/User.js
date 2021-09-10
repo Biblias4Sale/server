@@ -41,23 +41,23 @@ module.exports = (sequelize) => {
     },
     cp: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      // allowNull: false
     },
     address: {
       type: DataTypes.STRING,
-      allowNull: false
+      // allowNull: false
     },
     city: {
       type: DataTypes.STRING,
-      allowNull: false
+      // allowNull: false
     },
     province: {
       type: DataTypes.STRING,
-      allowNull: false
+      // allowNull: false
     },
     phone: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      // allowNull: false
     }
   }, {
     freezeTableName: true,
