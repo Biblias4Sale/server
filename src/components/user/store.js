@@ -19,6 +19,7 @@ const editUser = async (id, infoUser) => {
   if (infoUser.city) user.city = infoUser.city
   if (infoUser.province) user.province = infoUser.province
   if (infoUser.phone) user.phone = infoUser.phone
+  if (infoUser.password) user.password = infoUser.password
 
   user.save()
   const userReturn = {
