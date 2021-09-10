@@ -32,7 +32,7 @@ router.delete('/:id', (req, res) => {
 
 router.put('/:id', (req, res) => {
   controller
-    .activeUser(req.params.id)
+    .activateUser(req.params.id)
     .then(message => response.success(req, res, 201, message))
     .catch(e => response.error(req, res, 404, e, 'User not activate'))
 })

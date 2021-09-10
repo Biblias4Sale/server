@@ -17,7 +17,7 @@ const newUser = async ({ name, lastName, email, type }) => {
 
 const delUser = async (id) => await store.delUser(id)
 
-const activateUser = async (id) => await store.activeUser(id)
+const activateUser = async (id) => await store.activateUser(id)
 
 const resetPassword = async (id) => await store.resetPassword(id)
 
