@@ -23,7 +23,7 @@ const newUser = async (user) => {
 
 const delUser = async (id) => {
   const user = await User.findByPk(id)
-  console.log(user)
+  // console.log(user)
   user.status = false
   await user.save()
   return 'User deleted'

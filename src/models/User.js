@@ -38,6 +38,26 @@ module.exports = (sequelize) => {
     },
     googleId: {
       type: DataTypes.STRING
+    },
+    cp: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    address: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    city: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    province: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    phone: {
+      type: DataTypes.INTEGER,
+      allowNull: false
     }
   }, {
     freezeTableName: true,
