@@ -14,7 +14,12 @@ const editUser = async (id, infoUser) => {
   if (infoUser.name) user.name = infoUser.name
   if (infoUser.lastName) user.name = infoUser.name
   if (infoUser.email) user.name = infoUser.name
-  if (infoUser.password) user.name = infoUser.name
+  if (infoUser.cp) user.cp = infoUser.cp
+  if (infoUser.address) user.address = infoUser.address
+  if (infoUser.city) user.city = infoUser.city
+  if (infoUser.province) user.province = infoUser.province
+  if (infoUser.phone) user.phone = infoUser.phone
+
   user.save()
   const userReturn = {
     id: user.id,
