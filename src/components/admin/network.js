@@ -30,13 +30,6 @@ router.delete('/:id', (req, res) => {
     .catch(e => response.error(req, res, 404, e, 'User not deleted'))
 })
 
-router.post('/del', (req, res) => {
-  controller
-    .deleteUserWithEmail(req.body.email)
-    .then(message => response.success(req, res, 201, message))
-    .catch(e => response.error(req, res, 404, e, 'User not deleted'))
-})
-
 router.put('/:id', (req, res) => {
   controller
     .activateUser(req.params.id)
@@ -44,23 +37,9 @@ router.put('/:id', (req, res) => {
     .catch(e => response.error(req, res, 404, e, 'User not activate'))
 })
 
-router.post('/activate', (req, res) => {
-  controller
-    .activateUserWithEmail(req.body.email)
-    .then(message => response.success(req, res, 201, message))
-    .catch(e => response.error(req, res, 404, e, 'User not activate'))
-})
-
 router.put('/resetpassword/:id', (req, res) => {
   controller
     .resetPassword(req.params.id)
-    .then(message => response.success(req, res, 201, message))
-    .catch(e => response.error(req, res, 404, e, 'Password not changed'))
-})
-
-router.post('/resetpasswordwithemail', (req, res) => {
-  controller
-    .resetPasswordWithEmail(req.body.email)
     .then(message => response.success(req, res, 201, message))
     .catch(e => response.error(req, res, 404, e, 'Password not changed'))
 })

@@ -106,10 +106,69 @@ const editProduct = async (prod) => {
   return producto
 }
 
+const deleteProducts = async (idProducts) => {
+  try {
+    idProducts.map(async (id) => {
+      const product = await Product.findByPk(id)
+      product.state = false
+      await product.save()
+    })
+    return 'Producto eliminado'
+  } catch (err) {
+    console.log(err)
+    return 'Producto no se eliminó'
+  }
+}
+
+const activateProducts = async (idProducts) => {
+  try {
+    idProducts.map(async (id) => {
+      const product = await Product.findByPk(id)
+      product.state = true
+      await product.save()
+    })
+    return 'Producto activado'
+  } catch (err) {
+    console.log(err)
+    return 'Producto no se activo'
+  }
+}
+
+const changePrice = async (idProducts, value) => {
+  if (idProducts.length === 1) {
+    try {
+      idProducts.map(async (id) => {
+        const product = await Product.findByPk(id)
+        product.price = product.price - value
+        await product.save()
+      })
+      return 'Nuevo precio definido'
+    } catch (err) {
+      console.log(err)
+      return 'Precio no pudo ser establecido'
+    }
+  }
+
+  try {
+    idProducts.map(async (id) => {
+      const product = await Product.findByPk(id)
+      product.price = product.price - (product.price * value)
+      await product.save()
+    })
+    return 'Nuevo precio definido'
+  } catch (err) {
+    console.log(err)
+    return 'Precio no pudo ser establecido'
+  }
+}
+
 module.exports = {
   getAll,
   getDetail,
   addProduct,
   getReview,
-  editProduct
+  editProduct,
+  deleteProducts,
+  activateProducts,
+  changePrice
 }

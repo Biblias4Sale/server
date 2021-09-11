@@ -57,8 +57,42 @@ Debe venir la petición con `{ withCredentials: true }`
 "city": "Bahía Blanca",
 "province": "Buenos Aires",
 "phone": 291432562
+ }
 ```
-<br>
+
+- PUT /deleteproducts   >> Elimina productos
+```JSON
+{
+  "idProducts": ["12", "17", "23", "24"]
+}
+```
+
+- PUT /activateproducts   >> Activa productos
+```JSON
+{
+  "idProducts": ["12", "17", "23", "24"]
+}
+```
+
+- PUT /changeprice   >> Resta valor al precio
+```JSON
+//Si viene solo un id de producto, el valor debe ser en dinero
+{
+  "idProducts": ["12"],
+  "value": 450
+}
+
+//Si vienen dos o más id de producto, el valor debe ser en porcentaje
+{
+  "idProducts": ["12", "17", "23", "24"],
+  "value": 0.1
+}
+```
+- PUT /activateproducts   >> Activa productos
+```JSON
+{
+  "idProducts": ["12", "17", "23", "24"]
+}
 
 -PUT /products/edit >> Edita la información de un producto.
 ```JSON
