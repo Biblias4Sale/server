@@ -17,9 +17,15 @@ const newUser = async ({ name, lastName, email, type }) => {
 
 const delUser = async (id) => await store.delUser(id)
 
+const deleteUserWithEmail = async (email) => await store.deleteUserWithEmail(email)
+
 const activateUser = async (id) => await store.activateUser(id)
 
+const activateUserWithEmail = async (email) => await store.activateUserWithEmail(email)
+
 const resetPassword = async (id) => await store.resetPassword(id)
+
+const resetPasswordWithEmail = async (email) => await store.resetPasswordWithEmail(email)
 
 const changePassword = async (id, password) => {
   const salt = bcryptjs.genSaltSync()
@@ -36,8 +42,11 @@ module.exports = {
   getUsers,
   newUser,
   delUser,
+  deleteUserWithEmail,
   activateUser,
+  activateUserWithEmail,
   resetPassword,
+  resetPasswordWithEmail,
   changePassword,
   changeType
 }

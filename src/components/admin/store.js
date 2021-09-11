@@ -23,6 +23,14 @@ const newUser = async (user) => {
 
 const delUser = async (id) => {
   const user = await User.findByPk(id)
+  // console.log(user)
+  user.status = false
+  await user.save()
+  return 'User deleted'
+}
+
+const deleteUserWithEmail = async (email) => {
+  const user = await User.findOne({ where: { email: email } })
   console.log(user)
   user.status = false
   await user.save()
@@ -36,8 +44,23 @@ const activateUser = async (id) => {
   return 'User activate'
 }
 
-const resetPassword = async (id) => {
+const activateUserWithEmail = async (email) => {
+  const user = await User.findOne({ where: { email: email } })
+  user.status = true
+  await user.save()
+  return 'User activate'
+}
+
+const resetPassword = async (id, email) => {
   const user = await User.findByPk(id)
+  const salt = bcriptjs.genSaltSync()
+  user.password = bcriptjs.hashSync(user.email, salt)
+  user.save()
+  return 'Password reset'
+}
+
+const resetPasswordWithEmail = async (email) => {
+  const user = await User.findOne({ where: { email: email } })
   const salt = bcriptjs.genSaltSync()
   user.password = bcriptjs.hashSync(user.email, salt)
   user.save()
@@ -62,8 +85,11 @@ module.exports = {
   getUsers,
   newUser,
   delUser,
+  deleteUserWithEmail,
   activateUser,
+  activateUserWithEmail,
   resetPassword,
+  resetPasswordWithEmail,
   changePassword,
   changeType
 }

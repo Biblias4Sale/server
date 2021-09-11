@@ -48,13 +48,15 @@ Debe venir la petición con `{ withCredentials: true }`
 - POST /products >> recibe por BODY un objeto con estas características:
 ```JSON
  { 
- "model": "SX100", 
- "brand": "Canon ",
- "img": "https://arsonyb2c.vteximg.com.br/arquivos/ids/292451-550-550/ILCE-7M3_Black-1.jpg?v=637123589061300000",
- "description": "Una cámara linda", 
- "price": 800, "points": 5,
- "subCategory": "Semi-Reflex"
- } 
+"name":"Nacho",
+"lastName": "Posta",
+"email": "wasap@gmail.com",
+"password": "asdqw.",
+"cp": 666,
+"address": "En la loma del orto",
+"city": "Bahía Blanca",
+"province": "Buenos Aires",
+"phone": 291432562
 ```
 <br>
 
