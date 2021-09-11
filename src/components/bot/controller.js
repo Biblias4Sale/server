@@ -1,4 +1,3 @@
-const bcryptjs = require('bcryptjs')
 const store = require('./store')
 
 const getUsers = async (id) => await store.getUsers(id)

@@ -33,6 +33,10 @@ const activateProducts = async (idProducts) => {
   return await store.activateProducts(idProducts)
 }
 
+const changePrice = async ({ idProducts, value }) => {
+  return await store.changePrice(idProducts, value)
+}
+
 module.exports = {
   getAll,
   getBest,
@@ -41,5 +45,6 @@ module.exports = {
   getReview,
   editProduct,
   deleteProducts,
-  activateProducts
+  activateProducts,
+  changePrice
 }
