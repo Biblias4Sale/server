@@ -26,7 +26,13 @@ const editUser = async (id, infoUser) => {
     id: user.id,
     name: user.name,
     lastName: user.lastName,
-    email: user.email
+    email: user.email,
+    cp: user.cp,
+    address: user.address,
+    city: user.city,
+    province: user.province,
+    phone: user.phone,
+    password: user.password
   }
   return userReturn
 }

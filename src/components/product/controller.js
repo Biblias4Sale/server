@@ -24,11 +24,17 @@ const getReview = async () => {
 const editProduct = async (prod) => {
   return await store.editProduct(prod)
 }
+
+const deleteProduct = async (delProduct) => {
+  return await store.deleteProduct(delProduct)
+}
+
 module.exports = {
   getAll,
   getBest,
   getDetail,
   addProduct,
   getReview,
-  editProduct
+  editProduct,
+  deleteProduct
 }

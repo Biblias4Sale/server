@@ -106,10 +106,23 @@ const editProduct = async (prod) => {
   return producto
 }
 
+const deleteProduct = async (delProduct) => {
+  try {
+    const product = await Product.findByPk(delProduct)
+    product.state = false
+    await product.save()
+    return 'Producto eliminado'
+  } catch (err) {
+    console.log(err)
+    return 'Producto no se eliminó'
+  }
+}
+
 module.exports = {
   getAll,
   getDetail,
   addProduct,
   getReview,
-  editProduct
+  editProduct,
+  deleteProduct
 }
