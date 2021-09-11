@@ -106,10 +106,40 @@ const editProduct = async (prod) => {
   return producto
 }
 
+const deleteProducts = async (idProducts) => {
+  try {
+    idProducts.map(async (id) => {
+      const product = await Product.findByPk(id)
+      product.state = false
+      await product.save()
+    })
+    return 'Producto eliminado'
+  } catch (err) {
+    console.log(err)
+    return 'Producto no se eliminó'
+  }
+}
+
+const activateProducts = async (idProducts) => {
+  try {
+    idProducts.map(async (id) => {
+      const product = await Product.findByPk(id)
+      product.state = true
+      await product.save()
+    })
+    return 'Producto activado'
+  } catch (err) {
+    console.log(err)
+    return 'Producto no se activo'
+  }
+}
+
 module.exports = {
   getAll,
   getDetail,
   addProduct,
   getReview,
-  editProduct
+  editProduct,
+  deleteProducts,
+  activateProducts
 }

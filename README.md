@@ -59,6 +59,17 @@ Debe venir la petición con `{ withCredentials: true }`
 "province": "Buenos Aires",
 "phone": 291432562
 ```
+- DELETE /deleteproducts   >> Elimina productos
+```JSON
+{
+  "idProducts": ["12", "17", "23", "24"]
+}
+```
+- PUT /activateproducts   >> Activa productos
+```JSON
+{
+  "idProducts": ["12", "17", "23", "24"]
+}
 <br>
 
 -PUT /products/edit >> Edita la información de un producto.

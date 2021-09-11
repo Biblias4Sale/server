@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const { getAll, getBest, getDetail, addProduct, getReview, editProduct } = require('./controller')
+const { getAll, getBest, getDetail, addProduct, getReview, editProduct, deleteProducts, activateProducts } = require('./controller')
 
 router.get('/', async (req, res) => {
   const response = await getAll()
@@ -29,6 +29,16 @@ router.get('/reviews', async (req, res) => {
 router.put('/edit/', async (req, res) => {
   const response = await editProduct(req.body)
   res.json(response)
+})
+
+router.delete('/deleteproducts/', async (req, res) => {
+  const response = await deleteProducts(req.body.idProducts)
+  res.status(201).json(response)
+})
+
+router.put('/activateproducts/', async (req, res) => {
+  const response = await activateProducts(req.body.idProducts)
+  res.status(201).json(response)
 })
 
 module.exports = router

@@ -10,6 +10,10 @@ module.exports = (sequelize) => {
     amount: {
       type: DataTypes.INTEGER,
       allowNull: false
+    },
+    state: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false
     }
   }, {
     freezeTableName: true,

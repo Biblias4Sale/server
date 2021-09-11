@@ -41,29 +41,25 @@ module.exports = (sequelize) => {
     },
     type: {
       type: DataTypes.ENUM({
-        values: ['User', 'Admin']
+        values: ['User', 'Admin', 'Super']
       }),
-      allowNull: false
+      allowNull: false,
+      defaultValue: 'User'
     },
     cp: {
-      type: DataTypes.INTEGER,
-      // allowNull: false
+      type: DataTypes.INTEGER
     },
     address: {
-      type: DataTypes.STRING,
-      // allowNull: false
+      type: DataTypes.STRING
     },
     city: {
-      type: DataTypes.STRING,
-      // allowNull: false
+      type: DataTypes.STRING
     },
     province: {
-      type: DataTypes.STRING,
-      // allowNull: false
+      type: DataTypes.STRING
     },
     phone: {
-      type: DataTypes.INTEGER,
-      // allowNull: false
+      type: DataTypes.STRING
     }
   }, {
     freezeTableName: true,
