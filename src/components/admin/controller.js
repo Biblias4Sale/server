@@ -1,9 +1,13 @@
+const fs = require('fs').promises
+const parse = require('csv-parse/lib/sync')
+const stringify = require('csv-stringify')
+const path = require('path')
 const bcryptjs = require('bcryptjs')
 const store = require('./store')
 
-const getUsers = async (id) => await store.getUsers(id)
+const getUsers = async () => await store.getUsers()
 
-const newUser = async ({ name, lastName, email, type }) => {
+const newUser = async ({ name, lastName, email, type = 'User' }) => {
   const salt = bcryptjs.genSaltSync()
   const user = {
     name,
@@ -32,6 +36,37 @@ const changePassword = async (id, password) => {
 
 const changeType = async (id, type) => await store.changeType(id, type)
 
+const csvToUsers = async () => {
+  try {
+    const fileContent = await fs.readFile(path.join(__dirname, '/users.csv'))
+    const infoUser = parse(fileContent, { columns: true })
+    const users = infoUser.map(user => {
+      const salt = bcryptjs.genSaltSync()
+      user.password = bcryptjs.hashSync(user.email, salt)
+      return user
+    })
+    return store.csvToUsers(users)
+  } catch (err) {
+    return err
+  }
+}
+
+const usersToCSV = async () => {
+  try {
+    const users = await store.usersToCSV()
+    console.log(users)
+    stringify(users, {
+      header: true
+    }, function (err, output) {
+      fs.writeFile(path.join(__dirname, '/usersList.csv'), output)
+      console.log(err)
+    })
+    return 'Download list'
+  } catch (err) {
+    return err
+  }
+}
+
 module.exports = {
   getUsers,
   newUser,
@@ -39,5 +74,7 @@ module.exports = {
   activateUser,
   resetPassword,
   changePassword,
-  changeType
+  changeType,
+  csvToUsers,
+  usersToCSV
 }

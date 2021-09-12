@@ -1,3 +1,7 @@
+
+const fs = require('fs').promises
+const parse = require('csv-parse/lib/sync')
+const path = require('path')
 const store = require('./store')
 
 const getAll = async () => {
@@ -37,6 +41,16 @@ const changePrice = async ({ idProducts, value }) => {
   return await store.changePrice(idProducts, value)
 }
 
+const csvToProducts = async () => {
+  try {
+    const fileContent = await fs.readFile(path.join(__dirname, '/products.csv'))
+    const products = parse(fileContent, { columns: true })
+    return store.csvToProducts(products)
+  } catch (err) {
+    return err
+  }
+}
+
 module.exports = {
   getAll,
   getBest,
@@ -46,5 +60,6 @@ module.exports = {
   editProduct,
   deleteProducts,
   activateProducts,
-  changePrice
+  changePrice,
+  csvToProducts
 }

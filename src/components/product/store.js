@@ -162,6 +162,52 @@ const changePrice = async (idProducts, value) => {
   }
 }
 
+const csvToProducts = (products) => {
+  try {
+    products.map(async (product) => {
+      const { brand, model, img, description, price, points, stock, state } = product
+      const { subCategory } = product
+      const prod = await Product.findOne({
+        where: {
+          model
+        }
+      })
+
+      if (prod !== null) return 'El producto ya existe'
+
+      try {
+        const newProd = await Product.create({
+          brand,
+          model,
+          img,
+          description,
+          price,
+          points,
+          stock,
+          state
+        })
+
+        const subCat = await SubCategory.findOne({
+          where: {
+            name: subCategory
+          }
+        })
+
+        if (subCat === null) return 'No se encontró la SubCategoría'
+
+        await newProd.setSubCategory(subCat)
+        return await newProd
+      } catch (e) {
+        console.log(e)
+        return `${model} ya existe`
+      }
+    })
+    return 'Productos creados exitosamente'
+  } catch (err) {
+    return err
+  }
+}
+
 module.exports = {
   getAll,
   getDetail,
@@ -170,5 +216,6 @@ module.exports = {
   editProduct,
   deleteProducts,
   activateProducts,
-  changePrice
+  changePrice,
+  csvToProducts
 }
