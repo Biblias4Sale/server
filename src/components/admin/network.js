@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const { check } = require('express-validator')
+const path = require('path')
 const controller = require('./controller.js')
 const response = require('../../responses')
 const { validationEmail } = require('../../helpers/dbValidators.js')
@@ -56,6 +57,20 @@ router.put('/changetype/:id', (req, res) => {
     .changeType(req.params.id, req.body.type)
     .then(message => response.success(req, res, 201, message))
     .catch(e => response.error(req, res, 404, e, 'Password not changed'))
+})
+
+router.post('/csvadd', (req, res) => {
+  controller
+    .csvToUsers()
+    .then(message => response.success(req, res, 201, message))
+    .catch(e => response.error(req, res, 404, e, 'Users not created'))
+})
+
+router.get('/csvget', (req, res) => {
+  controller
+    .usersToCSV()
+    .then(message => response.success(req, res, 201, message))
+    .catch(e => response.error(req, res, 404, e, 'Users not created'))
 })
 
 module.exports = router
