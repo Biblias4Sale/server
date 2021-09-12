@@ -134,6 +134,34 @@ const activateProducts = async (idProducts) => {
   }
 }
 
+const changePrice = async (idProducts, value) => {
+  if (idProducts.length === 1) {
+    try {
+      idProducts.map(async (id) => {
+        const product = await Product.findByPk(id)
+        product.price = product.price - value
+        await product.save()
+      })
+      return 'Nuevo precio definido'
+    } catch (err) {
+      console.log(err)
+      return 'Precio no pudo ser establecido'
+    }
+  }
+
+  try {
+    idProducts.map(async (id) => {
+      const product = await Product.findByPk(id)
+      product.price = product.price - (product.price * value)
+      await product.save()
+    })
+    return 'Nuevo precio definido'
+  } catch (err) {
+    console.log(err)
+    return 'Precio no pudo ser establecido'
+  }
+}
+
 module.exports = {
   getAll,
   getDetail,
@@ -141,5 +169,6 @@ module.exports = {
   getReview,
   editProduct,
   deleteProducts,
-  activateProducts
+  activateProducts,
+  changePrice
 }
