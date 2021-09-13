@@ -169,6 +169,16 @@ req.body.password,
 req.params.id,
 req.body.type,
 ```
+- PUT /admin/csvadd >> Carga csv de usuarios
+ ```javascript
+req.params.id,
+req.body.type,
+```
+- PUT /admin/csvget >> Descarga csv de usuarios
+ ```javascript
+req.params.id,
+req.body.type,
+```
 
 <hr>
 

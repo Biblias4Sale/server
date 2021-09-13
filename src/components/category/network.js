@@ -21,7 +21,7 @@ router.post('/addSub', async (req, res) => {
   res.json(response)
 })
 
-router.get('/getSub/:cat', async (req, res) => {
+router.get('/getSubParams/:cat', async (req, res) => {
   if (!req.params.cat) res.json('Debes agregar un Categoría')
   res.json(await getAllSubCategories(req.params.cat))
 })

@@ -58,4 +58,18 @@ router.put('/changetype/:id', (req, res) => {
     .catch(e => response.error(req, res, 404, e, 'Password not changed'))
 })
 
+router.post('/csvadd', (req, res) => {
+  controller
+    .csvToUsers()
+    .then(message => response.success(req, res, 201, message))
+    .catch(e => response.error(req, res, 404, e, 'Users not created'))
+})
+
+router.get('/csvget', (req, res) => {
+  controller
+    .usersToCSV()
+    .then(message => response.success(req, res, 201, message))
+    .catch(e => response.error(req, res, 404, e, 'Users not created'))
+})
+
 module.exports = router
