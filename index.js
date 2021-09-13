@@ -20,12 +20,12 @@ const runServer = async () => {
   } catch (error) {
     console.log(error)
   }
-  await categoriesLoader()
-  await subCategoriesLoader('Camaras', subCategoryCamaras)
-  await subCategoriesLoader('Lentes', subCategoryLentes)
-  await subCategoriesLoader('Luces', subCategoryAccesorios)
-  await subCategoriesLoader('Accesorios', subCategoryLuces)
-  await subCategoriesLoader('Cargadores y baterías', subCategoryCargaYbat)
+  // await categoriesLoader()
+  // await subCategoriesLoader('Camaras', subCategoryCamaras)
+  // await subCategoriesLoader('Lentes', subCategoryLentes)
+  // await subCategoriesLoader('Luces', subCategoryAccesorios)
+  // await subCategoriesLoader('Accesorios', subCategoryLuces)
+  // await subCategoriesLoader('Cargadores y baterías', subCategoryCargaYbat)
   await productLoader()
 
   server.listen(PORT, () => {

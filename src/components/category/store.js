@@ -77,6 +77,8 @@ const getAllSubCategories = async (cat) => {
         }
       }
     })
+    console.log('subcats')
+    console.log(subcats)
     return subcats
   }
 }
