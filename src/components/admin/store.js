@@ -2,7 +2,11 @@ const bcriptjs = require('bcryptjs')
 const { User } = require('../../db')
 
 const getUsers = async () => {
-  return await User.findAll()
+  try {
+    return await User.findAll()
+  } catch (err) {
+    return err
+  }
 }
 
 const newUser = async (user) => {
@@ -58,6 +62,23 @@ const changeType = async (id, type) => {
   return 'Type modified'
 }
 
+const csvToUsers = (users) => {
+  try {
+    users.map(async (user) => await User.create(user))
+    return 'Usuarios creados exitosamente'
+  } catch (err) {
+    return err
+  }
+}
+
+const usersToCSV = async () => {
+  try {
+    return await User.findAll()
+  } catch (err) {
+    return err
+  }
+}
+
 module.exports = {
   getUsers,
   newUser,
@@ -65,5 +86,7 @@ module.exports = {
   activateUser,
   resetPassword,
   changePassword,
-  changeType
+  changeType,
+  csvToUsers,
+  usersToCSV
 }

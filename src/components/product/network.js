@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const { getAll, getBest, getDetail, addProduct, getReview, editProduct, deleteProducts, activateProducts, changePrice } = require('./controller')
+const { getAll, getBest, getDetail, addProduct, getReview, editProduct, deleteProducts, activateProducts, changePrice, csvToProducts } = require('./controller')
 
 router.get('/', async (req, res) => {
   const response = await getAll()
@@ -43,6 +43,16 @@ router.put('/activateproducts/', async (req, res) => {
 
 router.put('/changeprice', async (req, res) => {
   const response = await changePrice(req.body)
+  res.json(response)
+})
+
+router.get('/csvadd', async (req, res) => {
+  const response = await csvToProducts()
+  res.json(response)
+})
+
+router.get('/csvget', async (req, res) => {
+  const response = await csvToProducts()
   res.json(response)
 })
 
