@@ -1,7 +1,6 @@
 const express = require('express')
 const router = express.Router()
 const { check } = require('express-validator')
-const path = require('path')
 const controller = require('./controller.js')
 const response = require('../../responses')
 const { validationEmail } = require('../../helpers/dbValidators.js')
