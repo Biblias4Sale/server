@@ -36,7 +36,7 @@ Debe venir la petición con `{ withCredentials: true }`
 }
 ```
 - GET /categories/getSub/All >> todas las subCategorías
-- GET /categories/getSub/:Category >> devuelve un array con todas las SubCategorías de esa Categoría
+- GET /categories/getSubParams/:Category >> devuelve un array con todas las SubCategorías de esa Categoría
 
 <hr>
 
