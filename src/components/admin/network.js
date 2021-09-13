@@ -59,6 +59,10 @@ router.put('/changetype/:id', (req, res) => {
 })
 
 router.post('/csvadd', (req, res) => {
+  const users = req.files.file
+  users.mv(`./files/${users.name}`, err => {
+    if (err) return res.status(500)
+  })
   controller
     .csvToUsers()
     .then(message => response.success(req, res, 201, message))
