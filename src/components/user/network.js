@@ -28,6 +28,7 @@ router.post('/', [
 
 router.put('/:id', [
 ], (req, res) => {
+  console.log('body de editUser', req.body)
   controller
     .editUser(req.params.id, req.body)
     .then(message => response.success(req, res, 200, message))
