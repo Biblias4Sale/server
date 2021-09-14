@@ -37,13 +37,13 @@ Product.belongsTo(SubCategory)
 Category.hasMany(SubCategory)
 SubCategory.belongsTo(Category)
 
-Order.belongsTo(Cart)
-Cart.hasOne(Order)
+Cart.belongsTo(Order)
+Order.hasOne(Cart)
 User.hasMany(Product)
 Product.belongsTo(User)
 
-Product.belongsToMany(Order, { through: 'products_orders' })
-Order.belongsToMany(Product, { through: 'products_orders' })
+Product.belongsToMany(Cart, { through: 'cart_orders' })
+Cart.belongsToMany(Product, { through: 'cart_orders' })
 Cart.belongsToMany(User, { through: 'cart_users' })
 User.belongsToMany(Cart, { through: 'cart_users' })
 

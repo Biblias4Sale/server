@@ -58,7 +58,7 @@ const changeType = async (id, type) => {
   const user = await User.findByPk(id)
   user.type = type
   user.save()
-  return 'Type modified'
+  return 'Tipo modificado'
 }
 
 const csvToUsers = (users) => {
