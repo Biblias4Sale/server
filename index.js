@@ -6,7 +6,7 @@ const { productLoader } = require('./src/loaders/productLoader')
 const { subCategoryCamaras, subCategoryLentes, subCategoryLuces, subCategoryAccesorios, subCategoryCargaYbat } = require('./config')
 
 const { conn } = require('./src/db.js')
-const { force } = require('./config.js')
+const { force, alter } = require('./config.js')
 const PORT = process.env.PORT || 3001
 
 process.stdout.write('\u001b[2J\u001b[0;0H') // clear the screen on the console

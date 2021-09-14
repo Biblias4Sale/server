@@ -7,7 +7,6 @@ router.get('/', async (req, res) => {
 })
 
 router.post('/add', async (req, res) => {
-  console.log(req.body)
   res.json(await addCategory(req.body.name))
 })
 
@@ -21,9 +20,9 @@ router.post('/addSub', async (req, res) => {
   res.json(response)
 })
 
-router.get('/getSubParams/:cat', async (req, res) => {
-  if (!req.params.cat) res.json('Debes agregar un Categoría')
-  res.json(await getAllSubCategories(req.params.cat))
+router.get('/getSubParams', async (req, res) => {
+  if (!req.query.name) { res.json('debe ingresar una categoria').sendStatus(404) }
+  res.json(await getAllSubCategories(req.query.name))
 })
 
 module.exports = router

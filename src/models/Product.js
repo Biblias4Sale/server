@@ -2,10 +2,6 @@ const { DataTypes } = require('sequelize')
 
 module.exports = (sequelize) => {
   const Product = sequelize.define('product', {
-    brand: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
     model: {
       type: DataTypes.STRING,
       allowNull: false,

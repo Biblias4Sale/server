@@ -11,8 +11,8 @@ const addProduct = async (newProduct) => {
   })
 
   if (prod !== null) return 'El producto ya existe'
-
   try {
+    console.log(newProduct)
     const newProd = await Product.create({
       brand,
       model,

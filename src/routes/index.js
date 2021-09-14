@@ -10,6 +10,7 @@ const authLogout = require('../components/auth/logout')
 const loginUser = require('../components/auth/loginUser')
 const logoutUser = require('../components/auth/logoutUser')
 const theTest = require('../components/auth/test')
+const networkBrand = require('../components/brand/network')
 
 const category = '/categories'
 const product = '/products'
@@ -21,7 +22,9 @@ const googleLogout = '/logout/google'
 const userLogin = '/login'
 const userLogout = '/logout'
 const test = '/test'
+const brand = '/brands'
 
+router.use(brand, networkBrand)
 router.use(category, networkCategory)
 router.use(product, networkProduct)
 router.use(user, networkUser)

@@ -31,3 +31,31 @@ module.exports = {
   addSubCategory,
   getAllSubCategories
 }
+
+// producto:{
+//   name:'asdasd',
+//   id:'asdsadsd',
+//   category:{
+//     name:['asdasdds'],
+//     subCategory:{
+//       name:'asdsad'
+//     }
+//   }
+// }
+// producto.category.subcatory.name
+
+// proucto:{
+//   name:'asdsad',
+//   id:'1',
+//   category:[],
+//   subcategory:'asdasd'
+// }
+// producto.subcatory
+
+
+// mariano 3
+// parma: 6,
+// diego: 4,
+// lina: 2,
+// nacho: 2,
+// andres: 1
