@@ -3,9 +3,9 @@ const { check } = require('express-validator')
 const router = express.Router()
 const controller = require('./controller')
 const response = require('../../responses')
-const validation = require('../../middlewares/validation')
-// const tokenValidation = require('../../middlewares/tokenValidation')
 const { validationEmail } = require('../../helpers/dbValidators')
+const validation = require('../../middlewares/validation')
+const tokenValidation = require('../../middlewares/tokenValidation')
 
 router.post('/', [
   check('name', 'Name is required').notEmpty(),
@@ -26,6 +26,7 @@ router.post('/', [
 })
 
 router.put('/:id', [
+  tokenValidation
 ], (req, res) => {
   controller
     .editUser(req.params.id, req.body)
@@ -33,7 +34,9 @@ router.put('/:id', [
     .catch(e => response.error(req, res, 404, e, 'User not found'))
 })
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', [
+  tokenValidation
+], (req, res) => {
   controller
     .delUser(req.params.id)
     .then(message => response.success(req, res, 200, message))

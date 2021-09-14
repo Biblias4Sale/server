@@ -26,55 +26,75 @@ const newUser = async (user) => {
 }
 
 const delUser = async (id) => {
-  const user = await User.findByPk(id)
-  user.status = false
-  await user.save()
-  return 'User deleted'
+  try {
+    const user = await User.findByPk(id)
+    user.status = false
+    await user.save()
+    return 'User deleted'
+  } catch (err) {
+    throw new Error(err)
+  }
 }
 
 const activateUser = async (id) => {
-  const user = await User.findByPk(id)
-  user.status = true
-  await user.save()
-  return 'User activate'
+  try {
+    const user = await User.findByPk(id)
+    user.status = true
+    await user.save()
+    return 'User activate'
+  } catch (error) {
+    return error
+  }
 }
 
 const resetPassword = async (id, email) => {
-  const user = await User.findByPk(id)
-  const salt = bcriptjs.genSaltSync()
-  user.password = bcriptjs.hashSync(user.email, salt)
-  user.save()
-  return 'Password reset'
+  try {
+    const user = await User.findByPk(id)
+    const salt = bcriptjs.genSaltSync()
+    user.password = bcriptjs.hashSync(user.email, salt)
+    user.save()
+    return 'Password reset'
+  } catch (error) {
+    return error
+  }
 }
 
 const changePassword = async (user) => {
-  const userModified = await User.findByPk(user.id)
-  userModified.password = user.password
-  userModified.save()
-  return 'Password modified'
+  try {
+    const userModified = await User.findByPk(user.id)
+    userModified.password = user.password
+    userModified.save()
+    return 'Password modified'
+  } catch (error) {
+    return error
+  }
 }
 
 const changeType = async (id, type) => {
-  const user = await User.findByPk(id)
-  user.type = type
-  user.save()
-  return 'Tipo modificado'
+  try {
+    const user = await User.findByPk(id)
+    user.type = type
+    user.save()
+    return 'Type modified'
+  } catch (error) {
+    return error
+  }
 }
 
 const csvToUsers = (users) => {
   try {
     users.map(async (user) => await User.create(user))
-    return 'Usuarios creados exitosamente'
-  } catch (err) {
-    return err
+    return 'Users created'
+  } catch (error) {
+    return error
   }
 }
 
 const usersToCSV = async () => {
   try {
     return await User.findAll()
-  } catch (err) {
-    return err
+  } catch (error) {
+    return error
   }
 }
 
