@@ -1,12 +1,17 @@
 const bcryptjs = require('bcryptjs')
 const { User } = require('../db')
 
-// const Users = require('../models/Users')
-
 const validationEmail = async (email) => {
   const emailExist = await User.findOne({ where: { email: email } })
   if (emailExist) {
     throw new Error(`email ${email} exist`)
+  }
+}
+
+const validationUser = async (id) => {
+  const userExist = await User.findByPk(id)
+  if (!userExist) {
+    throw new Error('User not exist')
   }
 }
 
@@ -30,6 +35,7 @@ const validationActive = async (email) => {
 
 module.exports = {
   validationEmail,
+  validationUser,
   validationPassword,
   validationActive
 }

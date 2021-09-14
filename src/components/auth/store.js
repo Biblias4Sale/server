@@ -1,7 +1,11 @@
 const { User } = require('../../db')
 
 const getUser = async (email) => {
-  return User.findOne({ where: { email }, attributes: ['id', 'name', 'lastName', 'email', 'picture', 'type'] })
+  try {
+    return User.findOne({ where: { email }, attributes: ['id', 'name', 'lastName', 'email', 'picture', 'type'] })
+  } catch (error) {
+    return error
+  }
 }
 
 module.exports = {

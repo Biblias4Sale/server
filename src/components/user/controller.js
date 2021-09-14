@@ -25,7 +25,7 @@ const newUser = async ({ name, lastName, email, password }) => {
 }
 
 const editUser = async (id, body) => {
-  const { password, ...infoUser } = body
+  const { token, password, ...infoUser } = body
   if (password) {
     const salt = bcryptjs.genSaltSync()
     infoUser.password = bcryptjs.hashSync(password, salt)
