@@ -3,10 +3,16 @@ const router = express.Router()
 const { check } = require('express-validator')
 const controller = require('./controller.js')
 const response = require('../../responses')
-const { validationEmail } = require('../../helpers/dbValidators.js')
+const { validationEmail, validationUser } = require('../../helpers/dbValidators.js')
 const validation = require('../../middlewares/validation.js')
+const tokenValidation = require('../../middlewares/tokenValidation.js')
+const roleValidation = require('../../middlewares/roleValidation.js')
 
-router.get('/', (req, res) => {
+router.get('/', [
+  tokenValidation,
+  roleValidation,
+  validation
+], (req, res) => {
   controller
     .getUsers()
     .then(message => response.success(req, res, 200, message))
@@ -15,6 +21,8 @@ router.get('/', (req, res) => {
 
 router.post('/', [
   check('email', 'email exist').custom(validationEmail),
+  tokenValidation,
+  roleValidation,
   validation
 ], (req, res) => {
   controller
@@ -23,35 +31,60 @@ router.post('/', [
     .catch(e => response.error(req, res, 404, e, 'Not users'))
 })
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', [
+  check('id').custom(validationUser),
+  tokenValidation,
+  roleValidation,
+  validation
+], (req, res) => {
   controller
     .delUser(req.params.id)
     .then(message => response.success(req, res, 201, message))
-    .catch(e => response.error(req, res, 404, e, 'User not deleted'))
+    .catch(e => response.error(req, res, 404, e.message, 'User not deleted'))
 })
 
-router.put('/:id', (req, res) => {
+router.put('/:id', [
+  check('id').custom(validationUser),
+  tokenValidation,
+  roleValidation,
+  validation
+], (req, res) => {
   controller
     .activateUser(req.params.id)
     .then(message => response.success(req, res, 201, message))
     .catch(e => response.error(req, res, 404, e, 'User not activate'))
 })
 
-router.put('/resetpassword/:id', (req, res) => {
+router.put('/resetpassword/:id', [
+  check('id').custom(validationUser),
+  tokenValidation,
+  roleValidation,
+  validation
+], (req, res) => {
   controller
     .resetPassword(req.params.id)
     .then(message => response.success(req, res, 201, message))
     .catch(e => response.error(req, res, 404, e, 'Password not changed'))
 })
 
-router.put('/changepassword/:id', (req, res) => {
+router.put('/changepassword/:id', [
+  check('id').custom(validationUser),
+  tokenValidation,
+  roleValidation,
+  validation
+], (req, res) => {
   controller
     .changePassword(req.params.id, req.body.password)
     .then(message => response.success(req, res, 201, message))
     .catch(e => response.error(req, res, 404, e, 'Password not changed'))
 })
 
-router.put('/changetype/:id', (req, res) => {
+router.put('/changetype/:id', [
+  check('id').custom(validationUser),
+  tokenValidation,
+  roleValidation,
+  validation
+], (req, res) => {
   controller
     .changeType(req.params.id, req.body.type)
     .then(message => response.success(req, res, 201, message))
