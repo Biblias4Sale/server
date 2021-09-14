@@ -18,6 +18,6 @@ router.post('/', [
       // res.cookie('nToken', message.token, { maxAge: 900000, httpOnly: true })
       response.success(req, res, 201, message)
     })
-    .catch(e => response.error(req, res, 400, e, 'No session'))
+    .catch(e => response.error(req, res, 400, e.message, 'No session'))
 })
 module.exports = router
