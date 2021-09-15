@@ -46,8 +46,8 @@ ProductSold.belongsTo(Cart)
 User.hasMany(Cart)
 Cart.belongsTo(User)
 
-Review.hasMany(ProductSold)
-ProductSold.belongsTo(Review)
+ProductSold.hasOne(Review)
+Review.belongsTo(ProductSold)
 
 module.exports = {
   ...sequelize.models,
