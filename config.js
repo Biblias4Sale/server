@@ -24,7 +24,7 @@ const config = {
       user: 'Diego',
       points: 5,
       tittle: 'Bacano',
-      description: 'Es un producto que no deja de sorprenderme gratamente, estoy muy satisfecho con la compra que he realizado. Lo recomiendo ampliamente aunque en realidad nunca utilice la palabra vacano.',
+      description: 'Es un producto que no deja de sorprenderme gratamente, estoy muy satisfecho con la compra que he realizado. Lo recomiendo ampliamente.',
       fecha: '16/08/2021'
     },
     {
