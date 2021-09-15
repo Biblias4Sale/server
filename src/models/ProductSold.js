@@ -1,22 +1,22 @@
 const { DataTypes } = require('sequelize')
 
 module.exports = (sequelize) => {
-  const Review = sequelize.define('Review', {
-    title: {
+  const ProductSold = sequelize.define('ProductSold', {
+    amount: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    rating: {
+    price: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    description: {
+    soldDate: {
       type: DataTypes.STRING,
       allowNull: false
     }
   }, {
     freezeTableName: true,
     sequelize,
-    tableName: 'Review'
+    tableName: 'ProductSold'
   })
 }

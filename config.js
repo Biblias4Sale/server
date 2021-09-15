@@ -4,7 +4,7 @@ const { DB_PG_USER, DB_PG_PASSWORD, DB_PG_HOST, DB_PG_PORT, DB_PG_DATABASE, DATA
 const Environment = process.env.NODE_ENV
 
 const config = {
-  alter: true,
+  alter: false,
   force: true,
   categoriesList: ['Accesorios', 'Camaras', 'Lentes', 'Luces', 'Cargadores y baterías'],
   subCategoryCamaras: ['Reflex', 'Mirrorless', 'Compacta', 'Semi-Reflex'],
