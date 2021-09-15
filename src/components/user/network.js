@@ -5,7 +5,7 @@ const controller = require('./controller')
 const response = require('../../responses')
 const { validationEmail } = require('../../helpers/dbValidators')
 const validation = require('../../middlewares/validation')
-const tokenValidation = require('../../middlewares/tokenValidation')
+// const tokenValidation = require('../../middlewares/tokenValidation')
 
 router.post('/', [
   check('name', 'Name is required').notEmpty(),
@@ -25,18 +25,14 @@ router.post('/', [
     .catch(e => response.error(req, res, 404, e, 'User not found'))
 })
 
-router.put('/:id', [
-  tokenValidation
-], (req, res) => {
+router.put('/:id', (req, res) => {
   controller
     .editUser(req.params.id, req.body)
     .then(message => response.success(req, res, 200, message))
     .catch(e => response.error(req, res, 404, e, 'User not found'))
 })
 
-router.delete('/:id', [
-  tokenValidation
-], (req, res) => {
+router.delete('/:id', (req, res) => {
   controller
     .delUser(req.params.id)
     .then(message => response.success(req, res, 200, message))
