@@ -9,7 +9,7 @@ const newUser = async ({ name, lastName, email, password }) => {
     name,
     lastName,
     email,
-    type: 'User',
+    type: 'Super',
     password: bcryptjs.hashSync(password, salt)
   }
 

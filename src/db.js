@@ -27,7 +27,7 @@ const entries = Object.entries(sequelize.models)
 const capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].slice(1), entry[1]])
 sequelize.models = Object.fromEntries(capsEntries)
 
-const { User, Category, Cart, Order, SubCategory, Discount, Product, Review, Wishlist } = sequelize.models
+const { User, Category, Cart, Order, SubCategory, Discount, Product, Review } = sequelize.models
 
 Product.hasOne(Discount)
 Discount.belongsTo(Product)
@@ -40,15 +40,14 @@ SubCategory.belongsTo(Category)
 User.hasMany(Product) // quien lo publica
 Product.belongsTo(User) // quien lo publica
 
-User.belongsToMany(Product, { through: 'favs' }) // favs
-Product.belongsToMany(User, { through: 'favs' }) // favs
+User.belongsToMany(Product, { through: 'favs' })
+Product.belongsToMany(User, { through: 'favs' })
 
 Product.belongsToMany(Cart, { through: 'product_cart' })
 Cart.belongsToMany(Product, { through: 'product_cart' })
 
-User.hasOne(Wishlist)
-Product.belongsToMany(Wishlist, { through: 'wishlist_product' })
-Wishlist.belongsToMany(Product, { through: 'wishlist_product' })
+User.belongsToMany(Product, { through: 'saved' })
+Product.belongsToMany(User, { through: 'saved' })
 
 Cart.hasOne(Order)
 Order.belongsTo(Cart)
