@@ -3,10 +3,12 @@ const { Cart, Product, User, ProductSold } = require('../../db')
 const getCart = async (id) => {
   try {
     const cart = await Cart.findOne({ where: { UserId: id, status: 'En proceso' }, include: ProductSold })
+    // const idProducts = cart.ProductSolds.map(item => item.dataValues.productId)
+    // const product = idProducts.map(async (id) => await Product.findByPk(id))
+
     if (!cart) {
       const user = User.findByPk(id)
       const cart = await user.createCart({ status: 'En proceso' })
-      // Actualizar precio de productos
       return cart.id
     }
     return cart
@@ -15,7 +17,7 @@ const getCart = async (id) => {
   }
 }
 
-const addProduct = async (cartId, productId, infoProduct) => {
+const addProduct = async ({ cartId, infoProduct }, productId) => {
   try {
     const cart = await Cart.findByPk(cartId)
     const product = await Product.findByPk(productId)
