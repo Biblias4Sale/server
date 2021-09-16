@@ -22,8 +22,8 @@ const getFavs = async (user) => {
     }
   })
   if (!usuario) return 'Usuario no encontrado'
-  console.log(usuario.dataValues.products)
-  return usuario
+
+  return usuario.dataValues.products
 }
 
 module.exports = {
