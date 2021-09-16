@@ -9,7 +9,14 @@ const getFavs = async (user) => {
   const response = await store.getFavs(user)
   return response
 }
+
+const removeFav = async (user, productID) => {
+  const response = await store.removeFav(user, productID)
+  return response
+}
+
 module.exports = {
   addFav,
-  getFavs
+  getFavs,
+  removeFav
 }
