@@ -6,7 +6,7 @@ const getCart = async (id) => {
 }
 
 const addProduct = async ({ cartId, infoProduct }, productId) => {
-  return await store.addProduct(cartId, productId, infoProduct)
+  return await store.addProduct(cartId, infoProduct, productId)
 }
 
 module.exports = {

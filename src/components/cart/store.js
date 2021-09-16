@@ -17,7 +17,7 @@ const getCart = async (id) => {
   }
 }
 
-const addProduct = async ({ cartId, infoProduct }, productId) => {
+const addProduct = async (cartId, infoProduct, productId) => {
   try {
     const cart = await Cart.findByPk(cartId)
     const product = await Product.findByPk(productId)
