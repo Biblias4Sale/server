@@ -2,7 +2,7 @@ const { DataTypes } = require('sequelize')
 
 module.exports = (sequelize) => {
   const ProductSold = sequelize.define('ProductSold', {
-    amount: {
+    qty: {
       type: DataTypes.STRING,
       allowNull: false
     },
@@ -11,12 +11,10 @@ module.exports = (sequelize) => {
       allowNull: false
     },
     soldDate: {
-      type: DataTypes.STRING,
-      allowNull: false
+      type: DataTypes.STRING
     },
     discount: {
-      type: DataTypes.STRING,
-      allowNull: false
+      type: DataTypes.STRING
     }
   }, {
     freezeTableName: true,
