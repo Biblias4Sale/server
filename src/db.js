@@ -49,6 +49,9 @@ Cart.belongsTo(User)
 ProductSold.hasOne(Review)
 Review.belongsTo(ProductSold)
 
+Product.belongsToMany(User, { through: 'favs' })
+User.belongsToMany(Product, { through: 'favs' })
+
 module.exports = {
   ...sequelize.models,
   conn: sequelize
