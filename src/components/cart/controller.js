@@ -5,7 +5,7 @@ const getCart = async (id) => {
   return { cart }
 }
 
-const addProduct = async ({ cartId, productId, infoProduct }) => {
+const addProduct = async ({ cartId, infoProduct }, productId) => {
   return await store.addProduct(cartId, productId, infoProduct)
 }
 
