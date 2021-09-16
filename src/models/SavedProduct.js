@@ -2,8 +2,8 @@ const { DataTypes } = require('sequelize')
 
 module.exports = (sequelize) => {
   const SavedProduct = sequelize.define('SavedProduct', {
-    amount: {
-      type: DataTypes.STRING,
+    qty: {
+      type: DataTypes.INTEGER,
       allowNull: false
     }
   }, {
