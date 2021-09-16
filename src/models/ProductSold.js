@@ -11,12 +11,10 @@ module.exports = (sequelize) => {
       allowNull: false
     },
     soldDate: {
-      type: DataTypes.STRING,
-      allowNull: false
+      type: DataTypes.STRING
     },
     discount: {
-      type: DataTypes.STRING,
-      allowNull: false
+      type: DataTypes.STRING
     }
   }, {
     freezeTableName: true,

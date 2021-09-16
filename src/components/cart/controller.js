@@ -5,6 +5,11 @@ const getCart = async (id) => {
   return { cart }
 }
 
+const addProduct = async ({ cartId, productId, infoProduct }) => {
+  return await store.addProduct(cartId, productId, infoProduct)
+}
+
 module.exports = {
-  getCart
+  getCart,
+  addProduct
 }
