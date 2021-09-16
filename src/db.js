@@ -55,8 +55,8 @@ User.belongsToMany(Product, { through: 'favs' })
 User.hasMany(SavedProduct)
 SavedProduct.belongsTo(User)
 
-SavedProduct.hasMany(Product)
-Product.belongsTo(SavedProduct)
+Product.hasMany(SavedProduct)
+SavedProduct.belongsTo(Product)
 
 module.exports = {
   ...sequelize.models,
