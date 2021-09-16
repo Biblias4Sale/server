@@ -5,7 +5,7 @@ const Environment = process.env.NODE_ENV
 
 const config = {
   alter: false,
-  force: true,
+  force: false,
   categoriesList: ['Accesorios', 'Camaras', 'Lentes', 'Luces', 'Cargadores y baterías'],
   subCategoryCamaras: ['Reflex', 'Mirrorless', 'Compacta', 'Semi-Reflex'],
   subCategoryLentes: ['Zoom', 'Fijo'],

@@ -10,6 +10,8 @@ const authLogout = require('../components/auth/logout')
 const loginUser = require('../components/auth/loginUser')
 const logoutUser = require('../components/auth/logoutUser')
 const theTest = require('../components/auth/test')
+const networkProductSold = require('../components/productSold/network')
+const networkFavorites = require('../components/favorites/network')
 
 const category = '/categories'
 const product = '/products'
@@ -21,12 +23,16 @@ const googleLogout = '/logout'
 const userLogin = '/login'
 const userLogout = '/logout'
 const test = '/test'
+const productSold = '/productSold'
+const favorites = '/favorites'
 
 router.use(category, networkCategory)
 router.use(product, networkProduct)
 router.use(user, networkUser)
 router.use(admin, networkAdmin)
 router.use(bot, networkBot)
+router.use(productSold, networkProductSold)
+router.use(favorites, networkFavorites)
 
 // auth
 router.use(googleLogin, authLogin)

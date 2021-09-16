@@ -32,6 +32,9 @@ const { User, Category, Cart, ProductSold, SubCategory, Discount, Product, Revie
 Product.hasOne(Discount)
 Discount.belongsTo(Product)
 
+User.belongsToMany(Product, { through: 'favs' })
+Product.belongsToMany(User, { through: 'favs' })
+
 SubCategory.hasMany(Product)
 Product.belongsTo(SubCategory)
 Category.hasMany(SubCategory)
