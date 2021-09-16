@@ -5,8 +5,6 @@ const addSavedProduct = async (user, productID) => {
   const usuario = await User.findByPk(user, { include: { model: Product } })
   if (!producto) return 'Producto no encontrado'
 
-  
-
 
   return 'Producto guardado'
 }
