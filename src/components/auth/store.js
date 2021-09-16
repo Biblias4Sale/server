@@ -1,4 +1,4 @@
-const { User } = require('../../db')
+const { User, Cart } = require('../../db')
 
 const getUser = async (email) => {
   try {
@@ -8,6 +8,13 @@ const getUser = async (email) => {
   }
 }
 
+const getCart = async (email) => {
+  const user = await User.findOne({ where: { email } })
+  const cart = await Cart.findOne({ where: { UserId: user.id, status: 'En proceso' } })
+  return cart.id
+}
+
 module.exports = {
-  getUser
+  getUser,
+  getCart
 }

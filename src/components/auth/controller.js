@@ -1,3 +1,4 @@
+const store = require('./store')
 const tokenGenerator = require('../../helpers/tokenGenerator')
 const tokenValidators = require('../../helpers/tokenValidators')
 
@@ -7,8 +8,9 @@ const getToken = async ({ email, password }, res) => {
     if (tokenValidation) {
       throw new Error(tokenValidation)
     }
-    const token = await tokenGenerator(email)
-    return token
+    const { user, token } = await tokenGenerator(email)
+    const cart = await store.getCart(email)
+    return ({ user, cart, token })
   } catch (err) {
     throw new Error(err)
   }

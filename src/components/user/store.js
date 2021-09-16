@@ -1,11 +1,13 @@
 const { User } = require('../../db')
 
-const newUser = async (user) => {
+const newUser = async (userInfo) => {
   try {
-    return await User.create(user)
+    const user = await User.create(userInfo)
+    const cart = await user.createCart({ status: 'En proceso' })
+    return cart.id
   } catch (error) {
     console.error(error)
-    return 'User not created'
+    return 'Cart not created'
   }
 }
 

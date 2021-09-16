@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const networkCategory = require('../components/category/network')
 const networkProduct = require('../components/product/network')
+const networkCart = require('../components/cart/network.js')
 const networkUser = require('../components/user/network')
 const networkAdmin = require('../components/admin/network')
 const networkBot = require('../components/bot/network')
@@ -13,6 +14,7 @@ const theTest = require('../components/auth/test')
 
 const category = '/categories'
 const product = '/products'
+const cart = '/cart'
 const user = '/user'
 const admin = '/admin'
 const bot = '/bot'
@@ -24,6 +26,7 @@ const test = '/test'
 
 router.use(category, networkCategory)
 router.use(product, networkProduct)
+router.use(cart, networkCart)
 router.use(user, networkUser)
 router.use(admin, networkAdmin)
 router.use(bot, networkBot)
