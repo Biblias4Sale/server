@@ -13,6 +13,10 @@ module.exports = (sequelize) => {
     soldDate: {
       type: DataTypes.STRING,
       allowNull: false
+    },
+    discount: {
+      type: DataTypes.STRING,
+      allowNull: false
     }
   }, {
     freezeTableName: true,
