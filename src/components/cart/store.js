@@ -17,17 +17,17 @@ const getCart = async (id) => {
   }
 }
 
-const addProduct = async ({ cartId, infoProduct }, productId) => {
+const addProduct = async (cartId, productId, infoProduct) => {
   try {
     const cart = await Cart.findByPk(cartId)
     const product = await Product.findByPk(productId)
     const productSold = await ProductSold.findOne({ where: { CartId: cartId, productId: productId } })
     if (!productSold) {
-      const newProductSold = await cart.createProductSold({ amount: infoProduct.amount, price: product.price, productId: productId })
+      const newProductSold = await cart.createProductSold({ qty: infoProduct.amount, price: product.price, productId: productId })
       return newProductSold
     }
     if (infoProduct.amount) {
-      productSold.amount = infoProduct.amount
+      productSold.qty = infoProduct.qty
       productSold.save()
       productSold.price = product.price
       return 'Update product'
