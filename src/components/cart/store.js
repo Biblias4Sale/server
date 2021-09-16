@@ -23,7 +23,7 @@ const addProduct = async (cartId, productId, infoProduct) => {
     const product = await Product.findByPk(productId)
     const productSold = await ProductSold.findOne({ where: { CartId: cartId, productId: productId } })
     if (!productSold) {
-      const newProductSold = await cart.createProductSold({ qty: infoProduct.amount, price: product.price, productId: productId })
+      const newProductSold = await cart.createProductSold({ qty: infoProduct.qty, price: product.price, productId: productId })
       return newProductSold
     }
     if (infoProduct.amount) {
