@@ -7,8 +7,8 @@ const getToken = async ({ email, password }, res) => {
     if (tokenValidation) {
       throw new Error(tokenValidation)
     }
-    const token = await tokenGenerator(email)
-    return token
+    const { user, token } = await tokenGenerator(email)
+    return ({ user, token })
   } catch (err) {
     throw new Error(err)
   }
