@@ -17,6 +17,7 @@ https://noiloan.herokuapp.com
 req.body.email;
 req.body.password;
 ```
+**Retorna 1. Info del usuario - 2. Carrito - 3. Token**
 
 - GET /logout >> Cierra sesión eliminando el token del navegador _**No recibe parametros**_
   Debe venir la petición con `{ withCredentials: true }`
@@ -136,6 +137,7 @@ req.body.lastName;
 req.body.email;
 req.body.password;
 ```
+**Retorna 1. Info del usuario - 2. Carrito - 3. Token**
 
 - PUT /user/:id >> Editar información del usuario
 
@@ -151,6 +153,16 @@ req.body.password;
 
 ```javascript
 req.params.id;
+```
+
+<hr>
+
+### CARRITO:
+
+- GET /cart >> Obtiene un carrito
+
+```javascript
+req.params.id
 ```
 
 <hr>

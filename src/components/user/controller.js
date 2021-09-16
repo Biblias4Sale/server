@@ -5,7 +5,7 @@ const store = require('./store')
 
 const newUser = async ({ name, lastName, email, password }) => {
   const salt = bcryptjs.genSaltSync()
-  const user = {
+  const userInfo = {
     name,
     lastName,
     email,
@@ -13,12 +13,12 @@ const newUser = async ({ name, lastName, email, password }) => {
     password: bcryptjs.hashSync(password, salt)
   }
 
-  await store.newUser(user)
+  const cart = await store.newUser(userInfo)
   try {
     const tokenValidation = await tokenValidators(email, password)
     if (tokenValidation) return tokenValidation
-    const token = await tokenGenerator(email)
-    return token
+    const { user, token } = await tokenGenerator(email)
+    return ({ user, cart, token })
   } catch (err) {
     return err
   }
