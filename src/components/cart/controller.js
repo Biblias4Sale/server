@@ -5,8 +5,8 @@ const getCart = async (id) => {
   return { cart }
 }
 
-const addProduct = async ({ cartId, infoProduct }, productId) => {
-  return await store.addProduct(cartId, infoProduct, productId)
+const addProduct = async (cartId, productId, infoProduct) => {
+  return await store.addProduct(cartId, productId, infoProduct)
 }
 
 module.exports = {
