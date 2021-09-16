@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const { addFav, getFavs } = require('./controller')
+const { addFav, getFavs, removeFav } = require('./controller')
 
 router.post('/:user', async (req, res) => {
   const user = req.params.user
@@ -11,6 +11,12 @@ router.post('/:user', async (req, res) => {
 router.get('/:user', async (req, res) => {
   const user = req.params.user
   res.json(await getFavs(user))
+})
+
+router.delete('/:user', async (req, res) => {
+  const user = req.params.user
+  const { productID } = req.body
+  res.json(await removeFav(user, productID))
 })
 
 module.exports = router

@@ -8,25 +8,36 @@ const addFav = async (user, prod) => {
 
   try {
     await producto.addUser(usuario)
+    return 'Producto agregado a favorito'
   } catch (e) {
     return 'No se pudo agregar a favorito'
   }
-  return 'Producto agregado a favorito'
 }
 
 const getFavs = async (user) => {
   const usuario = await User.findByPk(user, {
     include: {
       model: Product,
-      attributes: ['model', 'brand', 'img', 'id']
+      attributes: ['model', 'brand', 'img', 'id', 'price'],
+      exclude: ['favs']
     }
   })
   if (!usuario) return 'Usuario no encontrado'
-
+  console.log(usuario.dataValues.products)
   return usuario.dataValues.products
+}
+
+const removeFav = async (user, productID) => {
+  const producto = await Product.findByPk(productID, { include: { model: User } })
+  const usuario = await User.findByPk(user, { include: { model: Product } })
+  try {
+    producto.removeUser(usuario)
+    return 'Producto eliminado de favoritos'
+  } catch (e) { return 'No se pudo eliminar de favoritos' }
 }
 
 module.exports = {
   addFav,
-  getFavs
+  getFavs,
+  removeFav
 }
