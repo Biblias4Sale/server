@@ -51,6 +51,10 @@ const csvToProducts = async () => {
   }
 }
 
+const addStock = async (qty, productId) => {
+  return await store.addStock(qty, productId)
+}
+
 module.exports = {
   getAll,
   getBest,
@@ -61,5 +65,6 @@ module.exports = {
   deleteProducts,
   activateProducts,
   changePrice,
-  csvToProducts
+  csvToProducts,
+  addStock
 }

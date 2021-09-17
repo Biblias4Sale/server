@@ -208,6 +208,18 @@ const csvToProducts = (products) => {
   }
 }
 
+const addStock = async (qty, productId) => {
+  try {
+    const product = await Product.findByPk(productId)
+    product.stock = product.stock + qty
+    await product.save()
+    return 'Nuevo stock definido'
+  } catch (err) {
+    console.log(err)
+    return 'Stock no pudo ser establecido'
+  }
+}
+
 module.exports = {
   getAll,
   getDetail,
@@ -217,5 +229,6 @@ module.exports = {
   deleteProducts,
   activateProducts,
   changePrice,
-  csvToProducts
+  csvToProducts,
+  addStock
 }
