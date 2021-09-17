@@ -2,12 +2,31 @@ const express = require('express')
 const router = express.Router()
 const controller = require('./controller')
 const response = require('../../responses')
+const statusCartValidation = require('../../middlewares/statusCartValidation')
+const validation = require('../../middlewares/validation')
 
 router.get('/:id', (req, res) => {
   controller
     .getCart(req.params.id)
     .then(message => response.success(req, res, 200, message))
     .catch(e => response.error(req, res, 404, e, 'Cart not found'))
+})
+
+router.post('/confirmCart/:cartId/:id', [
+  statusCartValidation,
+  validation
+], (req, res) => {
+  controller
+    .confirmCart(req.params.cartId, req.params.id)
+    .then(message => response.success(req, res, 201, message))
+    .catch(e => response.error(req, res, 404, e, 'Product not found'))
+})
+
+router.post('/newProduct/:cartId/:productId', (req, res) => {
+  controller
+    .newProduct(req.params.cartId, req.params.productId, req.body)
+    .then(message => response.success(req, res, 201, message))
+    .catch(e => response.error(req, res, 404, e, 'Product not found'))
 })
 
 router.post('/addProduct/:cartId/:productId', (req, res) => {

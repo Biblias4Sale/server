@@ -15,6 +15,11 @@ const getCart = async (id) => {
   ))
 }
 
+const confirmCart = async (cartId, userId) => {
+  const cart = await store.confirmCart(cartId, userId)
+  return cart
+}
+
 const newProduct = async (cartId, productId, infoProduct) => {
   return await store.newProduct(cartId, productId, infoProduct)
 }
@@ -33,6 +38,7 @@ const delProduct = async (cartId, productId) => {
 
 module.exports = {
   getCart,
+  confirmCart,
   newProduct,
   addProduct,
   subProduct,
