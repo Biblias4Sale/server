@@ -23,7 +23,7 @@ const getFavs = async (user) => {
     }
   })
   if (!usuario) return 'Usuario no encontrado'
-  console.log(usuario.dataValues.products)
+  // console.log(usuario.dataValues.products)
   return usuario.dataValues.products
 }
 
