@@ -28,6 +28,19 @@ const getCart = async (id) => {
   }
 }
 
+const confirmCart = async (cartId, userId) => {
+  try {
+    const cart = await Cart.findByPk(cartId)
+    cart.status = 'Generado'
+    cart.save()
+    const user = await User.findByPk(userId)
+    const newCart = await user.createCart({ status: 'En proceso' })
+    return ({ message: 'Cart confirmed', CartInProgress: newCart.id })
+  } catch (error) {
+    return error
+  }
+}
+
 const newProduct = async (cartId, productId, infoProduct) => {
   try {
     const cart = await Cart.findByPk(cartId)
@@ -40,7 +53,6 @@ const newProduct = async (cartId, productId, infoProduct) => {
     if (infoProduct.amount) {
       productSold.qty = infoProduct.qty
       productSold.save()
-      productSold.price = product.price
       return 'Update product'
     }
     return 'Not change product'
@@ -96,6 +108,7 @@ const delProduct = async (cartId, productId) => {
 
 module.exports = {
   getCart,
+  confirmCart,
   newProduct,
   addProduct,
   subProduct,
