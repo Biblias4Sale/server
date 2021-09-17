@@ -2,21 +2,21 @@ const express = require('express')
 const router = express.Router()
 const { addSavedProduct, getSavedProducts, removeSavedProducts } = require('./controller')
 
-router.post('/:user', async (req, res) => {
-  const user = req.params.user
-  const { productID } = req.body
-  res.json(await addSavedProduct(user, productID))
+router.get('/:userID', async (req, res) => {
+  const userID = req.params.userID
+  res.json(await getSavedProducts(userID))
 })
 
-router.get('/:user', async (req, res) => {
-  const user = req.params.user
-  res.json(await getSavedProducts(user))
+router.post('/:userID/:productID', async (req, res) => {
+  const userID = req.params.userID
+  const productID = req.params.productID
+  res.json(await addSavedProduct(userID, productID))
 })
 
-router.post('/delete/:user', async (req, res) => { // << que sea un delete con params
-  const user = req.params.user
-  const { productID } = req.body
-  res.json(await removeSavedProducts(user, productID))
+router.delete('/:userID/:productID', async (req, res) => {
+  const userID = req.params.userID
+  const productID = req.params.productID
+  res.json(await removeSavedProducts(userID, productID))
 })
 
 module.exports = router
