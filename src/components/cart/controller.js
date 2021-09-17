@@ -2,22 +2,16 @@ const store = require('./store')
 
 const getCart = async (id) => {
   const cart = await store.getCart(id)
-  console.log(cart.status)
-  return ({
-    cartId: cart.id,
-    status: cart.status,
-    product: cart.ProductSolds.map(product => (
-      {
-        status: product.status,
-        id: product.product.id,
-        brand: product.product.brand,
-        model: product.product.model,
-        img: product.product.img,
-        price: product.price,
-        qty: product.qty
-      }
-    ))
-  })
+  return cart.ProductSolds.map(product => (
+    {
+      id: product.product.id,
+      brand: product.product.brand,
+      model: product.product.model,
+      img: product.product.img,
+      price: product.price,
+      qty: product.qty
+    }
+  ))
 }
 
 const confirmCart = async (cartId, userId) => {
