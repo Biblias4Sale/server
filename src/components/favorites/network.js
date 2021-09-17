@@ -2,10 +2,10 @@ const express = require('express')
 const router = express.Router()
 const { addFav, getFavs, removeFav } = require('./controller')
 
-router.post('/:user', async (req, res) => {
-  const user = req.params.user
-  const { productID } = req.body
-  res.json(await addFav(user, productID))
+router.post('/:userID/:productID', async (req, res) => {
+  const userID = req.params.userID
+  const productID = req.params.productID
+  res.json(await addFav(userID, productID))
 })
 
 router.get('/:user', async (req, res) => {
@@ -13,11 +13,11 @@ router.get('/:user', async (req, res) => {
   res.json(await getFavs(user))
 })
 
-router.delete('/:user/:product', async (req, res) => {
-  const user = req.params.user
-  const productID = req.params.product
+router.delete('/:userID/:productID', async (req, res) => {
+  const userID = req.params.userID
+  const productID = req.params.productID
 
-  res.json(await removeFav(user, productID))
+  res.json(await removeFav(userID, productID))
 })
 
 module.exports = router
