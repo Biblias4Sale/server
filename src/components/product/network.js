@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const { getAll, getBest, getDetail, addProduct, getReview, editProduct, deleteProducts, activateProducts, changePrice, csvToProducts } = require('./controller')
+const { getAll, getBest, getDetail, addProduct, getReview, editProduct, deleteProducts, activateProducts, changePrice, csvToProducts, addStock } = require('./controller')
 
 router.get('/', async (req, res) => {
   const response = await getAll()
@@ -56,4 +56,10 @@ router.get('/csvget', async (req, res) => {
   res.json(response)
 })
 
+router.post('/addStock/:productId/:qty', async (req, res) => {
+  const productId = req.params.productId
+  const qty = req.params.qty
+  const response = await addStock(qty, productId)
+  res.json(response)
+})
 module.exports = router

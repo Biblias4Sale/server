@@ -27,7 +27,7 @@ const userLogin = '/login'
 const userLogout = '/logout'
 const test = '/test'
 const favorites = '/favorites'
-const savedProduct = '/saveProduct'
+const savedProduct = '/savedProducts'
 const mercadopago = '/api/v1/mercadopago'
 
 router.use(category, networkCategory)
