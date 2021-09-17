@@ -159,7 +159,25 @@ req.params.id;
 
 ### CARRITO:
 
-- GET /cart >> Obtiene un carrito
+- GET /cart/:id >> Obtiene un carrito
+
+```javascript
+req.params.id
+```
+
+- GET /cart/newProduct/:cartId/:productId >> Crea un producto con cantidad definida en el carrito
+
+```javascript
+req.params.id
+```
+
+- GET /cart/addProduct/:cartId/:productId >> Aunmenta la cantidad de producto en el carrito
+
+```javascript
+req.params.id
+```
+
+- GET /cart/subProduct/:cartId/:productId >> Disminuye la cantidad de producto en el carrito
 
 ```javascript
 req.params.id

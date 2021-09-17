@@ -19,8 +19,5 @@ router.delete('/:user/:id', async (req, res) => {
   // const { productID } = req.body
   res.json(await removeFav(user, productID))
 })
-router.get('/', (req,res)=> {
-  res.send('ok')
-})
 
 module.exports = router

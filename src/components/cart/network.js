@@ -10,4 +10,32 @@ router.get('/:id', (req, res) => {
     .catch(e => response.error(req, res, 404, e, 'Cart not found'))
 })
 
+router.post('/newProduct/:cartId/:productId', (req, res) => {
+  controller
+    .newProduct(req.params.cartId, req.params.productId, req.body)
+    .then(message => response.success(req, res, 201, message))
+    .catch(e => response.error(req, res, 404, e, 'Product not found'))
+})
+
+router.post('/addProduct/:cartId/:productId', (req, res) => {
+  controller
+    .addProduct(req.params.cartId, req.params.productId)
+    .then(message => response.success(req, res, 201, message))
+    .catch(e => response.error(req, res, 404, e, 'Product not found'))
+})
+
+router.post('/subProduct/:cartId/:productId', (req, res) => {
+  controller
+    .subProduct(req.params.cartId, req.params.productId)
+    .then(message => response.success(req, res, 201, message))
+    .catch(e => response.error(req, res, 404, e, 'Product not found'))
+})
+
+router.delete('/delProduct/:cartId/:productId', (req, res) => {
+  controller
+    .delProduct(req.params.cartId, req.params.productId)
+    .then(message => response.success(req, res, 201, message))
+    .catch(e => response.error(req, res, 404, e, 'Product not found'))
+})
+
 module.exports = router
