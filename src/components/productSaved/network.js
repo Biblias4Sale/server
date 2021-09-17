@@ -8,9 +8,11 @@ router.get('/:userID', async (req, res) => {
 })
 
 router.post('/:userID/:productID', async (req, res) => {
+  console.log(req.body.qty)
   const userID = req.params.userID
   const productID = req.params.productID
-  res.json(await addSavedProduct(userID, productID))
+  const qty = req.body.qty
+  res.json(await addSavedProduct(userID, productID, qty))
 })
 
 router.patch('/:userID/:productID', async (req, res) => {

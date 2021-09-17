@@ -1,6 +1,6 @@
 const { User, Product, SavedProduct } = require('../../db')
 
-const addSavedProduct = async (user, productID) => {
+const addSavedProduct = async (user, productID, qty = 1) => {
   try {
     const producto = await Product.findByPk(productID, { include: { model: User } })
     const usuario = await User.findByPk(user, { include: { model: SavedProduct } })
@@ -12,15 +12,15 @@ const addSavedProduct = async (user, productID) => {
       const oldQty = productSaved.dataValues.qty
       try {
         SavedProduct.update(
-          { qty: oldQty + 1 },
-          { where: { productId: productID } }
+          { qty: oldQty + qty },
+          { where: { productId: productID, UserId: user } }
         )
         return 'El producto se agregó correctamente'
       } catch (e) { return e }
     }
 
     try {
-      const savedProduct = await producto.createSavedProduct({ qty: 1 })
+      const savedProduct = await producto.createSavedProduct({ qty })
       usuario.addSavedProduct(savedProduct)
       return 'Producto guardado'
     } catch (e) { return e }
@@ -66,10 +66,10 @@ const decreaseSavedProducts = async (user, productID) => {
       return 'El producto se quitó correctamente'
     } catch (e) { return e }
   }
-  try {
-    SavedProduct.destroy({ where: { productId: productID, UserId: user } })
-    return 'El producto se quitó completamente'
-  } catch (e) { return e }
+  // try {
+  //   SavedProduct.destroy({ where: { productId: productID, UserId: user } })
+  //   return 'El producto se quitó completamente'
+  // } catch (e) { return e }
 }
 
 const deleteSavedProducts = async (user, productID) => {

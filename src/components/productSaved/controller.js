@@ -1,7 +1,7 @@
 const store = require('./store')
 
-const addSavedProduct = async (user, productID) => {
-  return await store.addSavedProduct(user, productID)
+const addSavedProduct = async (user, productID, qty) => {
+  return await store.addSavedProduct(user, productID, qty)
 }
 
 const getSavedProducts = async (user, productID) => {
