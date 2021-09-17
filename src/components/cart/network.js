@@ -17,4 +17,11 @@ router.post('/addProduct/:cartId/:productId', (req, res) => {
     .catch(e => response.error(req, res, 404, e, 'Product not found'))
 })
 
+router.delete('/delProduct/:cartId/:productId', (req, res) => {
+  controller
+    .delProduct(req.params.cartId, req.params.productId)
+    .then(message => response.success(req, res, 201, message))
+    .catch(e => response.error(req, res, 404, e, 'Product not found'))
+})
+
 module.exports = router
