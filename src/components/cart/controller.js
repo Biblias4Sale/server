@@ -8,7 +8,6 @@ const getCart = async (id) => {
     status: cart.status,
     product: cart.ProductSolds.map(product => (
       {
-        cartId: cart.id,
         status: product.status,
         id: product.product.id,
         brand: product.product.brand,
