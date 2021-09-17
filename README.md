@@ -259,3 +259,11 @@ req.body.type,
 En server/Loader/dataStore.js
 Hay un objeto donde pueden agregar todos los productos que quieran, repitiendo el patrón de los productos que ya están creados.
 <<<CUIDADO>>, la Key subCategory tiene que tener una subCategoría EXISTENTE ( Las pueden encontrar en server/config.js )
+
+### MERCADOPAGO:
+
+PARA QUE PUEDA FUNCIONAR SE DEBERÁ CREAR UN ACCESS_TOKEN DE PRUEBA. PARA ELLO CREAR CUENTA DE MERCADO PAGO. 
+Luego agregarlo a .env
+
+- POST /api/v1/mercadopago >> Creará y devolverá un ID de pago, y una URL donde se podrá gestionar el pago.
+- GET  /api/v1/mercadopago >> Obtendrá todos los pagos registrados. En el caso que se quiera obtener un pago en particular, se deberá pasar el id de pago por query. 
