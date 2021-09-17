@@ -2,7 +2,17 @@ const store = require('./store')
 
 const getCart = async (id) => {
   const cart = await store.getCart(id)
-  return { cart }
+  // return cart
+  return cart.ProductSolds.map(product => (
+    {
+      id: product.product.id,
+      brand: product.product.brand,
+      model: product.product.model,
+      img: product.product.img,
+      price: product.price,
+      qty: product.product.qty
+    }
+  ))
 }
 
 const newProduct = async (cartId, productId, infoProduct) => {

@@ -13,7 +13,7 @@ router.get('/:user', async (req, res) => {
   res.json(await getSavedProducts(user))
 })
 
-router.post('/delete/:user', async (req, res) => {
+router.post('/delete/:user', async (req, res) => { // << que sea un delete con params
   const user = req.params.user
   const { productID } = req.body
   res.json(await removeSavedProducts(user, productID))
