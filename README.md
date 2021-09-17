@@ -165,6 +165,13 @@ req.params.id;
 req.params.id
 ```
 
+- GET /confirmCart/:cartId/:id >> Obtiene un carrito
+
+```javascript
+req.params.cartId
+req.params.id
+```
+
 - GET /cart/newProduct/:cartId/:productId >> Crea un producto con cantidad definida en el carrito
 
 ```javascript

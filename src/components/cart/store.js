@@ -14,8 +14,6 @@ const getCart = async (id) => {
         }
       }
     })
-    // const idProducts = cart.ProductSolds.map(item => item.dataValues.productId)
-    // const product = idProducts.map(async (id) => await Product.findByPk(id))
 
     if (!cart) {
       const user = User.findByPk(id)
