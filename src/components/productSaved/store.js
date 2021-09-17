@@ -41,7 +41,7 @@ const getSavedProducts = async (user) => {
       })
       return res
     } else {
-      return 'El usuario no tiene productos'
+      return []
     }
   } catch (e) {
     return e
