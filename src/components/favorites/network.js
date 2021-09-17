@@ -13,10 +13,14 @@ router.get('/:user', async (req, res) => {
   res.json(await getFavs(user))
 })
 
-router.delete('/:user', async (req, res) => {
+router.delete('/:user/:id', async (req, res) => {
   const user = req.params.user
-  const { productID } = req.body
+  const productID = req.params.id
+  // const { productID } = req.body
   res.json(await removeFav(user, productID))
+})
+router.get('/', (req,res)=> {
+  res.send('ok')
 })
 
 module.exports = router
