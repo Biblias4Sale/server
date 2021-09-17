@@ -22,11 +22,17 @@ const getSavedProducts = async (user, productID) => {
   }
 }
 
-const removeSavedProducts = async (user, productID) => {
-  return await store.removeSavedProducts(user, productID)
+const decreaseSavedProducts = async (user, productID) => {
+  return await store.decreaseSavedProducts(user, productID)
 }
+
+const deleteSavedProducts = async (user, productID) => {
+  return await store.deleteSavedProducts(user, productID)
+}
+
 module.exports = {
   addSavedProduct,
   getSavedProducts,
-  removeSavedProducts
+  decreaseSavedProducts,
+  deleteSavedProducts
 }
