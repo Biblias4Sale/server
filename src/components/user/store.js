@@ -24,6 +24,7 @@ const editUser = async (id, infoUser) => {
     if (infoUser.phone) user.phone = infoUser.phone
     if (infoUser.password) user.password = infoUser.password
 
+<<<<<<< Updated upstream
     user.save()
     const userReturn = {
       id: user.id,
@@ -40,6 +41,19 @@ const editUser = async (id, infoUser) => {
     return userReturn
   } catch (error) {
     return error
+=======
+  user.save()
+  const userReturn = {
+    id: user.id,
+    name: user.name,
+    lastName: user.lastName,
+    email: user.email,
+    cp: user.cp,
+    address: user.address,
+    city: user.city,
+    province: user.province,
+    phone: user.phone
+>>>>>>> Stashed changes
   }
 }
 
