@@ -1,26 +1,26 @@
 const { User, Product, SavedProduct } = require('../../db')
 
-const addSavedProduct = async (user, productID) => {
+const addSavedProduct = async (user, productID, qty = 1) => {
   try {
     const producto = await Product.findByPk(productID, { include: { model: User } })
     const usuario = await User.findByPk(user, { include: { model: SavedProduct } })
     if (!producto) return 'Producto no encontrado'
     if (!usuario) return 'Usuario no encontrado'
 
-    const productSaved = await SavedProduct.findOne({ where: { productId: producto.id, UserId: usuario.id } })
+    const productSaved = await SavedProduct.findOne({ where: { productId: productID, UserId: user } })
     if (productSaved) {
       const oldQty = productSaved.dataValues.qty
       try {
         SavedProduct.update(
-          { qty: oldQty + 1 },
-          { where: { productId: producto.id } }
+          { qty: oldQty + qty },
+          { where: { productId: productID, UserId: user } }
         )
         return 'El producto se agregó correctamente'
       } catch (e) { return e }
     }
 
     try {
-      const savedProduct = await producto.createSavedProduct({ qty: 1 })
+      const savedProduct = await producto.createSavedProduct({ qty })
       usuario.addSavedProduct(savedProduct)
       return 'Producto guardado'
     } catch (e) { return e }
@@ -48,32 +48,43 @@ const getSavedProducts = async (user) => {
   }
 }
 
-const removeSavedProducts = async (user, productID) => {
+const decreaseSavedProducts = async (user, productID) => {
   const producto = await Product.findByPk(productID, { include: { model: User } })
   const usuario = await User.findByPk(user, { include: { model: SavedProduct } })
   if (!producto) return 'Producto no encontrado'
   if (!usuario) return 'Usuario no encontrado'
 
-  const productSaved = await SavedProduct.findOne({ where: { productId: producto.id, UserId: usuario.id } })
+  const productSaved = await SavedProduct.findOne({ where: { productId: productID, UserId: user } })
   if (!productSaved) return 'El usuario no tiene ese producto'
   if (productSaved.dataValues.qty > 1) {
     const oldQty = productSaved.dataValues.qty
     try {
       SavedProduct.update(
         { qty: oldQty - 1 },
-        { where: { productId: producto.id } }
+        { where: { productId: productID } }
       )
       return 'El producto se quitó correctamente'
     } catch (e) { return e }
   }
+  // try {
+  //   SavedProduct.destroy({ where: { productId: productID, UserId: user } })
+  //   return 'El producto se quitó completamente'
+  // } catch (e) { return e }
+}
+
+const deleteSavedProducts = async (user, productID) => {
   try {
-    SavedProduct.destroy({ where: { productId: producto.id, UserId: usuario.id } })
+    await SavedProduct.destroy({ where: { productId: productID, UserId: user } })
     return 'El producto se quitó completamente'
-  } catch (e) { return e }
+  } catch (e) {
+    console.log(e)
+    return e
+  }
 }
 
 module.exports = {
   addSavedProduct,
   getSavedProducts,
-  removeSavedProducts
+  decreaseSavedProducts,
+  deleteSavedProducts
 }

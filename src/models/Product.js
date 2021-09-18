@@ -30,7 +30,8 @@ module.exports = (sequelize) => {
     },
     stock: {
       type: DataTypes.INTEGER,
-      allowNull: true
+      allowNull: true,
+      defaultValue: 1
     },
     state: {
       type: DataTypes.BOOLEAN,

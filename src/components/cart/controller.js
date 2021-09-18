@@ -23,8 +23,8 @@ const newProduct = async (cartId, productId, infoProduct) => {
   return await store.newProduct(cartId, productId, infoProduct)
 }
 
-const addProduct = async (cartId, productId) => {
-  return await store.addProduct(cartId, productId)
+const addProduct = async (cartId, productId, qty) => {
+  return await store.addProduct(cartId, productId, qty)
 }
 
 const subProduct = async (cartId, productId) => {
