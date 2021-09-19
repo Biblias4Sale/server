@@ -33,7 +33,8 @@ const confirmCart = async (cartId, userId) => {
     cart.save()
     const user = await User.findByPk(userId)
     const newCart = await user.createCart({ status: 'En proceso' })
-    return ({ message: 'Cart confirmed', CartInProgress: newCart.id })
+    // return { message: 'Cart confirmed', CartInProgress: newCart.id }
+    return [user, { message: 'Cart confirmed', CartInProgress: newCart.id }]
   } catch (error) {
     return error
   }
