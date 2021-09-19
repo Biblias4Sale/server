@@ -1,9 +1,5 @@
 const store = require('./store')
 
-const addSavedProduct = async (user, productID, qty) => {
-  return await store.addSavedProduct(user, productID, qty)
-}
-
 const getSavedProducts = async (user, productID) => {
   try {
     const response = await store.getSavedProducts(user, productID)
@@ -16,19 +12,16 @@ const getSavedProducts = async (user, productID) => {
         img: obj.prod.img,
         price: obj.prod.price
       }))
-  } catch (error) {
-    console.log(error)
-    return error
+  } catch ({ message: error }) {
+    throw new Error(error)
   }
 }
 
-const decreaseSavedProducts = async (user, productID) => {
-  return await store.decreaseSavedProducts(user, productID)
-}
+const addSavedProduct = (user, productID, qty) => store.addSavedProduct(user, productID, qty)
 
-const deleteSavedProducts = async (user, productID) => {
-  return await store.deleteSavedProducts(user, productID)
-}
+const decreaseSavedProducts = (user, productID) => store.decreaseSavedProducts(user, productID)
+
+const deleteSavedProducts = async (user, productID) => store.deleteSavedProducts(user, productID)
 
 module.exports = {
   addSavedProduct,
