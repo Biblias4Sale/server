@@ -33,7 +33,8 @@ const confirmCart = async (cartId, userId) => {
     cart.save()
     const user = await User.findByPk(userId)
     const newCart = await user.createCart({ status: 'En proceso' })
-    return ({ message: 'Cart confirmed', CartInProgress: newCart.id })
+    // return { message: 'Cart confirmed', CartInProgress: newCart.id }
+    return [user, { message: 'Cart confirmed', CartInProgress: newCart.id }]
   } catch (error) {
     return error
   }
@@ -59,16 +60,16 @@ const newProduct = async (cartId, productId, infoProduct) => {
   }
 }
 
-const addProduct = async (cartId, productId) => {
+const addProduct = async (cartId, productId, qty = 1) => {
   try {
     const cart = await Cart.findByPk(cartId)
     const product = await Product.findByPk(productId)
     const productSold = await ProductSold.findOne({ where: { CartId: cartId, productId: productId } })
     if (!productSold) {
-      const newProductSold = await cart.createProductSold({ qty: '1', price: product.price, productId: productId })
+      const newProductSold = await cart.createProductSold({ qty, price: product.price, productId: productId })
       return newProductSold
     }
-    productSold.qty = String(parseInt(productSold.qty) + 1)
+    productSold.qty = String(parseInt(productSold.qty) + qty)
     productSold.save()
     return ({ message: 'Increased amount', qty: ProductSold.qty })
   } catch (error) {
@@ -81,8 +82,10 @@ const subProduct = async (cartId, productId) => {
     const productSold = await ProductSold.findOne({ where: { CartId: cartId, productId: productId } })
     if (!productSold) return 'Product not found'
     const product = await Product.findByPk(productId)
-    productSold.qty = String(parseInt(productSold.qty) - 1)
-    if (productSold.qty === '0') {
+    if (productSold.dataValues.qty > 1) {
+      productSold.qty = String(parseInt(productSold.qty) - 1)
+    }
+    if (productSold.qty === 0) {
       await ProductSold.destroy({ where: { id: productSold.id } })
       return 'Removed product'
     }

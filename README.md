@@ -66,7 +66,8 @@ req.body.password;
 "address": "En la loma del orto",
 "city": "Bahía Blanca",
 "province": "Buenos Aires",
-"phone": 291432562
+"phone": 291432562,
+"stock": 1
  }
 ```
 
@@ -109,7 +110,7 @@ req.body.password;
   "idProducts": ["12", "17", "23", "24"]
 }
 
--PUT /products/edit >> Edita la información de un producto.
+- PUT /products/edit >> Edita la información de un producto.
 ```JSON
  {
   "model": "SX100",
@@ -121,12 +122,88 @@ req.body.password;
  }
 ````
 
--GET /products/review devuelve un array reviews. (por el momento hardCoded)
+- GET /products/review devuelve un array reviews. (por el momento hardCoded)
+
+
+- POST /products/addStock/:productId/:qty => Agregar stock a producto.
+
+```javascript
+req.params.productId,
+req.params.qty,
+```
 
 <br>
 
 <hr>
 
+<br>
+
+### FAVORITES:
+
+- GET /favorites/:user => Obtiene los favoritos de un usuario.
+
+```javascript
+req.params.userID,
+```
+
+- POST /favorites/:userID/:productID => Agregar producto a favoritos.
+
+```javascript
+req.params.userID,
+req.params.productID
+```
+
+- DELETE /favorites/:userID/:productID => Elimina un producto de favoritos.
+
+```javascript
+req.params.userID,
+req.params.productID
+```
+<br>
+
+<hr>
+
+<br>
+
+### SAVED PRODUCT
+
+<br>
+
+<hr>
+
+<br>
+
+- GET /savedProducts/:userID  => Obtiene los productos guardados de un usuario.
+
+```javascript
+req.params.userID,
+```
+
+- POST /savedProducts/:userID/:productID => Agrega 1 a la cantidad de un producto a guardado.
+
+```javascript
+req.params.userID,
+req.params.productID
+```
+
+-PATCH /savedProducts/:userID/:productID => Resta en 1 la cantidad del producto guardado.
+
+```javascript
+req.params.userID,
+req.params.productID
+```
+-DELETE /savedProducts/:userID/:productID => Quita un producto de guardados.
+
+```javascript
+req.params.userID,
+req.params.productID
+```
+
+<br>
+
+<hr>
+
+<br>
 ### USUARIOS:
 
 - POST /user >> Crea una cuenta nueva
@@ -259,3 +336,29 @@ req.body.type,
 En server/Loader/dataStore.js
 Hay un objeto donde pueden agregar todos los productos que quieran, repitiendo el patrón de los productos que ya están creados.
 <<<CUIDADO>>, la Key subCategory tiene que tener una subCategoría EXISTENTE ( Las pueden encontrar en server/config.js )
+
+### MERCADOPAGO:
+
+PARA QUE PUEDA FUNCIONAR SE DEBERÁ CREAR UN ACCESS_TOKEN DE PRUEBA. PARA ELLO CREAR CUENTA DE MERCADO PAGO. 
+Luego agregarlo a .env
+
+- POST /api/v1/mercadopago >> Creará y devolverá un ID de pago, y una URL donde se podrá gestionar el pago.
+- GET  /api/v1/mercadopago >> Obtendrá todos los pagos registrados. En el caso que se quiera obtener un pago en particular, se deberá pasar el id de pago por query. 
+
+
+### FAVORITES:
+
+-GET /:user => Obtiene los favoritos de un usuario.
+```javascript
+req.params.userID,
+```
+
+- POST /:userID/:productID => Agregar producto a favoritos.
+```javascript
+req.params.userID,
+req.params.productID
+```
+
+-DELETE /:userID/:productID => Elimina un producto de favoritos.
+
+

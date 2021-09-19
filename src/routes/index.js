@@ -13,6 +13,7 @@ const logoutUser = require('../components/auth/logoutUser')
 const theTest = require('../components/auth/test')
 const networkFavorites = require('../components/favorites/network')
 const networkSavedProduct = require('../components/productSaved/network')
+const networkMercadoPago = require('../components/mercadoPago/network')
 
 const category = '/categories'
 const product = '/products'
@@ -26,7 +27,8 @@ const userLogin = '/login'
 const userLogout = '/logout'
 const test = '/test'
 const favorites = '/favorites'
-const savedProduct = '/saveProduct'
+const savedProduct = '/savedProducts'
+const mercadopago = '/api/v1/mercadopago'
 
 router.use(category, networkCategory)
 router.use(product, networkProduct)
@@ -36,6 +38,7 @@ router.use(admin, networkAdmin)
 router.use(bot, networkBot)
 router.use(favorites, networkFavorites)
 router.use(savedProduct, networkSavedProduct)
+router.use(mercadopago, networkMercadoPago)
 
 // auth
 router.use(googleLogin, authLogin)
