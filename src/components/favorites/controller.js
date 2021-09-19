@@ -1,19 +1,10 @@
 const store = require('./store')
 
-const addFav = async (user, prod) => {
-  const response = await store.addFav(user, prod)
-  return response
-}
+const addFav = async (user, prod) => store.addFav(user, prod)
 
-const getFavs = async (user) => {
-  const response = await store.getFavs(user)
-  return response
-}
+const getFavs = async (user) => store.getFavs(user)
 
-const removeFav = async (user, productID) => {
-  const response = await store.removeFav(user, productID)
-  return response
-}
+const removeFav = (user, productID) => store.removeFav(user, productID)
 
 module.exports = {
   addFav,
