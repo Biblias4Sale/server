@@ -1,6 +1,5 @@
-const sgMail = require('@sendgrid/mail')
-sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 const mail = require('../../mailing')
+const sms = require('../../sms')
 const store = require('./store')
 
 const getCart = async (id) => {
@@ -21,14 +20,8 @@ const confirmCart = async (cartId, userId) => {
   const [userInfo, cart] = await store.confirmCart(cartId, userId)
   // console.log(userInfo.dataValues.email)
   // const cart = await store.confirmCart(cartId, userId)
-  sgMail
-    .send(mail.confirmCart(userInfo.dataValues))
-    .then(() => {
-      console.log('Email sent')
-    })
-    .catch((error) => {
-      console.error(error)
-    })
+  mail.confirmCart(userInfo)
+  sms.confirmCart(userInfo)
   return cart
 }
 

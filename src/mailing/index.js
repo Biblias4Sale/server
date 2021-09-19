@@ -1,25 +1,22 @@
+const sgMail = require('@sendgrid/mail')
+sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+const mail = require('./handler')
+
+const createAccount = ({ name, email }) => {
+  sgMail
+    .send(mail.createAccount(name, email))
+    .then(() => { console.log('Email sent') })
+    .catch((error) => { console.error(error) })
+}
+
 const confirmCart = ({ name, email }) => {
-  return (
-    {
-      to: `${email}`, // Change to your recipient
-      from: 'contact@diegonaranjo.co', // Change to your verified sender
-      subject: `Hola ${name}, tu pedido se ha generado`,
-      text: 'and easy to do anywhere, even with Node.js',
-      html: `
-      <h2><strong>${name}</strong> gracias por comprar en NoiLoan, pronto enviaremos tu pedido</h2>
-      <hr>
-      <h3>Resumen del pedido</h3>
-      <p>
-        <ul>
-          <li>Producto 1</>
-          <li>Producto 2</>
-        </ul>
-      </p>
-      `
-    }
-  )
+  sgMail
+    .send(mail.confirmCart(name, email))
+    .then(() => { console.log('Email sent') })
+    .catch((error) => { console.error(error) })
 }
 
 module.exports = {
+  createAccount,
   confirmCart
 }
