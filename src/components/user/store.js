@@ -12,36 +12,17 @@ const newUser = async (userInfo) => {
 }
 
 const editUser = async (id, infoUser) => {
-  try {
-    const user = await User.findByPk(id)
-    if (infoUser.name) user.name = infoUser.name
-    if (infoUser.lastName) user.lastName = infoUser.lastName
-    if (infoUser.email) user.email = infoUser.email
-    if (infoUser.cp) user.cp = infoUser.cp
-    if (infoUser.address) user.address = infoUser.address
-    if (infoUser.city) user.city = infoUser.city
-    if (infoUser.province) user.province = infoUser.province
-    if (infoUser.phone) user.phone = infoUser.phone
-    if (infoUser.password) user.password = infoUser.password
+  const user = await User.findByPk(id)
+  if (infoUser.name) user.name = infoUser.name
+  if (infoUser.lastName) user.lastName = infoUser.lastName
+  if (infoUser.email) user.email = infoUser.email
+  if (infoUser.cp) user.cp = infoUser.cp
+  if (infoUser.address) user.address = infoUser.address
+  if (infoUser.city) user.city = infoUser.city
+  if (infoUser.province) user.province = infoUser.province
+  if (infoUser.phone) user.phone = infoUser.phone
+  if (infoUser.password) user.password = infoUser.password
 
-<<<<<<< Updated upstream
-    user.save()
-    const userReturn = {
-      id: user.id,
-      name: user.name,
-      lastName: user.lastName,
-      email: user.email,
-      cp: user.cp,
-      address: user.address,
-      city: user.city,
-      province: user.province,
-      phone: user.phone,
-      password: user.password
-    }
-    return userReturn
-  } catch (error) {
-    return error
-=======
   user.save()
   const userReturn = {
     id: user.id,
@@ -53,7 +34,6 @@ const editUser = async (id, infoUser) => {
     city: user.city,
     province: user.province,
     phone: user.phone
->>>>>>> Stashed changes
   }
 }
 
