@@ -2,7 +2,7 @@ const { Product, SubCategory, Category } = require('../../db')
 const { reviews } = require('../../../config')
 
 const addProduct = async (newProduct) => {
-  const { brand, model, img, description, price, points } = newProduct
+  const { brand, model, img, description, price, points, stock } = newProduct
   const { subCategory } = newProduct
   const prod = await Product.findOne({
     where: {
@@ -19,6 +19,7 @@ const addProduct = async (newProduct) => {
       img,
       description,
       price,
+      stock,
       points
     })
 

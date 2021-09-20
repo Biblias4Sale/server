@@ -57,18 +57,16 @@ req.body.password;
 - POST /products >> recibe por BODY un objeto con estas características:
 
 ```JSON
- {
-"name":"Nacho",
-"lastName": "Posta",
-"email": "wasap@gmail.com",
-"password": "asdqw.",
-"cp": 666,
-"address": "En la loma del orto",
-"city": "Bahía Blanca",
-"province": "Buenos Aires",
-"phone": 291432562,
-"stock": 1
- }
+ 
+{
+    "model": "SX1ss00",
+    "brand": "Canon ",
+    "img":  "https://arsonyb2c.vteximg.com.br/arquivos/ids/292451-550-550/ILCE-7M3_Black-1.jpg?v=637123589061300000",
+    "description": "Una cámara linda",
+    "price": 800,
+    "subCategory": "Semi-Reflex",
+    "stock": 1
+}
 ```
 
 - PUT /deleteproducts >> Elimina productos
@@ -204,6 +202,7 @@ req.params.productID
 <hr>
 
 <br>
+
 ### USUARIOS:
 
 - POST /user >> Crea una cuenta nueva
@@ -348,7 +347,7 @@ Luego agregarlo a .env
 
 ### FAVORITES:
 
--GET /:user => Obtiene los favoritos de un usuario.
+-GET /favorites/:user => Obtiene los favoritos de un usuario.
 ```javascript
 req.params.userID,
 ```
@@ -361,4 +360,7 @@ req.params.productID
 
 -DELETE /:userID/:productID => Elimina un producto de favoritos.
 
+### REVIEWS:
 
+- GET /reviews/:product => Obtiene los reviews de los usuarios.
+- POST /reviews/:productSold => Agrega review a un producto vendido. (Solo si su carrito figura como entregado)
