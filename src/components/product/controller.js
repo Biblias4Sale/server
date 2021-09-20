@@ -3,6 +3,7 @@ const fs = require('fs').promises
 const parse = require('csv-parse/lib/sync')
 const path = require('path')
 const store = require('./store')
+const moment = require('moment')
 
 const getAll = async () => {
   return await store.getAll()
@@ -15,7 +16,36 @@ const getBest = (qty) => {
     .slice(0, qty)
 }
 
-const getDetail = (id) => store.getDetail(id)
+const getDetail = async (id) => {
+  try {
+    const data = await store.getDetail(id)
+
+    const reviews = data.dataValues.ProductSolds.map(obj => {
+      const fecha = obj.dataValues.Review.dataValues.createdAt
+      const fechaMoment = moment(fecha).format('L')
+      return {
+        user: obj.Cart.dataValues.User.name,
+        points: obj.dataValues.Review.dataValues.rating,
+        description: obj.dataValues.Review.dataValues.description,
+        fecha: fechaMoment
+      }
+    })
+    const response = {
+      id: data.id,
+      brand: data.brand,
+      model: data.model,
+      img: data.img,
+      description: data.description,
+      price: data.price,
+      rating: data.rating,
+      stock: data.stock,
+      reviews: reviews
+    }
+    return response
+  } catch ({ message: error }) {
+    throw new Error(error)
+  }
+}
 
 const addProduct = async (newProduct) => {
   return await store.addProduct(newProduct)

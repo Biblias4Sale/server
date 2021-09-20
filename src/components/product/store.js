@@ -1,8 +1,8 @@
-const { Product, SubCategory, Category } = require('../../db')
+const { Product, SubCategory, Category, ProductSold, Cart, User, Review } = require('../../db')
 const { reviews } = require('../../../config')
 
 const addProduct = async (newProduct) => {
-  const { brand, model, img, description, price, points } = newProduct
+  const { brand, model, img, description, price, points, stock } = newProduct
   const { subCategory } = newProduct
   const prod = await Product.findOne({
     where: {
@@ -19,7 +19,8 @@ const addProduct = async (newProduct) => {
       img,
       description,
       price,
-      points
+      points,
+      stock
     })
 
     const subCat = await SubCategory.findOne({
@@ -60,18 +61,25 @@ const getAll = async () => {
   // return Product
 }
 
-const getDetail = async (id) => {
-  try {
-    const prod = await Product.findByPk(id, {
-      attributes: { exclude: ['createdAt', 'updatedAt'] }
-    })
-    if (!prod) return 'No se encontró el producto'
-    return prod
-  } catch (e) {
-    return e.name
-  }
+const getDetail = async (productId) => {
+  // try {
+  //   const prod = await Product.findByPk(id, {
+  //     attributes: { exclude: ['createdAt', 'updatedAt'] }
+  //   })
+  //   if (!prod) return 'No se encontró el producto'
+  //   return prod
+  // } catch (e) {
+  //   return e.name
+  // }
 
   // return Product.find(product => product.id === parseInt(id)) // Debe buscar en la DB por ID
+  try {
+    const producto = await Product.findByPk(productId, { include: { model: ProductSold, include: [{ model: Cart, include: { model: User } }, { model: Review }] } })
+    if (!producto) throw new Error('Producto no encontrado')
+    return producto
+  } catch ({ message: error }) {
+    throw new Error(error)
+  }
 }
 
 const getReview = () => {
