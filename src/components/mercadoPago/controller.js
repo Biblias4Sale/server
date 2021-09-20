@@ -4,14 +4,14 @@ const mercadopago = require('mercadopago')
 
 const { ACCESS_TOKEN } = process.env
 
-// mercadopago.configure({
-//   access_token: ACCESS_TOKEN
-// })
+mercadopago.configure({
+  access_token: ACCESS_TOKEN
+})
 
 const getPaymentLink = async (request) => {
   let paymentLink
   const preference = {
-    items: [request]
+    items: request
   }
 
   await mercadopago.preferences.create(preference)

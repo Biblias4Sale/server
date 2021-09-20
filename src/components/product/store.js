@@ -79,31 +79,29 @@ const getReview = () => {
 }
 
 const editProduct = async (prod) => {
-  const { id, brand, model, img, description, price, points, subCategory } = prod
+  const { id, model, img, description, price, points, brand, category, subCategory, discount } = prod
 
-  const producto = await Product.findByPk(id)
+  await Product.update(
+    {
+      model: model,
+      img: img,
+      description: description,
+      points: points,
+      price: price
+    }, { where: { id: id } })
 
-  if (producto === null) return 'No se encontró el producto'
-  // if (infoUser.name) user.name = infoUser.name
-  if (producto.brand) producto.brand = brand
-  if (producto.model) producto.model = model
-  if (producto.img) producto.img = img
-  if (producto.description) producto.brand = description
-  if (producto.price) producto.price = price
-  if (producto.points) producto.points = points
-
-  const subCat = await SubCategory.findOne({
-    where: {
-      name: subCategory
-    }
+  await Product.findOne({ where: { id: id } }).then((product) => {
+    SubCategory.findOne({ where: { name: subCategory } }).then((subCat) => {
+      product.setSubCategory(subCat.dataValues.id)
+      Category.findOne({ where: { name: category } }).then((Cat) => {
+        subCat.setCategory(Cat.dataValues.id)
+      })
+    })
   })
 
-  if (!subCat) return 'No se encontró la subcategoría'
+  const response = await getDetail(id)
 
-  producto.subCategoryId = subCat.id
-
-  await producto.save()
-  return producto
+  return response
 }
 
 const deleteProducts = async (idProducts) => {
