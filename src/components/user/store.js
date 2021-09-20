@@ -35,6 +35,7 @@ const editUser = async (id, infoUser) => {
     province: user.province,
     phone: user.phone
   }
+  return userReturn
 }
 
 const delUser = async (id) => {
