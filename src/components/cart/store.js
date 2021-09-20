@@ -31,6 +31,7 @@ const confirmCart = async (cartId, userId) => {
   try {
     const cart = await Cart.findByPk(cartId)
     cart.status = 'Generado'
+    cart.soldDate = new Date()
     cart.save()
     const user = await User.findByPk(userId)
     const newCart = await user.createCart({ status: 'En proceso' })
