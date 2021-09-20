@@ -46,8 +46,8 @@ const csvToUsers = async () => {
       return user
     })
     return store.csvToUsers(users)
-  } catch (err) {
-    return err
+  } catch ({ message: error }) {
+    throw new Error(error)
   }
 }
 
@@ -62,8 +62,8 @@ const usersToCSV = async () => {
       console.log(err)
     })
     return 'Download list'
-  } catch (err) {
-    return err
+  } catch ({ message: error }) {
+    throw new Error(error)
   }
 }
 
