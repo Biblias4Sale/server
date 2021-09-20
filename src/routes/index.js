@@ -6,6 +6,7 @@ const networkCart = require('../components/cart/network.js')
 const networkUser = require('../components/user/network')
 const networkAdmin = require('../components/admin/network')
 const networkBot = require('../components/bot/network')
+const networkMarketing = require('../components/marketing/network')
 const authLogin = require('../components/auth/login')
 const authLogout = require('../components/auth/logout')
 const loginUser = require('../components/auth/loginUser')
@@ -22,6 +23,7 @@ const cart = '/cart'
 const user = '/user'
 const admin = '/admin'
 const bot = '/bot'
+const marketing = '/configureMarketing'
 const googleLogin = '/api/v1/'
 const googleLogout = '/logout'
 const userLogin = '/login'
@@ -38,6 +40,7 @@ router.use(cart, networkCart)
 router.use(user, networkUser)
 router.use(admin, networkAdmin)
 router.use(bot, networkBot)
+router.use(marketing, networkMarketing)
 router.use(favorites, networkFavorites)
 router.use(savedProduct, networkSavedProduct)
 router.use(mercadopago, networkMercadoPago)

@@ -2,8 +2,9 @@ const bcryptjs = require('bcryptjs')
 const tokenGenerator = require('../../helpers/tokenGenerator')
 const tokenValidators = require('../../helpers/tokenValidators')
 const store = require('./store')
-const mail = require('../../mailing/')
-const sms = require('../../sms')
+const validation = require('../../helpers/marketingValidators')
+const mail = require('../marketing/handler/mailing')
+const sms = require('../marketing/handler/sms')
 
 const newUser = async ({ name, lastName, email, password }) => {
   const salt = bcryptjs.genSaltSync()
@@ -20,8 +21,9 @@ const newUser = async ({ name, lastName, email, password }) => {
     const tokenValidation = await tokenValidators(email, password)
     if (tokenValidation) return tokenValidation
     const { user, token } = await tokenGenerator(email)
-    mail.createAccount(user)
-    sms.createAccount(user)
+    if (await validation.mailCreateAccount()) mail.createAccount(user)
+    if (await validation.smsCreateAccount()) sms.createAccount(user)
+
     return ({ user, cart, token })
   } catch (err) {
     return err
