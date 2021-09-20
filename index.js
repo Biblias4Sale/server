@@ -1,5 +1,6 @@
 require('dotenv').config()
 const server = require('./src/app.js')
+const { settingsMarketingLoader } = require('./src/loaders/settingsMarketingLoader')
 const { categoriesLoader } = require('./src/loaders/categoriesLoader')
 const { subCategoriesLoader } = require('./src/loaders/subcategoriesLoader')
 const { productLoader } = require('./src/loaders/productLoader')
@@ -20,6 +21,7 @@ const runServer = async () => {
   } catch (error) {
     console.log(error)
   }
+  await settingsMarketingLoader()
   await categoriesLoader()
   await subCategoriesLoader('Camaras', subCategoryCamaras)
   await subCategoriesLoader('Lentes', subCategoryLentes)
