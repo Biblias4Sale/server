@@ -1,7 +1,6 @@
 const { Marketing } = require('../db')
 
 const mailCreateAccount = async () => {
-  console.log('hola')
   const option = await Marketing.findByPk(1)
   return option.mailCreateAccount
 }

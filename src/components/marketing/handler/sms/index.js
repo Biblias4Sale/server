@@ -1,5 +1,5 @@
-const accountSid = 'ACdb3db68045c1d4eadb53d52bd20ae8fe'
-const authToken = 'a1970bef2c60866dc2463a535aa1c5b3'
+const accountSid = process.env.TWILIO_ACCOUNT_SID
+const authToken = process.env.TWILIO_AUTH_TOKEN
 
 const Twilio = require('twilio')
 const client = new Twilio(accountSid, authToken)
