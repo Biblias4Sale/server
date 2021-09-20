@@ -3,8 +3,8 @@ const store = require('./store')
 const settingsMarketing = async (settings) => {
   try {
     return await store.settingsMarketing(settings)
-  } catch (error) {
-    return error
+  } catch ({ message: error }) {
+    throw new Error(error)
   }
 }
 
