@@ -33,9 +33,9 @@ const addProduct = async (newProduct) => {
 
     await newProd.setSubCategory(subCat)
     return await newProd
-  } catch (e) {
-    console.log(e)
-    return `${model} ya existe`
+  } catch ({ message: error }) {
+    console.log(error)
+    throw new Error(`${model} ya existe`)
   }
 }
 
@@ -54,8 +54,9 @@ const getAll = async () => {
     })
 
     return prod
-  } catch (e) {
-    return e.name
+  } catch ({ message: error }) {
+    console.log(error)
+    throw new Error(error)
   }
 
   // return Product
@@ -68,8 +69,9 @@ const getDetail = async (id) => {
     })
     if (!prod) return 'No se encontró el producto'
     return prod
-  } catch (e) {
-    return e.name
+  } catch ({ message: error }) {
+    console.log(error)
+    throw new Error(error)
   }
 
   // return Product.find(product => product.id === parseInt(id)) // Debe buscar en la DB por ID
@@ -113,9 +115,9 @@ const deleteProducts = async (idProducts) => {
       await product.save()
     })
     return 'Producto eliminado'
-  } catch (err) {
-    console.log(err)
-    return 'Producto no se eliminó'
+  } catch ({ message: error }) {
+    console.log(error)
+    throw new Error('Producto no se eliminó')
   }
 }
 
@@ -127,9 +129,8 @@ const activateProducts = async (idProducts) => {
       await product.save()
     })
     return 'Producto activado'
-  } catch (err) {
-    console.log(err)
-    return 'Producto no se activo'
+  } catch ({ message: error }) {
+    throw new Error('Producto no se activó')
   }
 }
 
@@ -142,9 +143,9 @@ const changePrice = async (idProducts, value) => {
         await product.save()
       })
       return 'Nuevo precio definido'
-    } catch (err) {
-      console.log(err)
-      return 'Precio no pudo ser establecido'
+    } catch ({ message: error }) {
+      console.log(error)
+      throw new Error('Producto no pudo ser establecido')
     }
   }
 
@@ -155,9 +156,9 @@ const changePrice = async (idProducts, value) => {
       await product.save()
     })
     return 'Nuevo precio definido'
-  } catch (err) {
-    console.log(err)
-    return 'Precio no pudo ser establecido'
+  } catch ({ message: error }) {
+    console.log(error)
+    throw new Error('Precio no pudo ser establecido')
   }
 }
 
@@ -215,7 +216,7 @@ const addStock = async (qty, productId) => {
     return 'Nuevo stock definido'
   } catch (err) {
     console.log(err)
-    return 'Stock no pudo ser establecido'
+    throw new Error('Stock no pudo ser establecido')
   }
 }
 
