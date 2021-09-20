@@ -25,22 +25,31 @@ const newUser = async ({ name, lastName, email, password }) => {
     if (await validation.smsCreateAccount()) sms.createAccount(user)
 
     return ({ user, cart, token })
-  } catch (err) {
-    return err
+  } catch (error) {
+    throw new Error(error)
   }
 }
 
 const editUser = async (id, body) => {
-  const { password, ...infoUser } = body
-  console.log('SOY BODY', body)
-  if (password) {
-    const salt = bcryptjs.genSaltSync()
-    infoUser.password = bcryptjs.hashSync(password, salt)
+  try {
+    const { token, password, ...infoUser } = body
+    if (password) {
+      const salt = bcryptjs.genSaltSync()
+      infoUser.password = bcryptjs.hashSync(password, salt)
+    }
+    return await store.editUser(id, infoUser)
+  } catch (error) {
+    throw new Error(error)
   }
-  return await store.editUser(id, infoUser)
 }
 
-const delUser = async (id) => await store.delUser(id)
+const delUser = async (id) => {
+  try {
+    return await store.delUser(id)
+  } catch (error) {
+    throw new Error(error)
+  }
+}
 
 module.exports = {
   newUser,

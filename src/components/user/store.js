@@ -5,9 +5,8 @@ const newUser = async (userInfo) => {
     const user = await User.create(userInfo)
     const cart = await user.createCart({ status: 'En proceso' })
     return cart.id
-  } catch (error) {
-    console.error(error)
-    return 'Cart not created'
+  } catch ({ message: error }) {
+    throw new Error('Cart not created')
   }
 }
 
@@ -44,8 +43,8 @@ const delUser = async (id) => {
     user.status = false
     await user.save()
     return 'User deleted'
-  } catch (error) {
-    return error
+  } catch ({ message: error }) {
+    throw new Error(error)
   }
 }
 
