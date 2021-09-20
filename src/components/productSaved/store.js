@@ -1,37 +1,9 @@
 const { User, Product, SavedProduct } = require('../../db')
 
-const addSavedProduct = async (user, productID, qty = 1) => {
-  try {
-    const producto = await Product.findByPk(productID, { include: { model: User } })
-    const usuario = await User.findByPk(user, { include: { model: SavedProduct } })
-    if (!producto) return 'Producto no encontrado'
-    if (!usuario) return 'Usuario no encontrado'
-
-    const productSaved = await SavedProduct.findOne({ where: { productId: productID, UserId: user } })
-    if (productSaved) {
-      const oldQty = productSaved.dataValues.qty
-      try {
-        SavedProduct.update(
-          { qty: oldQty + qty },
-          { where: { productId: productID, UserId: user } }
-        )
-        return 'El producto se agregó correctamente'
-      } catch (e) { return e }
-    }
-
-    try {
-      const savedProduct = await producto.createSavedProduct({ qty })
-      usuario.addSavedProduct(savedProduct)
-      return 'Producto guardado'
-    } catch (e) { return e }
-  } catch (e) {
-    return 'Los datos ingresados no son válidos'
-  }
-}
-
 const getSavedProducts = async (user) => {
   try {
     const usuario = await User.findByPk(user, { include: { model: SavedProduct, include: { model: Product } } })
+    if (!usuario) throw new Error('Usuario no encontrado')
     const productSaved = await SavedProduct.findAll({ where: { UserId: usuario.id } })
 
     if (productSaved.length > 0) {
@@ -43,42 +15,80 @@ const getSavedProducts = async (user) => {
     } else {
       return []
     }
-  } catch (e) {
-    return e
+  } catch ({ message: error }) {
+    throw new Error(error)
+  }
+}
+
+const addSavedProduct = async (user, productID, qty = 1) => {
+  try {
+    const producto = await Product.findByPk(productID, { include: { model: User } })
+    const usuario = await User.findByPk(user, { include: { model: SavedProduct } })
+    if (!producto) throw new Error('Producto no encontrado')
+    if (!usuario) throw new Error('Usuario no encontrado')
+
+    const productSaved = await SavedProduct.findOne({ where: { productId: productID, UserId: user } })
+    if (productSaved) {
+      const oldQty = productSaved.dataValues.qty
+      try {
+        SavedProduct.update(
+          { qty: oldQty + qty },
+          { where: { productId: productID, UserId: user } }
+        )
+        return 'El producto se agregó correctamente'
+      } catch ({ message: error }) {
+        throw new Error(error)
+      }
+    }
+
+    try {
+      const savedProduct = await producto.createSavedProduct({ qty })
+      usuario.addSavedProduct(savedProduct)
+      return 'Producto guardado'
+    } catch (e) { throw new Error(e) }
+  } catch ({ message: error }) {
+    throw new Error(error)
   }
 }
 
 const decreaseSavedProducts = async (user, productID) => {
-  const producto = await Product.findByPk(productID, { include: { model: User } })
-  const usuario = await User.findByPk(user, { include: { model: SavedProduct } })
-  if (!producto) return 'Producto no encontrado'
-  if (!usuario) return 'Usuario no encontrado'
+  try {
+    const producto = await Product.findByPk(productID, { include: { model: User } })
+    const usuario = await User.findByPk(user, { include: { model: SavedProduct } })
+    if (!producto) throw new Error('Producto no encontrado')
+    if (!usuario) throw new Error('Usuario no encontrado')
 
-  const productSaved = await SavedProduct.findOne({ where: { productId: productID, UserId: user } })
-  if (!productSaved) return 'El usuario no tiene ese producto'
-  if (productSaved.dataValues.qty > 1) {
-    const oldQty = productSaved.dataValues.qty
-    try {
-      SavedProduct.update(
-        { qty: oldQty - 1 },
-        { where: { productId: productID } }
-      )
-      return 'El producto se quitó correctamente'
-    } catch (e) { return e }
+    const productSaved = await SavedProduct.findOne({ where: { productId: productID, UserId: user } })
+    if (!productSaved) throw new Error('El usuario no tiene ese producto')
+    if (productSaved.dataValues.qty > 1) {
+      const oldQty = productSaved.dataValues.qty
+      try {
+        SavedProduct.update(
+          { qty: oldQty - 1 },
+          { where: { productId: productID } }
+        )
+        return 'El producto se quitó correctamente'
+      } catch ({ message: error }) {
+        throw new Error(error)
+      }
+    }
+    if (productSaved.dataValues.qty === 1) throw new Error('Si deseás eliminar el producto de guardado, utiliza el endpoint correcto')
+  } catch ({ message: error }) {
+    throw new Error(error)
   }
-  // try {
-  //   SavedProduct.destroy({ where: { productId: productID, UserId: user } })
-  //   return 'El producto se quitó completamente'
-  // } catch (e) { return e }
 }
 
 const deleteSavedProducts = async (user, productID) => {
   try {
-    await SavedProduct.destroy({ where: { productId: productID, UserId: user } })
+    const producto = await Product.findByPk(productID, { include: { model: User } })
+    const usuario = await User.findByPk(user, { include: { model: SavedProduct } })
+    if (!producto) throw new Error('Producto no encontrado')
+    if (!usuario) throw new Error('Usuario no encontrado')
+    const res = await SavedProduct.destroy({ where: { productId: productID, UserId: user } })
+    if (res === 0) throw new Error('El usuario no tiene ese producto guardado')
     return 'El producto se quitó completamente'
-  } catch (e) {
-    console.log(e)
-    return e
+  } catch ({ message: error }) {
+    throw new Error(error)
   }
 }
 
