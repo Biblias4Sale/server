@@ -2,8 +2,8 @@ const bcryptjs = require('bcryptjs')
 const tokenGenerator = require('../../helpers/tokenGenerator')
 const tokenValidators = require('../../helpers/tokenValidators')
 const store = require('./store')
-const mail = require('../../mailing/')
-const sms = require('../../sms')
+const mail = require('../../marketing/mailing')
+const sms = require('../../marketing/sms')
 
 const newUser = async ({ name, lastName, email, password }) => {
   const salt = bcryptjs.genSaltSync()
