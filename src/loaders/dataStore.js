@@ -124,7 +124,7 @@ const products = [
     price: 247000,
     points: 3,
     subCategory: 'Reflex',
-    stock: 1
+    stock: 4
   },
   {
     name: 'Canon EOS Rebel T6/1300D (18-55 mm III)',
@@ -135,7 +135,7 @@ const products = [
     price: 102000,
     points: 2,
     subCategory: 'Reflex',
-    stock: 1
+    stock: 0
   },
   {
     name: 'Canon EOS Rebel Kit T7 18-55mm III DSLR color negro',
@@ -156,7 +156,7 @@ const products = [
     price: 80000,
     points: 5,
     subCategory: 'Semi-Reflex',
-    stock: 1
+    stock: 3
   },
 
   {
@@ -168,7 +168,7 @@ const products = [
     price: 189000,
     points: 3,
     subCategory: 'Mirrorless',
-    stock: 1
+    stock: 4
   },
   {
     name: 'Sony Ilce-7m3 7miii Kit Lente 28-70mm',
@@ -190,7 +190,7 @@ const products = [
     price: 11900,
     points: 4,
     subCategory: 'Flashes',
-    stock: 1
+    stock: 0
   },
   {
     name: 'High-Speed Sync 1/8000s Li-ion Battery Camera Flash Speedlite Light',

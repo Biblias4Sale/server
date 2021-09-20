@@ -19,8 +19,8 @@ const addProduct = async (newProduct) => {
       img,
       description,
       price,
-      points,
-      stock
+      stock,
+      points
     })
 
     const subCat = await SubCategory.findOne({

@@ -1,5 +1,6 @@
-const mail = require('../../mailing')
-const sms = require('../../sms')
+const validation = require('../../helpers/marketingValidators')
+const mail = require('../marketing/handler/mailing')
+const sms = require('../marketing/handler/sms')
 const store = require('./store')
 
 const getCart = async (id) => {
@@ -18,10 +19,8 @@ const getCart = async (id) => {
 
 const confirmCart = async (cartId, userId) => {
   const [userInfo, cart] = await store.confirmCart(cartId, userId)
-  // console.log(userInfo.dataValues.email)
-  // const cart = await store.confirmCart(cartId, userId)
-  mail.confirmCart(userInfo)
-  sms.confirmCart(userInfo)
+  if (await validation.mailConfirmCart()) mail.confirmCart(userInfo)
+  if (await validation.smsConfirmCart()) sms.confirmCart(userInfo)
   return cart
 }
 

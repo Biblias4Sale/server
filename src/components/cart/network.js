@@ -22,12 +22,12 @@ router.post('/confirmCart/:cartId/:id', [
     .catch(e => response.error(req, res, 404, e, 'Product not found'))
 })
 
-// router.post('/newProduct/:cartId/:productId', (req, res) => {
-//   controller
-//     .newProduct(req.params.cartId, req.params.productId, req.body)
-//     .then(message => response.success(req, res, 201, message))
-//     .catch(e => response.error(req, res, 404, e, 'Product not found'))
-// })
+router.post('/newProduct/:cartId/:productId', (req, res) => {
+  controller
+    .newProduct(req.params.cartId, req.params.productId, req.body)
+    .then(message => response.success(req, res, 201, message))
+    .catch(e => response.error(req, res, 404, e, 'Product not found'))
+})
 
 router.post('/addProduct/:cartId/:productId', (req, res) => {
   controller
