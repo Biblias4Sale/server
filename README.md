@@ -202,6 +202,7 @@ req.params.productID
 <hr>
 
 <br>
+
 ### USUARIOS:
 
 - POST /user >> Crea una cuenta nueva
@@ -346,7 +347,7 @@ Luego agregarlo a .env
 
 ### FAVORITES:
 
--GET /:user => Obtiene los favoritos de un usuario.
+-GET /favorites/:user => Obtiene los favoritos de un usuario.
 ```javascript
 req.params.userID,
 ```
@@ -359,4 +360,7 @@ req.params.productID
 
 -DELETE /:userID/:productID => Elimina un producto de favoritos.
 
+### REVIEWS:
 
+- GET /reviews/:product => Obtiene los reviews de los usuarios.
+- POST /reviews/:productSold => Agrega review a un producto vendido. (Solo si su carrito figura como entregado)
