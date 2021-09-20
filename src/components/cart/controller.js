@@ -26,7 +26,7 @@ const confirmCart = async (cartId, userId) => {
     const [userInfo, cart] = await store.confirmCart(cartId, userId)
     if (await validation.mailConfirmCart()) mail.confirmCart(userInfo)
     if (await validation.smsConfirmCart()) sms.confirmCart(userInfo)
-    return cart
+    return (cart)
   } catch ({ message: error }) {
     throw new Error(error)
   }
