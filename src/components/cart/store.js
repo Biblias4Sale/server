@@ -21,8 +21,9 @@ const getCart = async (id) => {
       return cart.id
     }
     return cart
-  } catch (error) {
-    return error
+  } catch ({ message: error }) {
+    console.log(error)
+    throw new Error(error)
   }
 }
 
@@ -35,8 +36,9 @@ const confirmCart = async (cartId, userId) => {
     const newCart = await user.createCart({ status: 'En proceso' })
     // return { message: 'Cart confirmed', CartInProgress: newCart.id }
     return [user, { message: 'Cart confirmed', CartInProgress: newCart.id }]
-  } catch (error) {
-    return error
+  } catch ({ message: error }) {
+    console.log(error)
+    throw new Error(error)
   }
 }
 
@@ -55,8 +57,9 @@ const newProduct = async (cartId, productId, infoProduct) => {
       return 'Update product'
     }
     return 'Not change product'
-  } catch (error) {
+  } catch ({ message: error }) {
     console.log(error)
+    throw new Error(error)
   }
 }
 
@@ -72,8 +75,9 @@ const addProduct = async (cartId, productId, qty = 1) => {
     productSold.qty = String(parseInt(productSold.qty) + qty)
     productSold.save()
     return ({ message: 'Increased amount', qty: ProductSold.qty })
-  } catch (error) {
+  } catch ({ message: error }) {
     console.log(error)
+    throw new Error(error)
   }
 }
 
@@ -92,8 +96,9 @@ const subProduct = async (cartId, productId) => {
     productSold.price = product.price
     productSold.save()
     return ({ message: 'Decreased amount', qty: ProductSold.qty })
-  } catch (error) {
+  } catch ({ message: error }) {
     console.log(error)
+    throw new Error(error)
   }
 }
 
@@ -102,8 +107,9 @@ const delProduct = async (cartId, productId) => {
     const productSold = await ProductSold.findOne({ where: { CartId: cartId, productId: productId } })
     await ProductSold.destroy({ where: { id: productSold.id } })
     return 'Removed product'
-  } catch (error) {
+  } catch ({ message: error }) {
     console.log(error)
+    throw new Error(error)
   }
 }
 
