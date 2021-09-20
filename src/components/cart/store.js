@@ -7,10 +7,10 @@ const getCart = async (id) => {
       attributes: ['id', 'status'],
       include: {
         model: ProductSold,
-        attributes: ['id', 'qty', 'price'],
+        attributes: ['id', 'qty'],
         include: {
           model: Product,
-          attributes: ['id', 'brand', 'model', 'img']
+          attributes: ['id', 'brand', 'model', 'img', 'price', 'stock']
         }
       }
     })
