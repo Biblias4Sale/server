@@ -9,7 +9,7 @@ const getCart = async (id) => {
     return cart.ProductSolds.map(product => (
       {
         id: product.product.id,
-        brand: product.product.brand,
+        brand: product.product.brand.name,
         model: product.product.model,
         img: product.product.img,
         qty: product.qty,

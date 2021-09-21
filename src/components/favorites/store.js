@@ -23,7 +23,7 @@ const getFavs = async (user) => {
   const usuario = await User.findByPk(user, {
     include: {
       model: Product,
-      attributes: ['model', 'brand', 'img', 'id', 'price'],
+      attributes: ['model', 'img', 'id', 'price'],
       exclude: ['favs']
     }
   })

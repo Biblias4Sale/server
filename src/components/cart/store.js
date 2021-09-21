@@ -1,4 +1,4 @@
-const { Cart, Product, User, ProductSold } = require('../../db')
+const { Cart, Product, User, ProductSold, Brand } = require('../../db')
 
 const getCart = async (id) => {
   try {
@@ -10,7 +10,11 @@ const getCart = async (id) => {
         attributes: ['id', 'qty'],
         include: {
           model: Product,
-          attributes: ['id', 'brand', 'model', 'img', 'price', 'stock']
+          attributes: ['id', 'model', 'img', 'price', 'stock'],
+          include: {
+            model: Brand,
+            attributes: ['name']
+          }
         }
       }
     })

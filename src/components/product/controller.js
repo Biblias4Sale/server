@@ -1,13 +1,14 @@
-const { imgUploader }= require('../../helpers/imgUploader')
+const { imgUploader } = require('../../helpers/imgUploader')
 const fs = require('fs').promises
 const parse = require('csv-parse/lib/sync')
 const path = require('path')
 const store = require('./store')
-const  cloudinary  = require('../../cloudinary/cloudinary')
+const cloudinary = require('../../cloudinary/cloudinary')
 
-const getAll = async  () => {
-  let products = await store.getAll()
-  let allProducts = products.map(p => {
+const getAll = async () => {
+  const products = await store.getAll()
+  console.log(products)
+  const allProducts = products.map(p => {
     return {
       id: p.id,
       model: p.model,
@@ -17,7 +18,7 @@ const getAll = async  () => {
       stock: p.stock,
       state: p.state,
       subCategoryId: p.subCategory.id,
-      subCategory:p.subCategory.name,
+      subCategory: p.subCategory.name,
       categoryId: p.subCategory.category.id,
       category: p.subCategory.category.name,
       brand: p.brand.name,
@@ -36,8 +37,8 @@ const getBest = (qty) => {
 }
 
 const getDetail = async (id) => {
-  let p = await store.getDetail(id)
-  let productDetails = {
+  const p = await store.getDetail(id)
+  const productDetails = {
     id: p.id,
     model: p.model,
     img: p.img,
@@ -51,29 +52,29 @@ const getDetail = async (id) => {
 }
 
 const addProduct = async (newProduct) => {
-  let uploadFiles = newProduct.img
-  let uploadResult = []
+  const uploadFiles = newProduct.img
+  const uploadResult = []
   const result = await uploadFiles.map((file) => {
     return cloudinary.uploader.upload(
-    file, {
+      file, {
         async: false,
         upload_preset: 'product_imgs'
-    }, (error, response) => {
-      if(response){
-        uploadResult.push(response)
-      }
-      if(error){
-        console.log(error)
-      }
-      return uploadResult
-    }) 
-  }) 
+      }, (error, response) => {
+        if (response) {
+          uploadResult.push(response)
+        }
+        if (error) {
+          console.log(error)
+        }
+        return uploadResult
+      })
+  })
   try {
     const uploadedData = await Promise.all(result)
     const finalData = uploadedData.map(img => {
-      return  img.url
+      return img.url
     })
-    let product = {
+    const product = {
       brand: newProduct.brand,
       category: newProduct.category,
       subCategory: newProduct.subCategory,
@@ -83,9 +84,7 @@ const addProduct = async (newProduct) => {
       description: newProduct.description,
       model: newProduct.model
     }
-
-    console.log(product)
-    return await store.addProduct(product)  
+    return await store.addProduct(product)
   } catch (error) {
     console.log(error)
   }

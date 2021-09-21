@@ -3,10 +3,10 @@ const { newBrand, getBrandByName, getAllBrands } = require('./controllers')
 const router = express.Router()
 
 router.get('/', async (req, res) => {
-  if(req.query.name){
+  if (req.query.name) {
     return res.send(await getBrandByName(req.query.name))
   }
-    return res.send(await getAllBrands())
+  return res.send(await getAllBrands())
 })
 
 router.post('/', async (req, res) => {
@@ -14,4 +14,3 @@ router.post('/', async (req, res) => {
 })
 
 module.exports = router
-
