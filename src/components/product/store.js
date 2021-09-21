@@ -63,17 +63,6 @@ const getAll = async () => {
 }
 
 const getDetail = async (productId) => {
-  // try {
-  //   const prod = await Product.findByPk(id, {
-  //     attributes: { exclude: ['createdAt', 'updatedAt'] }
-  //   })
-  //   if (!prod) return 'No se encontró el producto'
-  //   return prod
-  // } catch (e) {
-  //   return e.name
-  // }
-
-  // return Product.find(product => product.id === parseInt(id)) // Debe buscar en la DB por ID
   try {
     const producto = await Product.findByPk(productId, {
       include: {
