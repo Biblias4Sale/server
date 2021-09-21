@@ -7,7 +7,6 @@ const cloudinary = require('../../cloudinary/cloudinary')
 
 const getAll = async () => {
   const products = await store.getAll()
-  console.log(products)
   const allProducts = products.map(p => {
     return {
       id: p.id,
@@ -25,7 +24,6 @@ const getAll = async () => {
       description: p.description
     }
   })
-  console.log(allProducts)
   return allProducts
 }
 

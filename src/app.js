@@ -1,4 +1,4 @@
-// require('./passport/passportGoogle.js')
+require('./passport/passportGoogle.js')
 const express = require('express')
 const cookieParser = require('cookie-parser')
 const morgan = require('morgan')
@@ -9,8 +9,8 @@ require('colors')
 const { frontEndHost } = require('../config.js')
 
 const routes = require('./routes')
-// const passport = require('passport');
-
+const passport = require('passport')
+const session = require('express-session')
 const server = express()
 
 server.name = 'NoiLan'
@@ -18,8 +18,8 @@ server.name = 'NoiLan'
 // server.use(cors({ credentials: true }))
 
 server.use(cors({ origin: frontEndHost(), credentials: true }))
-server.use(express.urlencoded({limit: '50mb', extended: true, parameterLimit: 50000}))
-server.use(express.json({limit: '50mb'}));
+server.use(express.urlencoded({ limit: '50mb', extended: true, parameterLimit: 50000 }))
+server.use(express.json({ limit: '50mb' }))
 server.use(cookieParser())
 server.use(morgan('dev'))
 server.use((req, res, next) => {
@@ -32,9 +32,10 @@ server.use((req, res, next) => {
 server.use(fileUpload())
 server.use(express.static('files'))
 
-// server.use(passport.initialize())
-// server.use(passport.session())
-
+server.use(cookieParser())
+server.use(session({ secret: 'anythinglol' }))
+server.use(passport.initialize())
+server.use(passport.session())
 server.use('/', routes)
 
 // Error catching endware.

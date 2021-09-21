@@ -22,7 +22,6 @@ const addProduct = async (newProduct) => {
         name: brand
       }
     })
-    console.log(pBrand, '    brand store/product')
     if (subCat === null || pBrand === null) {
       return 'Categoria o marca invalidas'
     } else {
