@@ -27,6 +27,28 @@ const getCart = async (id) => {
   }
 }
 
+const getOrders = async (id) => {
+  try {
+    const cart = await Cart.findAll({
+      where: { UserId: id, status: 'Generado' },
+      attributes: ['id', 'status'],
+      include: {
+        model: ProductSold,
+        attributes: ['id', 'qty'],
+        include: {
+          model: Product,
+          attributes: ['id', 'brand', 'model', 'img', 'price', 'stock']
+        }
+      }
+    })
+    // console.log(cart)
+    return cart
+  } catch ({ message: error }) {
+    console.log(error)
+    throw new Error(error)
+  }
+}
+
 const confirmCart = async (cartId, userId) => {
   try {
     const cart = await Cart.findByPk(cartId)
@@ -120,6 +142,7 @@ const delProduct = async (cartId, productId) => {
 
 module.exports = {
   getCart,
+  getOrders,
   confirmCart,
   newProduct,
   addProduct,
