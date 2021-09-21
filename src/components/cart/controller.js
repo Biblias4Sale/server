@@ -6,7 +6,6 @@ const store = require('./store')
 const getCart = async (id) => {
   try {
     const cart = await store.getCart(id)
-    if (!cart.ProductSolds.length) return cart
     return cart.ProductSolds.map(product => (
       {
         id: product.product.id,
@@ -26,7 +25,24 @@ const getCart = async (id) => {
 const getOrders = async (id) => {
   try {
     const cart = await store.getOrders(id)
-    const res = cart.map(product => product)
+    console.log(cart)
+    const res = cart.map(cart => {
+      const productSolds = cart.ProductSolds.map(product => {
+        return {
+          idProduct: product.product.id,
+          qty: product.qty,
+          brand: product.product.brand,
+          model: product.product.model,
+          img: product.product.img,
+          price: product.price
+        }
+      })
+      return {
+        cartId: cart.id,
+        status: cart.status,
+        productSolds
+      }
+    })
     return res
   } catch ({ message: error }) {
     throw new Error(error)
