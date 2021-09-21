@@ -1,7 +1,7 @@
 const Store = require('./store')
 
-const getPaymentLink = async () => {
-  return await Store.getPaymentLink()
+const getPaymentLink = async (request) => {
+  return await Store.getPaymentLink(request)
 }
 
 const getAllPayments = async () => {
