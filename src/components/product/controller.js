@@ -25,7 +25,7 @@ const getDetail = async (id) => {
       const fechaMoment = moment(fecha).format('L')
       return {
         user: obj.Cart.dataValues.User.name,
-        points: obj.dataValues.Review.dataValues.rating,
+        rating: obj.dataValues.Review.dataValues.rating,
         description: obj.dataValues.Review.dataValues.description,
         fecha: fechaMoment
       }

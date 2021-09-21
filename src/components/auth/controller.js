@@ -1,6 +1,6 @@
 const tokenGenerator = require('../../helpers/tokenGenerator')
 const tokenValidators = require('../../helpers/tokenValidators')
-const store = require('../cart/store')
+const store = require('./store')
 
 const getToken = async ({ email, password }, res) => {
   try {
