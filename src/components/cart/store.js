@@ -1,4 +1,5 @@
 const { Cart, Product, User, ProductSold } = require('../../db')
+const { Op } = require('sequelize')
 
 const getCart = async (id) => {
   try {
@@ -30,14 +31,14 @@ const getCart = async (id) => {
 const getOrders = async (id) => {
   try {
     const cart = await Cart.findAll({
-      where: { UserId: id, status: 'Generado' },
+      where: { UserId: id, status: { [Op.not]: 'En proceso' } },
       attributes: ['id', 'status'],
       include: {
         model: ProductSold,
-        attributes: ['id', 'qty'],
+        attributes: ['id', 'qty', 'price'],
         include: {
           model: Product,
-          attributes: ['id', 'brand', 'model', 'img', 'price', 'stock']
+          attributes: ['id', 'brand', 'model', 'img']
         }
       }
     })
