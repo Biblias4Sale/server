@@ -4,17 +4,15 @@ const getSavedProducts = async (user) => {
   try {
     const usuario = await User.findByPk(user, { include: { model: SavedProduct, include: { model: Product } } })
     if (!usuario) throw new Error('Usuario no encontrado')
-    const productSaved = await SavedProduct.findAll({ where: { UserId: usuario.id } })
 
-    if (productSaved.length > 0) {
-      const products = usuario.dataValues.SavedProducts
-      const res = products.map(el => {
-        return { qty: el.dataValues.qty, prod: el.dataValues.product.dataValues }
-      })
-      return res
-    } else {
-      return []
-    }
+    const savedPoducts = await SavedProduct.findAll({
+      where: { UserId: usuario.id },
+      include: {
+        model: Product,
+        attributes: ['id', 'brand', 'model', 'img', 'description', 'price', 'stock', 'rating']
+      }
+    })
+    return savedPoducts
   } catch ({ message: error }) {
     console.log(error)
     throw new Error(error)
