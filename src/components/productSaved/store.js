@@ -14,6 +14,7 @@ const getSavedProducts = async (user) => {
     })
     return savedPoducts
   } catch ({ message: error }) {
+    console.log(error)
     throw new Error(error)
   }
 }
@@ -35,6 +36,7 @@ const addSavedProduct = async (user, productID, qty = 1) => {
         )
         return 'El producto se agregó correctamente'
       } catch ({ message: error }) {
+        console.log(error)
         throw new Error(error)
       }
     }
@@ -45,6 +47,7 @@ const addSavedProduct = async (user, productID, qty = 1) => {
       return 'Producto guardado'
     } catch (e) { throw new Error(e) }
   } catch ({ message: error }) {
+    console.log(error)
     throw new Error(error)
   }
 }
@@ -67,6 +70,7 @@ const decreaseSavedProducts = async (user, productID) => {
         )
         return 'El producto se quitó correctamente'
       } catch ({ message: error }) {
+        console.log(error)
         throw new Error(error)
       }
     }
@@ -86,6 +90,7 @@ const deleteSavedProducts = async (user, productID) => {
     if (res === 0) throw new Error('El usuario no tiene ese producto guardado')
     return 'El producto se quitó completamente'
   } catch ({ message: error }) {
+    console.log(error)
     throw new Error(error)
   }
 }

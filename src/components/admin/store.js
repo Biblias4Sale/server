@@ -4,8 +4,9 @@ const { User } = require('../../db')
 const getUsers = async () => {
   try {
     return await User.findAll()
-  } catch (err) {
-    return err
+  } catch ({ message: error }) {
+    console.log(error)
+    throw new Error(error)
   }
 }
 
@@ -19,9 +20,9 @@ const newUser = async (user) => {
       email: userInfo.email
     }
     return userReturn
-  } catch (error) {
-    console.error(error)
-    return 'User not created'
+  } catch ({ message: error }) {
+    console.log(error)
+    throw new Error('User not created')
   }
 }
 
@@ -31,8 +32,9 @@ const delUser = async (id) => {
     user.status = false
     await user.save()
     return 'User deleted'
-  } catch (err) {
-    throw new Error(err)
+  } catch ({ message: error }) {
+    console.log(error)
+    throw new Error(error)
   }
 }
 
@@ -42,8 +44,9 @@ const activateUser = async (id) => {
     user.status = true
     await user.save()
     return 'User activate'
-  } catch (error) {
-    return error
+  } catch ({ message: error }) {
+    console.log(error)
+    throw new Error(error)
   }
 }
 
@@ -54,8 +57,9 @@ const resetPassword = async (id, email) => {
     user.password = bcriptjs.hashSync(user.email, salt)
     user.save()
     return 'Password reset'
-  } catch (error) {
-    return error
+  } catch ({ message: error }) {
+    console.log(error)
+    throw new Error(error)
   }
 }
 
@@ -65,8 +69,9 @@ const changePassword = async (user) => {
     userModified.password = user.password
     userModified.save()
     return 'Password modified'
-  } catch (error) {
-    return error
+  } catch ({ message: error }) {
+    console.log(error)
+    throw new Error(error)
   }
 }
 

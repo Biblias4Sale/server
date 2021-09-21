@@ -19,8 +19,9 @@ const addCategory = async (newCategory) => {
   try {
     const newCat = await Category.create({ name: newCategory })
     return newCat
-  } catch (e) {
-    return e.name
+  } catch ({ message: error }) {
+    console.log(error)
+    throw new Error(error)
   }
 }
 
