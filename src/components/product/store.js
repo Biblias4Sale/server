@@ -1,9 +1,8 @@
-const { Product, SubCategory, Category } = require('../../db')
+const { Product, SubCategory, Category, Brand } = require('../../db')
 const { reviews } = require('../../../config')
 
 const addProduct = async (newProduct) => {
-  const { brand, model, img, description, price, points } = newProduct
-  const { subCategory } = newProduct
+  const { brand, model, img, description, price, points, subCategory} = newProduct
   const prod = await Product.findOne({
     where: {
       model
@@ -11,27 +10,34 @@ const addProduct = async (newProduct) => {
   })
 
   if (prod !== null) return 'El producto ya existe'
-
   try {
-    const newProd = await Product.create({
-      brand,
-      model,
-      img,
-      description,
-      price,
-      points
-    })
-
     const subCat = await SubCategory.findOne({
       where: {
         name: subCategory
       }
     })
 
-    if (subCat === null) return 'No se encontró la SubCategoría'
-
-    await newProd.setSubCategory(subCat)
-    return await newProd
+    const pBrand = await Brand.findOne({
+      where:{
+        name:brand
+      }
+    })
+    console.log(pBrand)
+    if (subCat === null || pBrand === null) {
+      return 'Categoria o marca invalidas'
+    }
+    else{
+      const newProd = await Product.create({
+        model,
+        img,
+        description,
+        price,
+        points
+      })
+      await newProd.setBrand(pBrand)
+      await newProd.setSubCategory(subCat)
+      return await newProd
+    }
   } catch (e) {
     console.log(e)
     return `${model} ya existe`
@@ -41,17 +47,20 @@ const addProduct = async (newProduct) => {
 const getAll = async () => {
   try {
     const prod = await Product.findAll({
-      attributes: { exclude: ['createdAt', 'updatedAt', 'description'] },
-      include: {
+      attributes: { exclude: ['createdAt', 'updatedAt'] },
+      include: [{
         model: SubCategory,
         attributes: { exclude: ['createdAt', 'updatedAt', 'subCategoryId'] },
         include: {
           model: Category,
           attributes: { exclude: ['createdAt', 'updatedAt'] }
         }
-      }
+      },
+      {
+        model: Brand,
+        atributes:{ exclude:['createdAt', 'updatedAt'] }
+      }]
     })
-
     return prod
   } catch (e) {
     return e.name
@@ -63,7 +72,11 @@ const getAll = async () => {
 const getDetail = async (id) => {
   try {
     const prod = await Product.findByPk(id, {
-      attributes: { exclude: ['createdAt', 'updatedAt'] }
+      attributes: { exclude: ['createdAt', 'updatedAt'] },
+      include: {
+        model: Brand,
+        exclude:['createdAt', 'updatedAt']
+      }
     })
     if (!prod) return 'No se encontró el producto'
     return prod
@@ -208,18 +221,6 @@ const csvToProducts = (products) => {
   }
 }
 
-const addStock = async (qty, productId) => {
-  try {
-    const product = await Product.findByPk(productId)
-    product.stock = product.stock + qty
-    await product.save()
-    return 'Nuevo stock definido'
-  } catch (err) {
-    console.log(err)
-    return 'Stock no pudo ser establecido'
-  }
-}
-
 module.exports = {
   getAll,
   getDetail,
@@ -229,6 +230,5 @@ module.exports = {
   deleteProducts,
   activateProducts,
   changePrice,
-  csvToProducts,
-  addStock
+  csvToProducts
 }

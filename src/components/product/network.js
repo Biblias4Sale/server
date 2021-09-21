@@ -4,6 +4,7 @@ const { getAll, getBest, getDetail, addProduct, getReview, editProduct, deletePr
 
 router.get('/', async (req, res) => {
   const response = await getAll()
+  console.log(response)
   res.json(response)
 })
 

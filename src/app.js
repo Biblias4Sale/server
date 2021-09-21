@@ -14,11 +14,12 @@ const routes = require('./routes')
 const server = express()
 
 server.name = 'NoiLan'
-
 // server.use(cors())
 // server.use(cors({ credentials: true }))
+
 server.use(cors({ origin: frontEndHost(), credentials: true }))
-server.use(express.json())
+server.use(express.urlencoded({limit: '50mb', extended: true, parameterLimit: 50000}))
+server.use(express.json({limit: '50mb'}));
 server.use(cookieParser())
 server.use(morgan('dev'))
 server.use((req, res, next) => {

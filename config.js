@@ -39,7 +39,7 @@ const config = {
   frontEndHost: () => {
     return Environment === 'production'
       ? ['https://noiloan.web.app', 'https://noiloan-admin.web.app']
-      : ['http://localhost:3000', 'http://localhost:3001']
+      : ['http://localhost:3002', 'http://localhost:3000']
   },
 
   connectionString: () => {

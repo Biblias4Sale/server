@@ -7,7 +7,7 @@ const { subCategoryCamaras, subCategoryLentes, subCategoryLuces, subCategoryAcce
 
 const { conn } = require('./src/db.js')
 const { force } = require('./config.js')
-const PORT = process.env.PORT || 3002
+const PORT = process.env.PORT || 3001
 
 process.stdout.write('\u001b[2J\u001b[0;0H') // clear the screen on the console
 
@@ -20,13 +20,13 @@ const runServer = async () => {
   } catch (error) {
     console.log(error)
   }
-  await categoriesLoader()
-  await subCategoriesLoader('Camaras', subCategoryCamaras)
-  await subCategoriesLoader('Lentes', subCategoryLentes)
-  await subCategoriesLoader('Luces', subCategoryAccesorios)
-  await subCategoriesLoader('Accesorios', subCategoryLuces)
-  await subCategoriesLoader('Cargadores y baterías', subCategoryCargaYbat)
-  await productLoader()
+  // await categoriesLoader()
+  // await subCategoriesLoader('Camaras', subCategoryCamaras)
+  // await subCategoriesLoader('Lentes', subCategoryLentes)
+  // await subCategoriesLoader('Luces', subCategoryAccesorios)
+  // await subCategoriesLoader('Accesorios', subCategoryLuces)
+  // await subCategoriesLoader('Cargadores y baterías', subCategoryCargaYbat)
+  // await productLoader()
 
   server.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
