@@ -2,7 +2,21 @@ const store = require('./store')
 
 const addFav = async (user, prod) => store.addFav(user, prod)
 
-const getFavs = async (user) => store.getFavs(user)
+const getFavs = async (user) => {
+  const data = await store.getFavs(user)
+  const respuesta = data.map(obj => {
+    return {
+      id: obj.id,
+      brand: obj.brand,
+      model: obj.model,
+      img: obj.img,
+      price: obj.price,
+      stock: obj.stock,
+      rating: obj.rating
+    }
+  })
+  return respuesta
+}
 
 const removeFav = (user, productID) => store.removeFav(user, productID)
 

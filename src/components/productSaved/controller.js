@@ -5,12 +5,15 @@ const getSavedProducts = async (user, productID) => {
     const response = await store.getSavedProducts(user, productID)
     return response.map(obj => (
       {
-        id: obj.prod.id,
         qty: obj.qty,
-        brand: obj.prod.brand,
-        model: obj.prod.model,
-        img: obj.prod.img,
-        price: obj.prod.price
+        id: obj.product.id,
+        brand: obj.product.brand,
+        model: obj.product.model,
+        img: obj.product.img,
+        price: obj.product.price,
+        stock: obj.product.stock,
+        rating: obj.product.rating
+
       }))
   } catch ({ message: error }) {
     throw new Error(error)

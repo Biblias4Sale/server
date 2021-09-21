@@ -30,8 +30,14 @@ const runServer = async () => {
   await subCategoriesLoader('Cargadores y baterías', subCategoryCargaYbat)
   await productLoader()
 
-  server.listen(PORT, () => {
+  const serverio = require('http').createServer(server)
+  const io = require('socket.io')(serverio)
+  io.on('connection', () => { })
+  serverio.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
   })
+  // server.listen(PORT, () => {
+  //   console.log(`Server running on port ${PORT}`)
+  // })
 }
 runServer()

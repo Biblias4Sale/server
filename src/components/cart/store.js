@@ -27,10 +27,33 @@ const getCart = async (id) => {
   }
 }
 
+const getOrders = async (id) => {
+  try {
+    const cart = await Cart.findAll({
+      where: { UserId: id, status: 'Generado' },
+      attributes: ['id', 'status'],
+      include: {
+        model: ProductSold,
+        attributes: ['id', 'qty'],
+        include: {
+          model: Product,
+          attributes: ['id', 'brand', 'model', 'img', 'price', 'stock']
+        }
+      }
+    })
+    // console.log(cart)
+    return cart
+  } catch ({ message: error }) {
+    console.log(error)
+    throw new Error(error)
+  }
+}
+
 const confirmCart = async (cartId, userId) => {
   try {
     const cart = await Cart.findByPk(cartId)
     cart.status = 'Generado'
+    cart.soldDate = new Date()
     cart.save()
     const user = await User.findByPk(userId)
     const newCart = await user.createCart({ status: 'En proceso' })
@@ -72,7 +95,11 @@ const addProduct = async (cartId, productId, qty = 1) => {
       const newProductSold = await cart.createProductSold({ qty, price: product.price, productId: productId })
       return newProductSold
     }
-    productSold.qty = String(parseInt(productSold.qty) + qty)
+    if (product.stock > productSold.qty) {
+      productSold.qty = String(parseInt(productSold.qty) + qty)
+    } else {
+      throw new Error('Producto sin stock')
+    }
     productSold.save()
     return ({ message: 'Increased amount', qty: ProductSold.qty })
   } catch ({ message: error }) {
@@ -115,6 +142,7 @@ const delProduct = async (cartId, productId) => {
 
 module.exports = {
   getCart,
+  getOrders,
   confirmCart,
   newProduct,
   addProduct,
