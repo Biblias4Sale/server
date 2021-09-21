@@ -73,7 +73,11 @@ const addProduct = async (cartId, productId, qty = 1) => {
       const newProductSold = await cart.createProductSold({ qty, price: product.price, productId: productId })
       return newProductSold
     }
-    productSold.qty = String(parseInt(productSold.qty) + qty)
+    if (product.stock > productSold.qty) {
+      productSold.qty = String(parseInt(productSold.qty) + qty)
+    } else {
+      throw new Error('Producto sin stock')
+    }
     productSold.save()
     return ({ message: 'Increased amount', qty: ProductSold.qty })
   } catch ({ message: error }) {
