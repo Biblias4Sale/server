@@ -2,7 +2,7 @@ const { Product, SubCategory, Category, Brand } = require('../../db')
 const { reviews } = require('../../../config')
 
 const addProduct = async (newProduct) => {
-  const { brand, model, img, description, price, points, subCategory} = newProduct
+  const { brand, model, img, description, price, points, stock, subCategory } = newProduct
   const prod = await Product.findOne({
     where: {
       model
@@ -18,15 +18,14 @@ const addProduct = async (newProduct) => {
     })
 
     const pBrand = await Brand.findOne({
-      where:{
-        name:brand
+      where: {
+        name: brand
       }
     })
-    console.log(pBrand)
+    console.log(pBrand, '    brand store/product')
     if (subCat === null || pBrand === null) {
       return 'Categoria o marca invalidas'
-    }
-    else{
+    } else {
       const newProd = await Product.create({
         model,
         img,
@@ -58,12 +57,13 @@ const getAll = async () => {
       },
       {
         model: Brand,
-        atributes:{ exclude:['createdAt', 'updatedAt'] }
+        atributes: { exclude: ['createdAt', 'updatedAt'] }
       }]
     })
     return prod
-  } catch (e) {
-    return e.name
+  } catch ({ message: error }) {
+    console.log(error)
+    throw new Error(error)
   }
 
   // return Product
@@ -75,13 +75,14 @@ const getDetail = async (id) => {
       attributes: { exclude: ['createdAt', 'updatedAt'] },
       include: {
         model: Brand,
-        exclude:['createdAt', 'updatedAt']
+        exclude: ['createdAt', 'updatedAt']
       }
     })
     if (!prod) return 'No se encontró el producto'
     return prod
-  } catch (e) {
-    return e.name
+  } catch ({ message: error }) {
+    console.log(error)
+    throw new Error(error)
   }
 
   // return Product.find(product => product.id === parseInt(id)) // Debe buscar en la DB por ID
@@ -92,31 +93,29 @@ const getReview = () => {
 }
 
 const editProduct = async (prod) => {
-  const { id, brand, model, img, description, price, points, subCategory } = prod
+  const { id, model, img, description, price, points, brand, category, subCategory, discount } = prod
 
-  const producto = await Product.findByPk(id)
+  await Product.update(
+    {
+      model: model,
+      img: img,
+      description: description,
+      points: points,
+      price: price
+    }, { where: { id: id } })
 
-  if (producto === null) return 'No se encontró el producto'
-  // if (infoUser.name) user.name = infoUser.name
-  if (producto.brand) producto.brand = brand
-  if (producto.model) producto.model = model
-  if (producto.img) producto.img = img
-  if (producto.description) producto.brand = description
-  if (producto.price) producto.price = price
-  if (producto.points) producto.points = points
-
-  const subCat = await SubCategory.findOne({
-    where: {
-      name: subCategory
-    }
+  await Product.findOne({ where: { id: id } }).then((product) => {
+    SubCategory.findOne({ where: { name: subCategory } }).then((subCat) => {
+      product.setSubCategory(subCat.dataValues.id)
+      Category.findOne({ where: { name: category } }).then((Cat) => {
+        subCat.setCategory(Cat.dataValues.id)
+      })
+    })
   })
 
-  if (!subCat) return 'No se encontró la subcategoría'
+  const response = await getDetail(id)
 
-  producto.subCategoryId = subCat.id
-
-  await producto.save()
-  return producto
+  return response
 }
 
 const deleteProducts = async (idProducts) => {
@@ -127,9 +126,9 @@ const deleteProducts = async (idProducts) => {
       await product.save()
     })
     return 'Producto eliminado'
-  } catch (err) {
-    console.log(err)
-    return 'Producto no se eliminó'
+  } catch ({ message: error }) {
+    console.log(error)
+    throw new Error('Producto no se eliminó')
   }
 }
 
@@ -141,9 +140,8 @@ const activateProducts = async (idProducts) => {
       await product.save()
     })
     return 'Producto activado'
-  } catch (err) {
-    console.log(err)
-    return 'Producto no se activo'
+  } catch ({ message: error }) {
+    throw new Error('Producto no se activó')
   }
 }
 
@@ -156,9 +154,9 @@ const changePrice = async (idProducts, value) => {
         await product.save()
       })
       return 'Nuevo precio definido'
-    } catch (err) {
-      console.log(err)
-      return 'Precio no pudo ser establecido'
+    } catch ({ message: error }) {
+      console.log(error)
+      throw new Error('Producto no pudo ser establecido')
     }
   }
 
@@ -169,9 +167,9 @@ const changePrice = async (idProducts, value) => {
       await product.save()
     })
     return 'Nuevo precio definido'
-  } catch (err) {
-    console.log(err)
-    return 'Precio no pudo ser establecido'
+  } catch ({ message: error }) {
+    console.log(error)
+    throw new Error('Precio no pudo ser establecido')
   }
 }
 
@@ -218,6 +216,18 @@ const csvToProducts = (products) => {
     return 'Productos creados exitosamente'
   } catch (err) {
     return err
+  }
+}
+
+const addStock = async (qty, productId) => {
+  try {
+    const product = await Product.findByPk(productId)
+    product.stock = product.stock + qty
+    await product.save()
+    return 'Nuevo stock definido'
+  } catch (err) {
+    console.log(err)
+    throw new Error('Stock no pudo ser establecido')
   }
 }
 

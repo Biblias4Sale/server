@@ -27,7 +27,7 @@ const entries = Object.entries(sequelize.models)
 const capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].slice(1), entry[1]])
 sequelize.models = Object.fromEntries(capsEntries)
 
-const { User, Category, Cart, ProductSold, SubCategory, Discount, Product, Review, SavedProduct, Brand } = sequelize.models
+const { User, Category, Cart, ProductSold, SubCategory, Discount, Product, Review, SavedProduct, Brand, Marketing } = sequelize.models
 
 Product.hasOne(Discount)
 Discount.belongsTo(Product)
@@ -60,8 +60,6 @@ SavedProduct.belongsTo(User)
 
 Product.hasMany(SavedProduct)
 SavedProduct.belongsTo(Product)
-
-
 
 module.exports = {
   ...sequelize.models,

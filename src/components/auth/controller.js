@@ -11,8 +11,8 @@ const getToken = async ({ email, password }, res) => {
     const { user, token } = await tokenGenerator(email)
     const cart = await store.getCart(user.id)
     return ({ user, token, cart })
-  } catch (err) {
-    throw new Error(err)
+  } catch (error) {
+    throw new Error(error)
   }
 }
 
@@ -20,8 +20,8 @@ const getTokenGoogle = async ({ email }) => {
   try {
     const token = await tokenGenerator(email)
     return token
-  } catch (err) {
-    return err
+  } catch (error) {
+    throw new Error(error)
   }
 }
 
