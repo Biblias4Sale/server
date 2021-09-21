@@ -30,6 +30,7 @@ const getDetail = async (id) => {
         fecha: fechaMoment
       }
     })
+
     const response = {
       id: data.id,
       brand: data.brand,
@@ -85,6 +86,8 @@ const addStock = async (qty, productId) => {
   return await store.addStock(qty, productId)
 }
 
+const addReview = (productSoldId, review) => store.addReview(productSoldId, review)
+
 module.exports = {
   getAll,
   getBest,
@@ -96,5 +99,6 @@ module.exports = {
   activateProducts,
   changePrice,
   csvToProducts,
-  addStock
+  addStock,
+  addReview
 }
