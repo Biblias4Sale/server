@@ -9,14 +9,22 @@ mercadopago.configure({
   access_token: ACCESS_TOKEN
 })
 
-const getPaymentLink = async (request, cartId) => {
+const getPaymentLink = async (request) => {
   let paymentLink
   const preference = {
     items: request
   }
+  // const CartID = parseInt(request[0].category_id)
 
-  const cart = await Cart.findByPk(cartId)
-  cart.status = 'Pendiente de confirmación de pago'
+  // await Cart.update(
+  //   {
+  //     status: 'Pendiente de confirmación de pago',
+  //     confirmationDate: new Date()
+  //   },
+  //   { where: { id: CartID } }
+  // )
+
+  // const cart = await Cart.findByPk(CartID)
 
   await mercadopago.preferences.create(preference)
     .then(json => {
