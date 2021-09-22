@@ -15,7 +15,7 @@ const getCart = async (id) => {
       attributes: ['id', 'status']
     })
 
-    return cart.id
+    return cart
   } catch ({ message: error }) {
     console.log(error)
     throw new Error(error)

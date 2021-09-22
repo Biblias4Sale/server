@@ -5,7 +5,6 @@ const responses = require('../../responses')
 
 router.get('/', async (req, res) => {
   const response = await getAll()
-  console.log(response)
   res.json(response)
 })
 
@@ -74,6 +73,5 @@ router.post('/reviews/:productSoldId', (req, res) => {
     .then(message => responses.success(req, res, 201, message))
     .catch(error => responses.error(req, res, 400, error, 'No se pudo agregar el review'))
 })
-
 
 module.exports = router

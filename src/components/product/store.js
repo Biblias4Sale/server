@@ -1,6 +1,6 @@
 const { Product, SubCategory, Category, ProductSold, Cart, User, Review, Brand } = require('../../db')
 const { reviews } = require('../../../config')
-
+// brand ver con mariano
 const addProduct = async (newProduct) => {
   const { brand, model, img, description, price, points, stock, subCategory } = newProduct
   const prod = await Product.findOne({
@@ -30,7 +30,8 @@ const addProduct = async (newProduct) => {
         img,
         description,
         price,
-        points
+        points,
+        stock
       })
       await newProd.setBrand(pBrand)
       await newProd.setSubCategory(subCat)
@@ -100,7 +101,7 @@ const getReview = () => {
 }
 
 const editProduct = async (prod) => {
-  const { id, model, img, description, price, points, brand, category, subCategory, discount } = prod
+  const { id, model, img, description, price, points, brand, category, subCategory } = prod
 
   await Product.update(
     {
@@ -111,14 +112,21 @@ const editProduct = async (prod) => {
       price: price
     }, { where: { id: id } })
 
-  await Product.findOne({ where: { id: id } }).then((product) => {
-    SubCategory.findOne({ where: { name: subCategory } }).then((subCat) => {
-      product.setSubCategory(subCat.dataValues.id)
-      Category.findOne({ where: { name: category } }).then((Cat) => {
-        subCat.setCategory(Cat.dataValues.id)
-      })
+  await Product.findOne({ where: { id: id } })
+    .then((product) => {
+      Brand.findOne({ where: { name: brand } })
+        .then(brand => {
+          product.setBrand(brand)
+          SubCategory.findOne({ where: { name: subCategory } })
+            .then((subCat) => {
+              product.setSubCategory(subCat.dataValues.id)
+              Category.findOne({ where: { name: category } })
+                .then((Cat) => {
+                  subCat.setCategory(Cat.dataValues.id)
+                })
+            })
+        })
     })
-  })
 
   const response = await getDetail(id)
 
@@ -195,7 +203,6 @@ const csvToProducts = (products) => {
 
       try {
         const newProd = await Product.create({
-          brand,
           model,
           img,
           description,
@@ -205,14 +212,20 @@ const csvToProducts = (products) => {
           state
         })
 
+        const nBrand = await Brand.create({
+          where: {
+            name: brand
+          }
+        })
+
         const subCat = await SubCategory.findOne({
           where: {
             name: subCategory
           }
         })
 
-        if (subCat === null) return 'No se encontró la SubCategoría'
-
+        if (subCat === null || nBrand === null) return 'No se encontró la SubCategoría'
+        await newProd.setBrand(nBrand)
         await newProd.setSubCategory(subCat)
         return await newProd
       } catch (e) {

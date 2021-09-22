@@ -2,7 +2,7 @@ const { Router } = require('express')
 const { sucessRedirectUrl, failureRedirectUrl, logOutRedirect } = require('../../passport/config')
 const router = Router()
 const passport = require('passport')
-const { isAuthenticated } = require('../../middlewares/isAuthenticated')
+// const { isAuthenticated } = require('../../middlewares/isAuthenticated')
 
 router.get('/login/google',
   passport.authenticate('google', { scope: ['profile', 'email'] }))

@@ -1,4 +1,3 @@
-const { imgUploader } = require('../../helpers/imgUploader')
 const fs = require('fs').promises
 const parse = require('csv-parse/lib/sync')
 const path = require('path')

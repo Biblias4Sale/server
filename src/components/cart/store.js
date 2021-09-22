@@ -1,6 +1,6 @@
 const { Cart, Product, User, ProductSold, Brand } = require('../../db')
 const { Op } = require('sequelize')
-
+// brand listo
 const getCart = async (id) => {
   try {
     const cart = await Cart.findOne({
@@ -42,7 +42,12 @@ const getOrders = async (id) => {
         attributes: ['id', 'qty', 'price'],
         include: {
           model: Product,
-          attributes: ['id', 'brand', 'model', 'img']
+          attributes: ['id', 'model', 'img'],
+          include: {
+            model: Brand,
+            atributes: ['name']
+          }
+
         }
       }
     })
