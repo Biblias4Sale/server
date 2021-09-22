@@ -16,12 +16,19 @@ const getBrandByName = async (name) => {
 
 const newBrand = async (name) => {
   try {
-    const newBrand = await Brand.findOrCreate({
+    const exist = await Brand.findOne({
       where: {
         name: name
       }
     })
-    return newBrand
+    if (exist === null) {
+      const newBrand = await Brand.findOrCreate({
+        where: {
+          name: name
+        }
+      })
+      return newBrand
+    }
   } catch (error) {
     console.log(error)
   }
