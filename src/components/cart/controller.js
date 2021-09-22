@@ -76,6 +76,10 @@ const delProduct = async (cartId, productId) => {
   return await store.delProduct(cartId, productId)
 }
 
+const updateState = async (cartID) => {
+  return await store.updateState(cartID)
+}
+
 module.exports = {
   getCart,
   getOrders,
@@ -83,5 +87,6 @@ module.exports = {
   newProduct,
   addProduct,
   subProduct,
-  delProduct
+  delProduct,
+  updateState
 }

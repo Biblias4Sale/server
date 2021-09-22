@@ -57,4 +57,11 @@ router.delete('/delProduct/:cartId/:productId', (req, res) => {
     .catch(e => response.error(req, res, 404, e, 'Product not found'))
 })
 
+router.put('/update/:id', (req, res) => {
+  controller
+    .updateState(req.params.id)
+    .then(message => response.success(req, res, 200, message))
+    .catch(e => response.error(req, res, 400, e, 'Cart not updated'))
+})
+
 module.exports = router
