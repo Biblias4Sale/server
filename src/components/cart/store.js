@@ -4,7 +4,7 @@ const { Op } = require('sequelize')
 const getCart = async (id) => {
   try {
     const cart = await Cart.findOne({
-      where: { UserId: id, status: 'En proceso' },
+      where: { UserId: id },
       attributes: ['id', 'status'],
       include: {
         model: ProductSold,
@@ -141,6 +141,20 @@ const delProduct = async (cartId, productId) => {
   }
 }
 
+const updateState = async (cartID) => {
+  await Cart.update(
+    {
+      status: 'Pendiente de confirmación de pago',
+      confirmationDate: new Date()
+    },
+    { where: { id: cartID } }
+  )
+
+  const cart = await Cart.findByPk(cartID)
+
+  return cart
+}
+
 module.exports = {
   getCart,
   getOrders,
@@ -148,5 +162,6 @@ module.exports = {
   newProduct,
   addProduct,
   subProduct,
-  delProduct
+  delProduct,
+  updateState
 }

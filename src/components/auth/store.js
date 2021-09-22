@@ -11,11 +11,10 @@ const getUser = async (email) => {
 const getCart = async (id) => {
   try {
     const cart = await Cart.findOne({
-      where: { UserId: id, status: 'En proceso' },
-      attributes: ['id', 'status']
+      where: { UserId: id }
     })
 
-    return cart.id
+    return cart
   } catch ({ message: error }) {
     console.log(error)
     throw new Error(error)
