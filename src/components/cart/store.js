@@ -1,4 +1,5 @@
 const { Cart, Product, User, ProductSold, Brand } = require('../../db')
+const { Op } = require('sequelize')
 
 const getCart = async (id) => {
   try {
@@ -24,6 +25,28 @@ const getCart = async (id) => {
       const cart = await user.createCart({ status: 'En proceso' })
       return cart.id
     }
+    return cart
+  } catch ({ message: error }) {
+    console.log(error)
+    throw new Error(error)
+  }
+}
+
+const getOrders = async (id) => {
+  try {
+    const cart = await Cart.findAll({
+      where: { UserId: id, status: { [Op.not]: 'En proceso' } },
+      attributes: ['id', 'status'],
+      include: {
+        model: ProductSold,
+        attributes: ['id', 'qty', 'price'],
+        include: {
+          model: Product,
+          attributes: ['id', 'brand', 'model', 'img']
+        }
+      }
+    })
+    // console.log(cart)
     return cart
   } catch ({ message: error }) {
     console.log(error)
@@ -124,6 +147,7 @@ const delProduct = async (cartId, productId) => {
 
 module.exports = {
   getCart,
+  getOrders,
   confirmCart,
   newProduct,
   addProduct,

@@ -23,12 +23,11 @@ const getFavs = async (user) => {
   const usuario = await User.findByPk(user, {
     include: {
       model: Product,
-      attributes: ['model', 'img', 'id', 'price'],
-      exclude: ['favs']
+      attributes: ['model', 'brand', 'img', 'id', 'price', 'stock', 'rating']
     }
   })
   if (!usuario) throw new Error('Usuario no encontrado')
-  return usuario.dataValues.products
+  return usuario.products
 }
 
 const removeFav = async (user, productID) => {

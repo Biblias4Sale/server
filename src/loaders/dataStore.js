@@ -9,7 +9,7 @@ const products = [
     price: 104000,
     points: 4,
     subCategory: 'Reflex',
-    stock: 1
+    stock: 10
   },
   {
     name: 'Canon EOS M50 Mark II kit 15-45mm',
@@ -20,7 +20,7 @@ const products = [
     price: 104999,
     points: 5,
     subCategory: 'Reflex',
-    stock: 1
+    stock: 12
   },
   {
     name: 'Nikon Z7 kit 24-70mm',
@@ -31,7 +31,7 @@ const products = [
     price: 689000,
     points: 1,
     subCategory: 'Reflex',
-    stock: 1
+    stock: 9
   },
   {
     name: 'Canon Powershot SX420',
@@ -42,7 +42,7 @@ const products = [
     price: 51000,
     points: 3,
     subCategory: 'Semi-Reflex',
-    stock: 1
+    stock: 6
   },
   {
     name: 'Canon Powershot SX540HS',
@@ -54,7 +54,7 @@ const products = [
     price: 64000,
     points: 2,
     subCategory: 'Semi-Reflex',
-    stock: 1
+    stock: 15
   },
   {
     name: 'Lente Canon EF 100mm f/2.8L Macro IS USM',
@@ -66,7 +66,7 @@ const products = [
     price: 294000,
     points: 2,
     subCategory: 'Zoom',
-    stock: 1
+    stock: 17
   },
   {
     name: 'Lente Nikon AF-P 70-300mm f/4.5-6.3G ED VR',
@@ -79,7 +79,7 @@ const products = [
     price: 52000,
     points: 1,
     subCategory: 'Zoom',
-    stock: 1
+    stock: 18
   },
   {
     name: 'Lente Canon EF 75-300mm f/4-5.6 III',
@@ -91,7 +91,7 @@ const products = [
     price: 37000,
     points: 1,
     subCategory: 'Zoom',
-    stock: 1
+    stock: 20
   },
   {
     name: 'Lente Nikon AF-S 50mm f/1.8G',
@@ -102,7 +102,7 @@ const products = [
     price: 437000,
     points: 4,
     subCategory: 'Fijo',
-    stock: 1
+    stock: 17
   },
   {
     name: 'Nikon D780 Body',
@@ -113,7 +113,7 @@ const products = [
     price: 437000,
     points: 1,
     subCategory: 'Reflex',
-    stock: 1
+    stock: 7
   },
   {
     name: 'Nikon D7500 (18-140 mm f/3.5-5.6 G ED VR)',
@@ -146,7 +146,7 @@ const products = [
     price: 78127,
     points: 1,
     subCategory: 'Reflex',
-    stock: 1
+    stock: 25
   },
   {
     model: 'SX100',
@@ -156,7 +156,7 @@ const products = [
     price: 80000,
     points: 5,
     subCategory: 'Semi-Reflex',
-    stock: 3
+    stock: 30
   },
 
   {
@@ -168,7 +168,7 @@ const products = [
     price: 189000,
     points: 3,
     subCategory: 'Mirrorless',
-    stock: 4
+    stock: 14
   },
   {
     name: 'Sony Ilce-7m3 7miii Kit Lente 28-70mm',
@@ -179,7 +179,7 @@ const products = [
     price: 245000,
     points: 5,
     subCategory: 'Mirrorless',
-    stock: 1
+    stock: 15
   },
   {
     name: 'Neewer TT560 Flash Speedlite',
@@ -201,7 +201,7 @@ const products = [
     price: 35000,
     points: 5,
     subCategory: 'Flashes',
-    stock: 1
+    stock: 20
   },
   {
     name: 'NW550 Camera Flash Speedlite',
@@ -212,7 +212,7 @@ const products = [
     price: 7000,
     points: 2,
     subCategory: 'Flashes',
-    stock: 1
+    stock: 23
   },
   {
     name: 'MEIKE 320S Mini TTL Speedlite Automatic',
@@ -223,7 +223,7 @@ const products = [
     price: 8500,
     points: 3,
     subCategory: 'Flashes',
-    stock: 1
+    stock: 23
   },
   {
     name: 'TTL GN36 Wireless Speedlite Flash',
@@ -234,7 +234,7 @@ const products = [
     price: 14400,
     points: 4,
     subCategory: 'Flashes',
-    stock: 1
+    stock: 35
   },
   {
     name: 'High Power Infrared LED Lights',
@@ -245,7 +245,7 @@ const products = [
     price: 8000,
     points: 3,
     subCategory: 'Iluminadores Led',
-    stock: 1
+    stock: 27
   },
   {
     name: 'Illuminator 8-Led Infrared Light',
@@ -256,7 +256,7 @@ const products = [
     price: 9800,
     points: 4,
     subCategory: 'Iluminadores Led',
-    stock: 1
+    stock: 13
   },
   {
     name: 'LED Video Light and Stand Lighting Kit',
@@ -267,7 +267,7 @@ const products = [
     price: 21000,
     points: 5,
     subCategory: 'Iluminadores Led',
-    stock: 1
+    stock: 15
   },
   {
     name: 'IR Illuminator',
@@ -278,7 +278,7 @@ const products = [
     price: 6000,
     points: 2,
     subCategory: 'Iluminadores Led',
-    stock: 1
+    stock: 30
   },
   {
     name: 'Ultra High Power Panel Digital Camera',
@@ -289,7 +289,7 @@ const products = [
     price: 11300,
     points: 3,
     subCategory: 'Iluminadores Led',
-    stock: 1
+    stock: 25
   },
   {
     name: 'LED Video Light, Portable Camera Photo Light Panel',
@@ -300,7 +300,7 @@ const products = [
     price: 20600,
     points: 4,
     subCategory: 'Iluminadores Led',
-    stock: 1
+    stock: 17
   },
   {
     name: 'Standard Reflector Diffuser Lamp Shade ',
@@ -311,7 +311,7 @@ const products = [
     price: 7200,
     points: 4,
     subCategory: 'Modificadores',
-    stock: 1
+    stock: 30
   },
   {
     name: ['Mountdog Photography Reflector with Clip 24 Inches'],
@@ -321,7 +321,8 @@ const products = [
     description: 'Mountdog Photography Reflector with Clip 24 Inches/ 60cm 5 in 1 Photo Light Collapsible Diffuser with Bag & Reflector Holder for Studio Photography Outdoor Lighting Translucent Silver Gold White Black',
     price: 990,
     points: 3,
-    subCategory: 'Modificadores'
+    subCategory: 'Modificadores',
+    stock: 35
   },
   {
     name: 'Bowens Mount Softbox',
@@ -332,7 +333,7 @@ const products = [
     price: 18800,
     points: 5,
     subCategory: 'Modificadores',
-    stock: 1
+    stock: 17
   },
   {
     name: 'HPUSN Softbox Lighting Kit',
@@ -343,7 +344,7 @@ const products = [
     price: 23100,
     points: 5,
     subCategory: 'Modificadores',
-    stock: 1
+    stock: 15
   },
   {
     name: 'ICOE Softbox Lighting Kit Photography',
@@ -354,7 +355,7 @@ const products = [
     price: 24900,
     points: 4,
     subCategory: 'Modificadores',
-    stock: 1
+    stock: 12
   },
   {
     name: 'Neewer 2-Pack Dimmable 5600K USB LED Video Light with Adjustable Tripod',
@@ -365,7 +366,7 @@ const products = [
     price: 5100,
     points: 2,
     subCategory: 'Modificadores',
-    stock: 1
+    stock: 18
   }
 
 ]

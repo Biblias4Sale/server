@@ -122,6 +122,7 @@ req.body.password;
 
 - GET /products/review devuelve un array reviews. (por el momento hardCoded)
 
+- POST /products/reviews/:productSold => Agrega review a un producto vendido. (Solo si su carrito figura como entregado)
 
 - POST /products/addStock/:productId/:qty => Agregar stock a producto.
 
@@ -362,5 +363,5 @@ req.params.productID
 
 ### REVIEWS:
 
-- GET /reviews/:product => Obtiene los reviews de los usuarios.
-- POST /reviews/:productSold => Agrega review a un producto vendido. (Solo si su carrito figura como entregado)
+- GET /products/reviews/:product => Obtiene los reviews de los usuarios.
+

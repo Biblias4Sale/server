@@ -22,6 +22,33 @@ const getCart = async (id) => {
   }
 }
 
+const getOrders = async (id) => {
+  try {
+    const cart = await store.getOrders(id)
+    console.log(cart)
+    const res = cart.map(cart => {
+      const productSolds = cart.ProductSolds.map(product => {
+        return {
+          idProduct: product.product.id,
+          qty: product.qty,
+          brand: product.product.brand,
+          model: product.product.model,
+          img: product.product.img,
+          price: product.price
+        }
+      })
+      return {
+        cartId: cart.id,
+        status: cart.status,
+        productSolds
+      }
+    })
+    return res
+  } catch ({ message: error }) {
+    throw new Error(error)
+  }
+}
+
 const confirmCart = async (cartId, userId) => {
   try {
     const [userInfo, cart] = await store.confirmCart(cartId, userId)
@@ -51,6 +78,7 @@ const delProduct = async (cartId, productId) => {
 
 module.exports = {
   getCart,
+  getOrders,
   confirmCart,
   newProduct,
   addProduct,

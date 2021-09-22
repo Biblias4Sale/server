@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
-const { getAll, getBest, getDetail, addProduct, getReview, editProduct, deleteProducts, activateProducts, changePrice, csvToProducts, addStock } = require('./controller')
+const { getAll, getBest, getDetail, addProduct, getReview, editProduct, deleteProducts, activateProducts, changePrice, csvToProducts, addStock, addReview } = require('./controller')
+const responses = require('../../responses')
 
 router.get('/', async (req, res) => {
   const response = await getAll()
@@ -12,9 +13,10 @@ router.get('/best/:qty', (req, res) => {
   res.json(getBest(req.params.qty))
 })
 
-router.get('/detail/:id', async (req, res) => {
-  const response = await getDetail(req.params.id)
-  res.json(response)
+router.get('/detail/:id', (req, res) => {
+  getDetail(req.params.id)
+    .then(message => responses.success(req, res, 201, message))
+    .catch(error => responses.error(req, res, 404, error, 'No se pudo obtener los detalles del producto'))
 })
 
 router.post('/add', async (req, res) => {
@@ -63,4 +65,15 @@ router.post('/addStock/:productId/:qty', async (req, res) => {
   const response = await addStock(qty, productId)
   res.json(response)
 })
+
+router.post('/reviews/:productSoldId', (req, res) => {
+  const productSoldId = req.params.productSoldId
+  const review = req.body
+
+  addReview(productSoldId, review)
+    .then(message => responses.success(req, res, 201, message))
+    .catch(error => responses.error(req, res, 400, error, 'No se pudo agregar el review'))
+})
+
+
 module.exports = router

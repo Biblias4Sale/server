@@ -1,4 +1,4 @@
-const { User } = require('../../db')
+const { User, Cart } = require('../../db')
 
 const getUser = async (email) => {
   try {
@@ -8,6 +8,20 @@ const getUser = async (email) => {
   }
 }
 
+const getCart = async (id) => {
+  try {
+    const cart = await Cart.findOne({
+      where: { UserId: id, status: 'En proceso' },
+      attributes: ['id', 'status']
+    })
+
+    return cart.id
+  } catch ({ message: error }) {
+    console.log(error)
+    throw new Error(error)
+  }
+}
+
 module.exports = {
-  getUser
+  getUser, getCart
 }

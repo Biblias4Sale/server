@@ -4,6 +4,7 @@ const parse = require('csv-parse/lib/sync')
 const path = require('path')
 const store = require('./store')
 const cloudinary = require('../../cloudinary/cloudinary')
+const moment = require('moment')
 
 const getAll = async () => {
   const products = await store.getAll()
@@ -35,18 +36,35 @@ const getBest = (qty) => {
 }
 
 const getDetail = async (id) => {
-  const p = await store.getDetail(id)
-  const productDetails = {
-    id: p.id,
-    model: p.model,
-    img: p.img,
-    price: p.price,
-    rating: p.rating,
-    stock: p.stock,
-    state: p.state,
-    brand: p.brand.name
+  try {
+    const data = await store.getDetail(id)
+
+    const reviews = data.dataValues.ProductSolds.map(obj => {
+      const fecha = obj.dataValues.Review.dataValues.createdAt
+      const fechaMoment = moment(fecha).format('L')
+      return {
+        user: obj.Cart.dataValues.User.name,
+        rating: obj.dataValues.Review.dataValues.rating,
+        description: obj.dataValues.Review.dataValues.description,
+        fecha: fechaMoment
+      }
+    })
+
+    const response = {
+      id: data.id,
+      brand: data.brand.name,
+      model: data.model,
+      img: data.img,
+      description: data.description,
+      price: data.price,
+      rating: data.rating,
+      stock: data.stock,
+      reviews: reviews
+    }
+    return response
+  } catch ({ message: error }) {
+    throw new Error(error)
   }
-  return productDetails
 }
 
 const addProduct = async (newProduct) => {
@@ -122,6 +140,8 @@ const addStock = async (qty, productId) => {
   return await store.addStock(qty, productId)
 }
 
+const addReview = (productSoldId, review) => store.addReview(productSoldId, review)
+
 module.exports = {
   getAll,
   getBest,
@@ -133,5 +153,6 @@ module.exports = {
   activateProducts,
   changePrice,
   csvToProducts,
-  addStock
+  addStock,
+  addReview
 }
