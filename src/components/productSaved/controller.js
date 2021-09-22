@@ -7,7 +7,7 @@ const getSavedProducts = async (user, productID) => {
       {
         qty: obj.qty,
         id: obj.product.id,
-        brand: obj.product.brand,
+        brand: obj.product.brand.name,
         model: obj.product.model,
         img: obj.product.img,
         price: obj.product.price,

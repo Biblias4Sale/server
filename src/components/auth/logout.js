@@ -4,14 +4,6 @@ const { Router } = require('express')
 
 const router = Router()
 
-// router.get('/',
-//   (req, res) => {
-//     req.logout()
-//     res.redirect('/')
-//     req.session.destroy((error) => {
-//       if (error) return console.log(error)
-//     })
-//   }
-// )
 
 module.exports = router
+

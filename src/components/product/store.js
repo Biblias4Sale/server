@@ -1,9 +1,8 @@
-const { Product, SubCategory, Category, ProductSold, Cart, User, Review } = require('../../db')
+const { Product, SubCategory, Category, ProductSold, Cart, User, Review, Brand } = require('../../db')
 const { reviews } = require('../../../config')
-
+// brand ver con mariano
 const addProduct = async (newProduct) => {
-  const { brand, model, img, description, price, points, stock } = newProduct
-  const { subCategory } = newProduct
+  const { brand, model, img, description, price, points, stock, subCategory } = newProduct
   const prod = await Product.findOne({
     where: {
       model
@@ -11,48 +10,56 @@ const addProduct = async (newProduct) => {
   })
 
   if (prod !== null) return 'El producto ya existe'
-
   try {
-    const newProd = await Product.create({
-      brand,
-      model,
-      img,
-      description,
-      price,
-      stock,
-      points
-    })
-
     const subCat = await SubCategory.findOne({
       where: {
         name: subCategory
       }
     })
 
-    if (subCat === null) return 'No se encontró la SubCategoría'
-
-    await newProd.setSubCategory(subCat)
-    return await newProd
-  } catch ({ message: error }) {
-    console.log(error)
-    throw new Error(`${model} ya existe`)
+    const pBrand = await Brand.findOne({
+      where: {
+        name: brand
+      }
+    })
+    if (subCat === null || pBrand === null) {
+      return 'Categoria o marca invalidas'
+    } else {
+      const newProd = await Product.create({
+        model,
+        img,
+        description,
+        price,
+        points,
+        stock
+      })
+      await newProd.setBrand(pBrand)
+      await newProd.setSubCategory(subCat)
+      return await newProd
+    }
+  } catch (e) {
+    console.log(e)
+    return `${model} ya existe`
   }
 }
 
 const getAll = async () => {
   try {
     const prod = await Product.findAll({
-      attributes: { exclude: ['createdAt', 'updatedAt', 'description'] },
-      include: {
+      attributes: { exclude: ['createdAt', 'updatedAt'] },
+      include: [{
         model: SubCategory,
         attributes: { exclude: ['createdAt', 'updatedAt', 'subCategoryId'] },
         include: {
           model: Category,
           attributes: { exclude: ['createdAt', 'updatedAt'] }
         }
-      }
+      },
+      {
+        model: Brand,
+        atributes: { exclude: ['createdAt', 'updatedAt'] }
+      }]
     })
-
     return prod
   } catch ({ message: error }) {
     console.log(error)
@@ -65,20 +72,22 @@ const getAll = async () => {
 const getDetail = async (productId) => {
   try {
     const producto = await Product.findByPk(productId, {
-      include: {
+      include:
+      [{
         model: ProductSold,
         include: [
           {
             model: Cart,
-            include: {
-              model: User
-            }
+            include: { model: User }
           },
           {
             model: Review
           }
         ]
-      }
+      }, {
+        model: Brand,
+        exclude: ['createdAt', 'updatedAt']
+      }]
     })
     if (!producto) throw new Error('Producto no encontrado')
     return producto
@@ -92,7 +101,7 @@ const getReview = () => {
 }
 
 const editProduct = async (prod) => {
-  const { id, model, img, description, price, points, brand, category, subCategory, discount } = prod
+  const { id, model, img, description, price, points, brand, category, subCategory } = prod
 
   await Product.update(
     {
@@ -103,14 +112,21 @@ const editProduct = async (prod) => {
       price: price
     }, { where: { id: id } })
 
-  await Product.findOne({ where: { id: id } }).then((product) => {
-    SubCategory.findOne({ where: { name: subCategory } }).then((subCat) => {
-      product.setSubCategory(subCat.dataValues.id)
-      Category.findOne({ where: { name: category } }).then((Cat) => {
-        subCat.setCategory(Cat.dataValues.id)
-      })
+  await Product.findOne({ where: { id: id } })
+    .then((product) => {
+      Brand.findOne({ where: { name: brand } })
+        .then(brand => {
+          product.setBrand(brand)
+          SubCategory.findOne({ where: { name: subCategory } })
+            .then((subCat) => {
+              product.setSubCategory(subCat.dataValues.id)
+              Category.findOne({ where: { name: category } })
+                .then((Cat) => {
+                  subCat.setCategory(Cat.dataValues.id)
+                })
+            })
+        })
     })
-  })
 
   const response = await getDetail(id)
 
@@ -187,7 +203,6 @@ const csvToProducts = (products) => {
 
       try {
         const newProd = await Product.create({
-          brand,
           model,
           img,
           description,
@@ -197,14 +212,20 @@ const csvToProducts = (products) => {
           state
         })
 
+        const nBrand = await Brand.create({
+          where: {
+            name: brand
+          }
+        })
+
         const subCat = await SubCategory.findOne({
           where: {
             name: subCategory
           }
         })
 
-        if (subCat === null) return 'No se encontró la SubCategoría'
-
+        if (subCat === null || nBrand === null) return 'No se encontró la SubCategoría'
+        await newProd.setBrand(nBrand)
         await newProd.setSubCategory(subCat)
         return await newProd
       } catch (e) {

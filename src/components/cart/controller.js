@@ -9,7 +9,7 @@ const getCart = async (id) => {
     const productSolds = cart.ProductSolds.map(product => (
       {
         id: product.product.id,
-        brand: product.product.brand,
+        brand: product.product.brand.name,
         model: product.product.model,
         img: product.product.img,
         qty: product.qty,
@@ -31,7 +31,7 @@ const getOrders = async (id) => {
         return {
           idProduct: product.product.id,
           qty: product.qty,
-          brand: product.product.brand,
+          brand: product.product.brand.name,
           model: product.product.model,
           img: product.product.img,
           price: product.price
