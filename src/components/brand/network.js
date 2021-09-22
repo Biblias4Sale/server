@@ -10,7 +10,9 @@ router.get('/', async (req, res) => {
 })
 
 router.post('/', async (req, res) => {
-  res.json(await newBrand(req.body.name))
+  const { name } = req.body
+  console.log(name)
+  res.json(await newBrand(name))
 })
 
 module.exports = router
