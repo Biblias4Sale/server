@@ -25,7 +25,6 @@ const getCart = async (id) => {
 const getOrders = async (id) => {
   try {
     const cart = await store.getOrders(id)
-    console.log(cart)
     const res = cart.map(cart => {
       const productSolds = cart.ProductSolds.map(product => {
         return {
@@ -40,7 +39,13 @@ const getOrders = async (id) => {
       return {
         cartId: cart.id,
         status: cart.status,
-        productSolds
+        productSolds,
+        soldDate: cart.soldDate,
+        confirmationDate: cart.confirmationDate,
+        preparationDate: cart.preparationDate,
+        dispatchDate: cart.dispatchDate,
+        deliveryDate: cart.deliveryDate,
+        cancelDate: cart.cancelDate
       }
     })
     return res
