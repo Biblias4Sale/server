@@ -4,17 +4,20 @@ module.exports = (sequelize) => {
   const Cart = sequelize.define('Cart', {
     status: {
       type: DataTypes.ENUM({
-        values: ['En proceso', 'Generado', 'Pendiente de confirmación de pago', 'En preparación', 'Despachado', 'Entregado', 'Cancelado']
+        values: ['En proceso', 'Pendiente nuevo pago', 'Pendiente de confirmación de pago', 'En preparación', 'Despachado', 'Entregado', 'Cancelado']
       }),
       allowNull: false
+    },
+    totalAmount: {
+      type: DataTypes.STRING
     },
     paymentsMethod: {
       type: DataTypes.STRING
     },
-    soldDate: {
+    paymentPending: {
       type: DataTypes.DATE
     },
-    confirmationDate: {
+    confirmationPending: {
       type: DataTypes.DATE
     },
     preparationDate: {
@@ -23,7 +26,7 @@ module.exports = (sequelize) => {
     dispatchDate: {
       type: DataTypes.DATE
     },
-    deliverDate: {
+    deliveryDate: {
       type: DataTypes.DATE
     },
     cancelDate: {

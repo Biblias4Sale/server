@@ -6,7 +6,7 @@ const store = require('./store')
 const getCart = async (id) => {
   try {
     const cart = await store.getCart(id)
-    return cart.ProductSolds.map(product => (
+    const productSolds = cart.ProductSolds.map(product => (
       {
         id: product.product.id,
         brand: product.product.brand.name,
@@ -17,6 +17,7 @@ const getCart = async (id) => {
         stock: product.product.stock
       }
     ))
+    return { id: cart.id, status: cart.status, products: productSolds }
   } catch ({ message: error }) {
     throw new Error(error)
   }
@@ -25,7 +26,6 @@ const getCart = async (id) => {
 const getOrders = async (id) => {
   try {
     const cart = await store.getOrders(id)
-    console.log(cart)
     const res = cart.map(cart => {
       const productSolds = cart.ProductSolds.map(product => {
         return {
@@ -40,7 +40,14 @@ const getOrders = async (id) => {
       return {
         cartId: cart.id,
         status: cart.status,
-        productSolds
+        totalAmount: cart.totalAmount,
+        productSolds,
+        paymentPendingDate: cart.paymentPending,
+        confirmationDate: cart.confirmationPending,
+        preparationDate: cart.preparationDate,
+        dispatchDate: cart.dispatchDate,
+        deliveryDate: cart.deliveryDate,
+        cancelDate: cart.cancelDate
       }
     })
     return res
@@ -49,9 +56,9 @@ const getOrders = async (id) => {
   }
 }
 
-const confirmCart = async (cartId, userId) => {
+const confirmCart = async (cartId, userId, price) => {
   try {
-    const [userInfo, cart] = await store.confirmCart(cartId, userId)
+    const [userInfo, cart] = await store.confirmCart(cartId, userId, price)
     if (await validation.mailConfirmCart()) mail.confirmCart(userInfo)
     if (await validation.smsConfirmCart()) sms.confirmCart(userInfo)
     return (cart)
@@ -76,6 +83,10 @@ const delProduct = async (cartId, productId) => {
   return await store.delProduct(cartId, productId)
 }
 
+const updateState = async (cartID) => {
+  return await store.updateState(cartID)
+}
+
 module.exports = {
   getCart,
   getOrders,
@@ -83,5 +94,6 @@ module.exports = {
   newProduct,
   addProduct,
   subProduct,
-  delProduct
+  delProduct,
+  updateState
 }

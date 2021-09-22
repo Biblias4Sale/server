@@ -24,7 +24,7 @@ const newUser = async ({ name, lastName, email, password }) => {
     if (await validation.mailCreateAccount()) mail.createAccount(user)
     if (await validation.smsCreateAccount()) sms.createAccount(user)
 
-    return ({ user, cart, token })
+    return ({ user, token, cartID: cart.id })
   } catch (error) {
     throw new Error(error)
   }

@@ -24,7 +24,7 @@ router.post('/confirmCart/:cartId/:id', [
   validation
 ], (req, res) => {
   controller
-    .confirmCart(req.params.cartId, req.params.id)
+    .confirmCart(req.params.cartId, req.params.id, req.body.price)
     .then(message => response.success(req, res, 201, message))
     .catch(e => response.error(req, res, 404, e, 'Product not found'))
 })
@@ -55,6 +55,13 @@ router.delete('/delProduct/:cartId/:productId', (req, res) => {
     .delProduct(req.params.cartId, req.params.productId)
     .then(message => response.success(req, res, 201, message))
     .catch(e => response.error(req, res, 404, e, 'Product not found'))
+})
+
+router.put('/update/:id', (req, res) => {
+  controller
+    .updateState(req.params.id)
+    .then(message => response.success(req, res, 200, message))
+    .catch(e => response.error(req, res, 400, e, 'Cart not updated'))
 })
 
 module.exports = router

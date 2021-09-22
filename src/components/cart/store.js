@@ -36,22 +36,22 @@ const getOrders = async (id) => {
   try {
     const cart = await Cart.findAll({
       where: { UserId: id, status: { [Op.not]: 'En proceso' } },
-      attributes: ['id', 'status'],
+      attributes: { exclude: ['createdAt', 'updatedAt'] },
       include: {
         model: ProductSold,
-        attributes: ['id', 'qty', 'price'],
+        attributes: { exclude: ['createdAt', 'updatedAt'] },
         include: {
           model: Product,
           attributes: ['id', 'model', 'img'],
+          exclude: ['createdAt', 'updatedAt'],
           include: {
             model: Brand,
-            atributes: ['name']
+            atributes: ['name'],
+            exclude: ['createdAt', 'updatedAt'] 
           }
-
         }
       }
     })
-    // console.log(cart)
     return cart
   } catch ({ message: error }) {
     console.log(error)
@@ -59,11 +59,12 @@ const getOrders = async (id) => {
   }
 }
 
-const confirmCart = async (cartId, userId) => {
+const confirmCart = async (cartId, userId, price) => {
   try {
     const cart = await Cart.findByPk(cartId)
-    cart.status = 'Generado'
-    cart.soldDate = new Date()
+    cart.status = 'Pendiente de confirmación de pago'
+    cart.confirmationPending = new Date()
+    cart.totalAmount = price
     cart.save()
     const user = await User.findByPk(userId)
     const newCart = await user.createCart({ status: 'En proceso' })
@@ -150,6 +151,20 @@ const delProduct = async (cartId, productId) => {
   }
 }
 
+const updateState = async (cartID) => {
+  await Cart.update(
+    {
+      status: 'Pendiente de confirmación de pago',
+      confirmationDate: new Date()
+    },
+    { where: { id: cartID } }
+  )
+
+  const cart = await Cart.findByPk(cartID)
+
+  return cart
+}
+
 module.exports = {
   getCart,
   getOrders,
@@ -157,5 +172,6 @@ module.exports = {
   newProduct,
   addProduct,
   subProduct,
-  delProduct
+  delProduct,
+  updateState
 }
