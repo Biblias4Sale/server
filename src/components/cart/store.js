@@ -51,15 +51,15 @@ const getOrders = async (id) => {
 
 const confirmCart = async (cartId, userId) => {
   try {
-    const cart = await Cart.findByPk(cartId)
-    cart.status = 'Pendiente de confirmación de pago'
-    cart.soldDate = new Date()
-    console.log(cart.soldDate)
-    cart.save()
+    const oldCart = await Cart.findByPk(cartId)
+    oldCart.status = 'Pendiente de confirmación de pago'
+    oldCart.soldDate = new Date()
+    console.log(oldCart.soldDate)
+    oldCart.save()
     const user = await User.findByPk(userId)
-    const newCart = await user.createCart({ status: 'En proceso' })
+    const cart = await user.createCart({ status: 'En proceso' })
     // return { message: 'Cart confirmed', CartInProgress: newCart.id }
-    return [user, { message: 'Cart confirmed', CartInProgress: newCart.id }]
+    return [user, cart]
   } catch ({ message: error }) {
     console.log(error)
     throw new Error(error)
@@ -141,20 +141,6 @@ const delProduct = async (cartId, productId) => {
   }
 }
 
-const updateState = async (cartID) => {
-  await Cart.update(
-    {
-      status: 'Pendiente de confirmación de pago',
-      confirmationDate: new Date()
-    },
-    { where: { id: cartID } }
-  )
-
-  const cart = await Cart.findByPk(cartID)
-
-  return cart
-}
-
 module.exports = {
   getCart,
   getOrders,
@@ -162,6 +148,5 @@ module.exports = {
   newProduct,
   addProduct,
   subProduct,
-  delProduct,
-  updateState
+  delProduct
 }
