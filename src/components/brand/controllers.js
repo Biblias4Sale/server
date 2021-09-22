@@ -1,7 +1,7 @@
 const store = require('./store')
 
 const newBrand = async (name) => {
-  console.log(name,' en controllers')
+  console.log(name, ' en controllers')
   const newBrand = await store.newBrand(name)
   return newBrand
 }
