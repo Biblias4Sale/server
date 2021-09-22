@@ -1,24 +1,26 @@
 const passport = require('passport')
 const GoogleStrategy = require('passport-google-oauth20').Strategy
-
-// const { Users } = require('../db')
+const { callBackUrl } = require('./config')
+const { User } = require('../db')
 
 const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } = process.env
 
 passport.use(new GoogleStrategy({
   clientID: GOOGLE_CLIENT_ID,
   clientSecret: GOOGLE_CLIENT_SECRET,
-  callbackURL: 'http://localhost:3001/api/v1/auth/google/callback',
+  callbackURL: callBackUrl(),
   passReqToCallback: true
 },
 async (req, accessToken, refreshToken, profile, cb) => {
   const user = await User.findOrCreate({
     where: {
       name: profile.name.givenName,
-      id: profile.id,
+      googleId: profile.id,
       email: profile.emails[0].value,
-      familyName: profile.name.familyName,
-      picture: profile.photos[0].value
+      lastName: profile.name.familyName,
+      picture: profile.photos[0].value,
+      googleSession: true
+
     }
   }).catch((error) => {
     console.log(error, 'login failed')
@@ -29,11 +31,13 @@ async (req, accessToken, refreshToken, profile, cb) => {
 ))
 
 passport.serializeUser((user, cb) => {
+  console.log('       serialize'.blue.white)
   cb(null, user.id)
 })
 
 passport.deserializeUser(async (id, cb) => {
-  const user = User.findOne({
+  console.log(id, '   deserialize')
+  const user = await User.findOne({
     where: {
       id
     }

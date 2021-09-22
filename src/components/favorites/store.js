@@ -1,5 +1,5 @@
-const { User, Product } = require('../../db')
-
+const { User, Product, Brand } = require('../../db')
+// brand listo
 const addFav = async (user, prod) => {
   try {
     const producto = await Product.findByPk(prod, { include: { model: User } })
@@ -23,8 +23,13 @@ const getFavs = async (user) => {
   const usuario = await User.findByPk(user, {
     include: {
       model: Product,
-      attributes: ['model', 'brand', 'img', 'id', 'price', 'stock', 'rating']
+      attributes: ['model', 'img', 'id', 'price', 'stock', 'rating'],
+      include: {
+        model: Brand,
+        attributes: ['name']
+      }
     }
+
   })
   if (!usuario) throw new Error('Usuario no encontrado')
   return usuario.products

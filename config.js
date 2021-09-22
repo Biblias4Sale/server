@@ -5,7 +5,7 @@ const Environment = process.env.NODE_ENV
 
 const config = {
   alter: true,
-  force: false,
+  force: true,
   categoriesList: ['Accesorios', 'Camaras', 'Lentes', 'Luces', 'Cargadores y baterías'],
   subCategoryCamaras: ['Reflex', 'Mirrorless', 'Compacta', 'Semi-Reflex'],
   subCategoryLentes: ['Zoom', 'Fijo'],
@@ -39,7 +39,7 @@ const config = {
   frontEndHost: () => {
     return Environment === 'production'
       ? ['https://noiloan.web.app', 'https://noiloan-admin.web.app']
-      : ['http://localhost:3000', 'http://localhost:3001']
+      : ['http://localhost:3002', 'http://localhost:3000']
   },
 
   connectionString: () => {

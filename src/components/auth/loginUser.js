@@ -11,6 +11,7 @@ router.post('/', [
   check('password', 'Password is required and must be more than 6 letters').isLength({ min: 6 }).notEmpty(),
   validation
 ], (req, res) => {
+  console.log(req.body)
   controller
     .getToken(req.body, res)
     .then(message => {

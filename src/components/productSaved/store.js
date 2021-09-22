@@ -1,4 +1,4 @@
-const { User, Product, SavedProduct } = require('../../db')
+const { User, Product, SavedProduct, Brand } = require('../../db')
 
 const getSavedProducts = async (user) => {
   try {
@@ -9,7 +9,11 @@ const getSavedProducts = async (user) => {
       where: { UserId: usuario.id },
       include: {
         model: Product,
-        attributes: ['id', 'brand', 'model', 'img', 'description', 'price', 'stock', 'rating']
+        attributes: ['id', 'model', 'img', 'description', 'price', 'stock', 'rating'],
+        include: {
+          model: Brand,
+          attributes: ['name']
+        }
       }
     })
     return savedPoducts
