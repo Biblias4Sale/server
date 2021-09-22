@@ -6,8 +6,6 @@ const store = require('./store')
 const getCart = async (id) => {
   try {
     const cart = await store.getCart(id)
-    console.log(cart)
-
     const productSolds = cart.ProductSolds.map(product => (
       {
         id: product.product.id,
