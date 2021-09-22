@@ -3,9 +3,9 @@ const { check } = require('express-validator')
 const router = express.Router()
 const controller = require('./controller')
 const response = require('../../responses')
-const validation = require('../../middlewares/validation')
-const tokenValidation = require('../../middlewares/tokenValidation')
 const { validationEmail } = require('../../helpers/dbValidators')
+const validation = require('../../middlewares/validation')
+// const tokenValidation = require('../../middlewares/tokenValidation')
 
 router.post('/', [
   check('name', 'Name is required').notEmpty(),
@@ -19,28 +19,22 @@ router.post('/', [
   controller
     .newUser(req.body)
     .then(message => {
-      res.cookie('nToken', message.token, { maxAge: 900000, httpOnly: true })
-      response.success(req, res, 201, message.user)
+      // res.cookie('nToken', message.token, { maxAge: 900000, httpOnly: true })
+      response.success(req, res, 201, message)
     })
     .catch(e => response.error(req, res, 404, e, 'User not found'))
 })
 
-router.put('/', [
-  tokenValidation,
-  validation
-], (req, res) => {
+router.put('/:id', (req, res) => {
   controller
-    .editUser(req.body)
+    .editUser(req.params.id, req.body)
     .then(message => response.success(req, res, 200, message))
     .catch(e => response.error(req, res, 404, e, 'User not found'))
 })
 
-router.delete('/', [
-  tokenValidation,
-  validation
-], (req, res) => {
+router.delete('/:id', (req, res) => {
   controller
-    .delUser(req.body.id)
+    .delUser(req.params.id)
     .then(message => response.success(req, res, 200, message))
     .catch(e => response.error(req, res, 404, e, 'User not found'))
 })

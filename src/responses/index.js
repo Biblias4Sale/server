@@ -3,6 +3,7 @@ exports.success = (req, res, status, message) => {
 }
 
 exports.error = (req, res, status, message, details) => {
-  console.log(details)
-  res.status(status || 404).json(message)
+  console.log(details, 'msg'.red)
+  console.log(message.message, 'msg'.red)
+  res.status(status || 404).json({ Error: message.message })
 }

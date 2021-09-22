@@ -2,12 +2,9 @@ require('dotenv').config()
 const { Sequelize } = require('sequelize')
 const fs = require('fs')
 const path = require('path')
-const { DB_PG_USER, DB_PG_PASSWORD, DB_PG_HOST, DB_PG_PORT, DB_PG_DATABASE, DATABASE_URL } = process.env
+const { connectionString } = require('../config.js')
 
-const isProduction = process.env.NODE_ENV === 'production'
-const connectionString = isProduction ? DATABASE_URL : `postgres://${DB_PG_USER}:${DB_PG_PASSWORD}@${DB_PG_HOST}:${DB_PG_PORT}/${DB_PG_DATABASE}`
-
-const sequelize = new Sequelize(connectionString, {
+const sequelize = new Sequelize(connectionString(), {
   logging: false, // set to console.log to see the raw SQL queries
   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
   ssl: {
@@ -30,24 +27,36 @@ const entries = Object.entries(sequelize.models)
 const capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].slice(1), entry[1]])
 sequelize.models = Object.fromEntries(capsEntries)
 
-const { Users, Categories, Cart, Orders, SubCategories, Discounts, Products } = sequelize.models
+const { User, Category, Cart, ProductSold, SubCategory, Discount, Product, Review, SavedProduct, Marketing } = sequelize.models
 
-Products.hasOne(Discounts)
-Discounts.belongsTo(Products)
+Product.hasOne(Discount)
+Discount.belongsTo(Product)
 
-SubCategories.hasMany(Products)
-Products.belongsTo(SubCategories)
-Categories.hasMany(SubCategories)
-SubCategories.belongsTo(Categories)
-Cart.hasMany(Orders, { as: 'cart_orders' })
-Orders.belongsTo(Cart)
-Users.hasMany(Products, { as: 'products_user' })
-Products.belongsTo(Users)
+SubCategory.hasMany(Product)
+Product.belongsTo(SubCategory)
+Category.hasMany(SubCategory)
+SubCategory.belongsTo(Category)
 
-Products.belongsToMany(Orders, { through: 'products_orders' })
-Orders.belongsToMany(Products, { through: 'products_orders' })
-Cart.belongsToMany(Users, { through: 'cart_users' })
-Users.belongsToMany(Cart, { through: 'cart_users' })
+Product.hasMany(ProductSold)
+ProductSold.belongsTo(Product)
+
+Cart.hasMany(ProductSold)
+ProductSold.belongsTo(Cart)
+
+User.hasMany(Cart)
+Cart.belongsTo(User)
+
+ProductSold.hasOne(Review)
+Review.belongsTo(ProductSold)
+
+Product.belongsToMany(User, { through: 'favs' })
+User.belongsToMany(Product, { through: 'favs' })
+
+User.hasMany(SavedProduct)
+SavedProduct.belongsTo(User)
+
+Product.hasMany(SavedProduct)
+SavedProduct.belongsTo(Product)
 
 module.exports = {
   ...sequelize.models,

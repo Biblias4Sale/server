@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize')
 
 module.exports = (sequelize) => {
-  const Discounts = sequelize.define('discounts', {
+  const Discount = sequelize.define('discount', {
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV1,
@@ -10,10 +10,14 @@ module.exports = (sequelize) => {
     amount: {
       type: DataTypes.INTEGER,
       allowNull: false
+    },
+    state: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false
     }
   }, {
     freezeTableName: true,
     sequelize,
-    tableName: 'discounts'
+    tableName: 'discount'
   })
 }

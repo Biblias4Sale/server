@@ -1,116 +1,304 @@
-const Product = [
-  { id: 1, name: 'Producto Lindo', points: 3, category: 'Cámaras', subCategory: 'DSLR', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' },
-  { id: 2, name: 'Producto Feo', points: 4, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' },
-  { id: 3, name: 'Nikon 1', points: 2, category: 'Cámaras', subCategory: 'DSLR', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' },
-  { id: 4, name: 'Canon 3', points: 4, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' },
-  { id: 5, name: 'Manzana', points: 4, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' },
-  { id: 6, name: 'Naranja', points: 2, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' },
-  { id: 7, name: 'Hola', points: 1, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' },
-  { id: 8, name: 'Lina', points: 1, category: 'Cámaras', subCategory: 'Compact', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' },
-  { id: 9, name: 'Andres', points: 3, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' },
-  { id: 10, name: 'Erieli', points: 3, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' },
-  { id: 11, name: 'Diego', points: 4, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' },
-  { id: 12, name: 'Marian', points: 2, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' },
-  { id: 13, name: 'Parma', points: 2, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' },
-  { id: 14, name: 'Nacho', points: 4, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' },
-  { id: 15, name: 'Tu Vieja', points: 4, category: 'Cámaras', subCategory: 'Compact+', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' },
-  { id: 16, name: 'Sigma', points: 2, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' },
-  { id: 17, name: 'Tamron', points: 1, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' },
-  { id: 18, name: 'Tokina', points: 1, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' },
-  { id: 19, name: 'Telezoom', points: 3, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' },
-  { id: 20, name: 'El bondi', points: 3, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' },
-  { id: 21, name: 'Panasonic', points: 1, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' },
-  { id: 22, name: 'Nikon 4', points: 2, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' },
-  { id: 23, name: 'Nikon 2', points: 2, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' },
-  { id: 24, name: 'Sony 3', points: 4, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' },
-  { id: 25, name: 'Sonya Blade', points: 4, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' },
-  { id: 26, name: 'Canon 7', points: 2, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' },
-  { id: 27, name: 'Canoncito', points: 1, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' },
-  { id: 28, name: 'Panamericano', points: 1, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' },
-  { id: 29, name: 'Panasonic MDH2', points: 3, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' }
-]
-
-const { categoriesList } = require('../../../config')
-const { Products, SubCategories, Categories } = require('../../db')
+const { Product, SubCategory, Category, ProductSold, Cart, User, Review } = require('../../db')
+const { reviews } = require('../../../config')
 
 const addProduct = async (newProduct) => {
-  const { brand, model, img, description, price, points } = newProduct
+  const { brand, model, img, description, price, points, stock } = newProduct
   const { subCategory } = newProduct
-  const prod = await Products.findOne({
+  const prod = await Product.findOne({
     where: {
       model
     }
   })
-  if (prod !== null) {
-    return 'El producto ya existe'
-  }
+
+  if (prod !== null) return 'El producto ya existe'
 
   try {
-    const newProd = await Products.create({
+    const newProd = await Product.create({
       brand,
       model,
       img,
       description,
       price,
+      stock,
       points
     })
 
-    const subCat = await SubCategories.findOne({
+    const subCat = await SubCategory.findOne({
       where: {
         name: subCategory
       }
     })
-    if (subCat === null) return 'No se encontró la SubCategoría'
-    try {
-      await subCat.addProduct(newProd)
-    } catch (e) {
-      return e.name
-    }
 
+    if (subCat === null) return 'No se encontró la SubCategoría'
+
+    await newProd.setSubCategory(subCat)
     return await newProd
-  } catch (e) {
-    console.log(e)
-    return `${model} ya existe`
+  } catch ({ message: error }) {
+    console.log(error)
+    throw new Error(`${model} ya existe`)
   }
 }
 
 const getAll = async () => {
   try {
-    const product = await Products.findAll({
+    const prod = await Product.findAll({
       attributes: { exclude: ['createdAt', 'updatedAt', 'description'] },
       include: {
-        model: SubCategories,
+        model: SubCategory,
         attributes: { exclude: ['createdAt', 'updatedAt', 'subCategoryId'] },
         include: {
-          model: Categories,
+          model: Category,
           attributes: { exclude: ['createdAt', 'updatedAt'] }
         }
       }
     })
 
-    return product
-  } catch (e) {
-    return e.name
+    return prod
+  } catch ({ message: error }) {
+    console.log(error)
+    throw new Error(error)
   }
 
   // return Product
 }
 
-const findById = async (id) => {
+const getDetail = async (productId) => {
   try {
-    const product = await Products.findByPk(id, {
-      attributes: { exclude: ['createdAt', 'updatedAt'] }
+    const producto = await Product.findByPk(productId, {
+      include: {
+        model: ProductSold,
+        include: [
+          {
+            model: Cart,
+            include: {
+              model: User
+            }
+          },
+          {
+            model: Review
+          }
+        ]
+      }
     })
-    return product
-  } catch (e) {
-    return e.name
+    if (!producto) throw new Error('Producto no encontrado')
+    return producto
+  } catch ({ message: error }) {
+    throw new Error(error)
+  }
+}
+
+const getReview = () => {
+  return reviews
+}
+
+const editProduct = async (prod) => {
+  const { id, model, img, description, price, points, brand, category, subCategory, discount } = prod
+
+  await Product.update(
+    {
+      model: model,
+      img: img,
+      description: description,
+      points: points,
+      price: price
+    }, { where: { id: id } })
+
+  await Product.findOne({ where: { id: id } }).then((product) => {
+    SubCategory.findOne({ where: { name: subCategory } }).then((subCat) => {
+      product.setSubCategory(subCat.dataValues.id)
+      Category.findOne({ where: { name: category } }).then((Cat) => {
+        subCat.setCategory(Cat.dataValues.id)
+      })
+    })
+  })
+
+  const response = await getDetail(id)
+
+  return response
+}
+
+const deleteProducts = async (idProducts) => {
+  try {
+    idProducts.map(async (id) => {
+      const product = await Product.findByPk(id)
+      product.state = false
+      await product.save()
+    })
+    return 'Producto eliminado'
+  } catch ({ message: error }) {
+    console.log(error)
+    throw new Error('Producto no se eliminó')
+  }
+}
+
+const activateProducts = async (idProducts) => {
+  try {
+    idProducts.map(async (id) => {
+      const product = await Product.findByPk(id)
+      product.state = true
+      await product.save()
+    })
+    return 'Producto activado'
+  } catch ({ message: error }) {
+    throw new Error('Producto no se activó')
+  }
+}
+
+const changePrice = async (idProducts, value) => {
+  if (idProducts.length === 1) {
+    try {
+      idProducts.map(async (id) => {
+        const product = await Product.findByPk(id)
+        product.price = product.price - value
+        await product.save()
+      })
+      return 'Nuevo precio definido'
+    } catch ({ message: error }) {
+      console.log(error)
+      throw new Error('Producto no pudo ser establecido')
+    }
   }
 
-  // return Product.find(product => product.id === parseInt(id)) // Debe buscar en la DB por ID
+  try {
+    idProducts.map(async (id) => {
+      const product = await Product.findByPk(id)
+      product.price = product.price - (product.price * value)
+      await product.save()
+    })
+    return 'Nuevo precio definido'
+  } catch ({ message: error }) {
+    console.log(error)
+    throw new Error('Precio no pudo ser establecido')
+  }
+}
+
+const csvToProducts = (products) => {
+  try {
+    products.map(async (product) => {
+      const { brand, model, img, description, price, points, stock, state } = product
+      const { subCategory } = product
+      const prod = await Product.findOne({
+        where: {
+          model
+        }
+      })
+
+      if (prod !== null) return 'El producto ya existe'
+
+      try {
+        const newProd = await Product.create({
+          brand,
+          model,
+          img,
+          description,
+          price,
+          points,
+          stock,
+          state
+        })
+
+        const subCat = await SubCategory.findOne({
+          where: {
+            name: subCategory
+          }
+        })
+
+        if (subCat === null) return 'No se encontró la SubCategoría'
+
+        await newProd.setSubCategory(subCat)
+        return await newProd
+      } catch (e) {
+        console.log(e)
+        return `${model} ya existe`
+      }
+    })
+    return 'Productos creados exitosamente'
+  } catch (err) {
+    return err
+  }
+}
+
+const addStock = async (qty, productId) => {
+  try {
+    const product = await Product.findByPk(productId)
+    product.stock = product.stock + qty
+    await product.save()
+    return 'Nuevo stock definido'
+  } catch (err) {
+    console.log(err)
+    throw new Error('Stock no pudo ser establecido')
+  }
+}
+
+const addReview = async (productSoldId, review) => {
+  try {
+    const productSold = await ProductSold.findByPk(productSoldId,
+      {
+        include: [
+          {
+            model: Cart,
+            attributes: ['status']
+          },
+          {
+            model: Product,
+            attributes: ['rating', 'id']
+
+          }]
+      })
+
+    const hasReview = await productSold.getReview()
+
+    if (productSold.Cart.status !== 'Entregado ') {
+      throw new Error('No puedes hacer un review a un producto que no fue entregado')
+    }
+
+    if (!hasReview) {
+      const newReview = await Review.create(review)
+      productSold.setReview(newReview)
+        .then(async review => {
+          if (productSold.product.rating === null) {
+            productSold.product.rating = review.rating
+            await productSold.product.save()
+          } else {
+            const ratings = await ProductSold.findAll({
+              where: { productId: productSold.product.id },
+              include: {
+                model: Review,
+                attributes: ['rating']
+              }
+            })
+
+            let rank = 0
+            for (let i = 0; i < ratings.length; i++) {
+              console.log(ratings[i].Review.rating)
+              rank = rank + parseInt(ratings[i].Review.rating)
+            }
+            const promedio = Math.floor(rank / ratings.length)
+            productSold.product.rating = promedio
+            productSold.product.save()
+            return productSold.product.rating
+          }
+        })
+
+      return 'El review fue creado con éxito'
+    } else {
+      throw new Error('El producto ya tiene review')
+    }
+  } catch ({ message: error }) {
+    throw new Error(error)
+  }
 }
 
 module.exports = {
   getAll,
-  findById,
-  addProduct
+  getDetail,
+  addProduct,
+  getReview,
+  editProduct,
+  deleteProducts,
+  activateProducts,
+  changePrice,
+  csvToProducts,
+  addStock,
+  addReview
 }

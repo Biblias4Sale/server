@@ -2,33 +2,54 @@ const bcryptjs = require('bcryptjs')
 const tokenGenerator = require('../../helpers/tokenGenerator')
 const tokenValidators = require('../../helpers/tokenValidators')
 const store = require('./store')
+const validation = require('../../helpers/marketingValidators')
+const mail = require('../marketing/handler/mailing')
+const sms = require('../marketing/handler/sms')
 
 const newUser = async ({ name, lastName, email, password }) => {
   const salt = bcryptjs.genSaltSync()
-  const user = {
+  const userInfo = {
     name,
     lastName,
     email,
+    type: 'Super',
     password: bcryptjs.hashSync(password, salt)
   }
 
-  await store.newUser(user)
+  const cart = await store.newUser(userInfo)
   try {
     const tokenValidation = await tokenValidators(email, password)
     if (tokenValidation) return tokenValidation
-    const token = await tokenGenerator(email)
-    return token
-  } catch (err) {
-    return err
+    const { user, token } = await tokenGenerator(email)
+    if (await validation.mailCreateAccount()) mail.createAccount(user)
+    if (await validation.smsCreateAccount()) sms.createAccount(user)
+
+    return ({ user, token, cartID: cart.id })
+  } catch (error) {
+    throw new Error(error)
   }
 }
 
-const editUser = async () => {
-  return 'hi'
-  // await store.editUser()
+const editUser = async (id, body) => {
+  try {
+    const { token, password, ...infoUser } = body
+    if (password) {
+      const salt = bcryptjs.genSaltSync()
+      infoUser.password = bcryptjs.hashSync(password, salt)
+    }
+    return await store.editUser(id, infoUser)
+  } catch (error) {
+    throw new Error(error)
+  }
 }
 
-const delUser = async (id) => await store.delUser(id)
+const delUser = async (id) => {
+  try {
+    return await store.delUser(id)
+  } catch (error) {
+    throw new Error(error)
+  }
+}
 
 module.exports = {
   newUser,

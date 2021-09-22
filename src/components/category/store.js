@@ -1,71 +1,77 @@
-const { Categories, SubCategories } = require('../../db')
+const { Category, SubCategory } = require('../../db')
 
 const getAllCategories = async () => {
-  const cat = await Categories.findAll({
+  const cat = await Category.findAll({
     include: {
-      model: SubCategories
+      model: SubCategory
     }
   })
-  // console.log(cat)
   return cat
 }
 
 const addCategory = async (newCategory) => {
-  const category = await Categories.findOne({
+  const cat = await Category.findOne({
     where: {
       name: newCategory
     }
   })
-  if (category != null) return 'La categoría ya existe'
+  if (cat != null) return 'La categoría ya existe'
   try {
-    const newCat = await Categories.create({ name: newCategory })
+    const newCat = await Category.create({ name: newCategory })
     return newCat
-  } catch (e) {
-    return e.name
+  } catch ({ message: error }) {
+    console.log(error)
+    throw new Error(error)
   }
 }
 
-const addSubCategory = async (category, subCategory) => {
-  const subCat = await SubCategories.findOne({
+const addSubCategory = async (categ, subCateg) => {
+  let subCat = await SubCategory.findOne({
     where: {
-      name: subCategory
+      name: subCateg
     }
   })
 
-  if (subCat !== null) return 'La SubCategoría ya existe'
+  if (subCat === null) {
+    subCat = await SubCategory.create({
+      name: subCateg
+    })
+  }
 
-  try {
-    const subCat = await SubCategories.create({
-      name: subCategory
-    })
-    const cat = await Categories.findOne({
-      where: {
-        name: category
-      }
-    })
-    await cat.addSubCategories(subCat)
-    return subCat
-  } catch (e) {
-    return e.name
+  const cat = await Category.findOne({
+    where: {
+      name: categ
+    }
+  })
+
+  if (cat !== null) {
+    if (cat.dataValues.id !== subCat.dataValues.categoryId) {
+      await subCat.setCategory(cat)
+      return subCat
+    } else {
+      return 'La categoría ya tiene esa sub Categoría'
+    }
+  } else {
+    return 'No se encontró la categoría'
   }
 }
 
 const getAllSubCategories = async (cat) => {
   if (cat === 'All') {
-    const subcats = await SubCategories.findAll({
+    const subcats = await SubCategory.findAll({
       attributes: { exclude: ['createdAt', 'updatedAt'] },
       include: {
-        model: Categories,
+        model: Category,
         attributes: { exclude: ['createdAt', 'updatedAt'] }
       }
-      // attributes: ['name', 'id_subCat']
+
     })
     return subcats
   } else {
-    const subcats = await SubCategories.findAll({
+    const subcats = await SubCategory.findAll({
       attributes: { exclude: ['createdAt', 'updatedAt'] },
       include: {
-        model: Categories,
+        model: Category,
         attributes: { exclude: ['createdAt', 'updatedAt'] },
         where: {
           name: cat

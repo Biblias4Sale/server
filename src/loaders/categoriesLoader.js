@@ -1,17 +1,17 @@
-const { Categories } = require('../db.js')
+const { Category } = require('../db.js')
 const { categoriesList } = require('../../config')
 
 const categoriesLoader = async () => {
-  const categoriesInDB = await Categories.findAndCountAll()
+  const categoriesInDB = await Category.findAndCountAll()
   if (categoriesInDB.count === 0) {
     try {
-      categoriesList.forEach(category => Categories.create({ name: category }))
-      console.log('DB filled')
+      categoriesList.forEach(categ => Category.create({ name: categ }))
+      console.log('DB filled with Categories')
     } catch (error) {
-      console.log('Error filling DB')
+      console.log('Error filling DB with Categories')
     }
   } else {
-    console.log('Categories table allready has data... loader skipped')
+    console.log('Category table allready has data... loader skipped')
   }
 }
 
