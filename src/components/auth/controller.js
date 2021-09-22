@@ -10,7 +10,7 @@ const getToken = async ({ email, password }, res) => {
     }
     const { user, token } = await tokenGenerator(email)
     const cart = await store.getCart(user.id)
-    return ({ user, token, cart })
+    return ({ user, token, cartID: cart.id })
   } catch (error) {
     throw new Error(error)
   }
