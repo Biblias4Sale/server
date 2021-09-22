@@ -1,6 +1,7 @@
 require('dotenv').config()
 const axios = require('axios')
 const mercadopago = require('mercadopago')
+const { Cart } = require('../../db')
 
 const { ACCESS_TOKEN } = process.env
 
@@ -13,6 +14,17 @@ const getPaymentLink = async (request) => {
   const preference = {
     items: request
   }
+  // const CartID = parseInt(request[0].category_id)
+
+  // await Cart.update(
+  //   {
+  //     status: 'Pendiente de confirmación de pago',
+  //     confirmationDate: new Date()
+  //   },
+  //   { where: { id: CartID } }
+  // )
+
+  // const cart = await Cart.findByPk(CartID)
 
   await mercadopago.preferences.create(preference)
     .then(json => {

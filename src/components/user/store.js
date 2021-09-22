@@ -4,8 +4,7 @@ const newUser = async (userInfo) => {
   try {
     const user = await User.create(userInfo)
     const cart = await user.createCart({ status: 'En proceso' })
-    console.log('cart', cart.id)
-    return cart.id
+    return cart
   } catch ({ message: error }) {
     throw new Error('Cart not created')
   }
