@@ -11,7 +11,7 @@ const getUser = async (email) => {
 const getCart = async (id) => {
   try {
     const cart = await Cart.findOne({
-      where: { UserId: id }
+      where: { UserId: id, status: 'En proceso' }
     })
 
     return cart
