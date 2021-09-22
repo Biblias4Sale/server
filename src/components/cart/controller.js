@@ -39,9 +39,10 @@ const getOrders = async (id) => {
       return {
         cartId: cart.id,
         status: cart.status,
+        totalAmount: cart.totalAmount,
         productSolds,
-        soldDate: cart.soldDate,
-        confirmationDate: cart.confirmationDate,
+        paymentPendingDate: cart.paymentPending,
+        confirmationDate: cart.confirmationPending,
         preparationDate: cart.preparationDate,
         dispatchDate: cart.dispatchDate,
         deliveryDate: cart.deliveryDate,
@@ -54,9 +55,9 @@ const getOrders = async (id) => {
   }
 }
 
-const confirmCart = async (cartId, userId) => {
+const confirmCart = async (cartId, userId, price) => {
   try {
-    const [userInfo, cart] = await store.confirmCart(cartId, userId)
+    const [userInfo, cart] = await store.confirmCart(cartId, userId, price)
     if (await validation.mailConfirmCart()) mail.confirmCart(userInfo)
     if (await validation.smsConfirmCart()) sms.confirmCart(userInfo)
     return (cart)

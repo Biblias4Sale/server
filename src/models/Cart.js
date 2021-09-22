@@ -8,13 +8,16 @@ module.exports = (sequelize) => {
       }),
       allowNull: false
     },
+    totalAmount: {
+      type: DataTypes.STRING
+    },
     paymentsMethod: {
       type: DataTypes.STRING
     },
     paymentPending: {
       type: DataTypes.DATE
     },
-    confirmation: {
+    confirmationPending: {
       type: DataTypes.DATE
     },
     preparationDate: {
@@ -23,7 +26,7 @@ module.exports = (sequelize) => {
     dispatchDate: {
       type: DataTypes.DATE
     },
-    deliverDate: {
+    deliveryDate: {
       type: DataTypes.DATE
     },
     cancelDate: {
