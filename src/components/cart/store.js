@@ -4,7 +4,7 @@ const { Op } = require('sequelize')
 const getCart = async (id) => {
   try {
     const cart = await Cart.findOne({
-      where: { UserId: id },
+      where: { UserId: id, status: 'En proceso' },
       attributes: ['id', 'status'],
       include: {
         model: ProductSold,
@@ -49,12 +49,12 @@ const getOrders = async (id) => {
   }
 }
 
-const confirmCart = async (cartId, userId) => {
+const confirmCart = async (cartId, userId, price) => {
   try {
     const cart = await Cart.findByPk(cartId)
     cart.status = 'Pendiente de confirmación de pago'
-    cart.soldDate = new Date()
-    console.log(cart.soldDate)
+    cart.confirmationPending = new Date()
+    cart.totalAmount = price
     cart.save()
     const user = await User.findByPk(userId)
     const newCart = await user.createCart({ status: 'En proceso' })
