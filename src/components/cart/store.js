@@ -19,7 +19,7 @@ const getCart = async (id) => {
     if (!cart) {
       const user = User.findByPk(id)
       const cart = await user.createCart({ status: 'En proceso' })
-      return cart.id
+      return cart
     }
     return cart
   } catch ({ message: error }) {
