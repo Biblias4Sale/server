@@ -74,5 +74,4 @@ router.post('/reviews/:productSoldId', (req, res) => {
     .catch(error => responses.error(req, res, 400, error, 'No se pudo agregar el review'))
 })
 
-
 module.exports = router
