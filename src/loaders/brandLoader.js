@@ -3,10 +3,10 @@ const { products } = require('./dataStore')
 const { Brand } = require('../db')
 
 const brandLoader = async () => {
-  await products.map(p => {
+  await products.forEach(p => {
     return newBrand(p.brand)
   })
-  const brands = Brand.findAll()
+  let brands = await Brand.findAll()
   if (brands) {
     console.log('brands loaded')
   }
