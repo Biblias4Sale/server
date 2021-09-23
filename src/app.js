@@ -9,7 +9,7 @@ require('colors')
 const { frontEndHost } = require('../config.js')
 
 const routes = require('./routes')
-const passport = require('passport')
+// const passport = require('passport')
 const session = require('express-session')
 const server = express()
 
@@ -33,9 +33,9 @@ server.use(fileUpload())
 server.use(express.static('files'))
 
 server.use(cookieParser())
-server.use(session({ secret: 'anythinglol' }))
-server.use(passport.initialize())
-server.use(passport.session())
+// server.use(session({ secret: 'anythinglol' }))
+// server.use(passport.initialize())
+// server.use(passport.session())
 server.use('/', routes)
 
 // Error catching endware.
