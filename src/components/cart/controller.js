@@ -29,7 +29,6 @@ const getCart = async (id) => {
 const getOrders = async (id) => {
   try {
     getAllPayments()
-    console.log('ESTOY ACTUALIZANDO LOS CARRITOS')
     const cart = await store.getOrders(id)
     const res = cart.map(cart => {
       const productSolds = cart.ProductSolds.map(product => {
