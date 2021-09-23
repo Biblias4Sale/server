@@ -84,8 +84,6 @@ const confirmCart = async (cartId, userId, price) => {
       const qtyToDecrease = pSold[i].qty
       Product.findByPk(pSold[i].product.id)
         .then(prod => {
-          // console.log(pSold[i].id)
-
           pSold[i].price = prod.price
           pSold[i].save()
           if (prod.stock >= qtyToDecrease) {
