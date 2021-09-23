@@ -60,16 +60,18 @@ const getAllPayments = async () => {
         return details
       })
       newResponse.map(async (p) => {
-        if (p.payment_status.status && p.payment_status.status === 'approved') {
+        if (p.payment_status.status && isNaN(p.client_cart) && p.payment_status.status === 'approved') {
           const changeStatus = await Cart.findOne({
             where: {
               id: p.client_cart
             }
           })
-          changeStatus.status = 'En preparación'
-          changeStatus.confirmationDate = moment().format('YYYY-MM-DD HH:mm')
-          changeStatus.save()
-          console.log(changeStatus)
+          if (changeStatus) {
+            changeStatus.status = 'En preparación'
+            // changeStatus.preparationDate = moment().format('YYYY-MM-DD HH:mm')
+            changeStatus.save()
+            // console.log('CAMBIE EL CARRITO:', changeStatus)
+          }
         }
       })
       return newResponse
