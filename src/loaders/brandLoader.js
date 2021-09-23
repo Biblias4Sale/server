@@ -1,15 +1,15 @@
-const { newBrand } = require('../components/brand/store')
+// const { newBrand } = require('../components/brand/store')
 const { products } = require('./dataStore')
-
+const { Brand } = require('../db')
 const brandLoader = async () => {
   try {
+    const mySet = new Set()
     products.forEach(p => {
-      newBrand(p.brand)
-        .then(message => message)
-        .catch(error => error.message)
+      mySet.add(p.brand)
     })
+    for (const item of mySet) Brand.findOrCreate({ where: { name: item } })
   } catch (e) {
-    return e.message
+    console.log(e.message)
   }
 }
 
