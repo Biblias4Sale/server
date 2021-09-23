@@ -267,6 +267,13 @@ req.params.id
 req.params.id
 ```
 
+- PUT /cart/update/:cartID?status=   >> Cambia el status del carrito,
+
+```javascript
+req.params.id
+req.query.status
+```
+
 <hr>
 
 ### ADMINISTRADOR:

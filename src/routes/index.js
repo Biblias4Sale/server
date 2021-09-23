@@ -7,8 +7,8 @@ const networkUser = require('../components/user/network')
 const networkAdmin = require('../components/admin/network')
 const networkBot = require('../components/bot/network')
 const networkMarketing = require('../components/marketing/network')
-const authLogin = require('../components/auth/login')
-const authLogout = require('../components/auth/logout')
+// const authLogin = require('../components/auth/login')
+// const authLogout = require('../components/auth/logout')
 const loginUser = require('../components/auth/loginUser')
 const logoutUser = require('../components/auth/logoutUser')
 const theTest = require('../components/auth/test')
@@ -27,7 +27,7 @@ const admin = '/admin'
 const bot = '/bot'
 const marketing = '/configureMarketing'
 const googleLogin = '/api/v1/'
-const googleLogout = '/google/logout'
+// const googleLogout = '/google/logout'
 const userLogin = '/login'
 const userLogout = '/logout'
 const test = '/test'
@@ -50,8 +50,8 @@ router.use(mercadopago, networkMercadoPago)
 router.use(reviews, networkReviews)
 
 // auth
-router.use(googleLogin, authLogin)
-router.use(googleLogout, authLogout)
+// router.use(googleLogin, authLogin)
+// router.use(googleLogout, authLogout)
 router.use(userLogin, loginUser)
 router.use(userLogout, logoutUser)
 router.use(test, theTest)

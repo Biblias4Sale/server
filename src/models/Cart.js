@@ -2,6 +2,11 @@ const { DataTypes } = require('sequelize')
 
 module.exports = (sequelize) => {
   const Cart = sequelize.define('Cart', {
+    id: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV1,
+      primaryKey: true
+    },
     status: {
       type: DataTypes.ENUM({
         values: ['En proceso', 'Pendiente nuevo pago', 'Pendiente de confirmación de pago', 'En preparación', 'Despachado', 'Entregado', 'Cancelado']

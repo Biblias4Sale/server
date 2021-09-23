@@ -8,7 +8,6 @@ const getBrandByName = async (name) => {
 }
 const getAllBrands = async () => {
   const allBrands = await store.getAllBrands()
-  console.log(allBrands)
   return allBrands
 }
 
