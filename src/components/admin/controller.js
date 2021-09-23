@@ -5,6 +5,8 @@ const path = require('path')
 const bcryptjs = require('bcryptjs')
 const store = require('./store')
 
+const getStatistic = async (data) => await store.getStatistic(data)
+
 const getUsers = async () => await store.getUsers()
 
 const newUser = async ({ name, lastName, email, type = 'User' }) => {
@@ -68,6 +70,7 @@ const usersToCSV = async () => {
 }
 
 module.exports = {
+  getStatistic,
   getUsers,
   newUser,
   delUser,

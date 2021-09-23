@@ -1,5 +1,14 @@
 const { Marketing } = require('../../db')
 
+const getSettingMarketing = async () => {
+  try {
+    const options = await Marketing.findByPk(1)
+    return options
+  } catch ({ message: error }) {
+    throw new Error(error)
+  }
+}
+
 const settingsMarketing = async (settings) => {
   try {
     const options = await Marketing.findByPk(1)
@@ -17,12 +26,14 @@ const settingsMarketing = async (settings) => {
     options.mailCanceled = settings.mailCanceled
     options.smsCanceled = settings.smsCanceled
 
-    return await options.save()
+    await options.save()
+    return 'Setting changed'
   } catch ({ message: error }) {
     throw new Error(error)
   }
 }
 
 module.exports = {
+  getSettingMarketing,
   settingsMarketing
 }
