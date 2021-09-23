@@ -15,8 +15,10 @@ const theTest = require('../components/auth/test')
 const networkFavorites = require('../components/favorites/network')
 const networkSavedProduct = require('../components/productSaved/network')
 const networkMercadoPago = require('../components/mercadoPago/network')
+const networkBrand = require('../components/brand/network')
 const networkReviews = require('../components/reviews/network')
 
+const brand = '/brands'
 const category = '/categories'
 const product = '/products'
 const cart = '/cart'
@@ -25,7 +27,7 @@ const admin = '/admin'
 const bot = '/bot'
 const marketing = '/configureMarketing'
 const googleLogin = '/api/v1/'
-const googleLogout = '/logout'
+const googleLogout = '/google/logout'
 const userLogin = '/login'
 const userLogout = '/logout'
 const test = '/test'
@@ -34,6 +36,7 @@ const savedProduct = '/savedProducts'
 const mercadopago = '/api/v1/mercadopago'
 const reviews = '/reviews'
 
+router.use(brand, networkBrand)
 router.use(category, networkCategory)
 router.use(product, networkProduct)
 router.use(cart, networkCart)

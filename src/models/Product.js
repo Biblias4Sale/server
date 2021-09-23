@@ -2,17 +2,13 @@ const { DataTypes } = require('sequelize')
 
 module.exports = (sequelize) => {
   const Product = sequelize.define('product', {
-    brand: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
     model: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true
     },
     img: {
-      type: DataTypes.STRING,
+      type: DataTypes.ARRAY(DataTypes.STRING),
       allowNull: false
     },
     description: {

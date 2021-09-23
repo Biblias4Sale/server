@@ -37,6 +37,10 @@ module.exports = (sequelize) => {
       allowNull: false,
       defaultValue: 'User'
     },
+    googleSession: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    },
     googleId: {
       type: DataTypes.STRING
     },

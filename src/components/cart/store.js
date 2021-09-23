@@ -1,6 +1,6 @@
-const { Cart, Product, User, ProductSold } = require('../../db')
+const { Cart, Product, User, ProductSold, Brand } = require('../../db')
 const { Op } = require('sequelize')
-
+// brand listo
 const getCart = async (id) => {
   try {
     const cart = await Cart.findOne({
@@ -11,7 +11,11 @@ const getCart = async (id) => {
         attributes: ['id', 'qty'],
         include: {
           model: Product,
-          attributes: ['id', 'brand', 'model', 'img', 'price', 'stock']
+          attributes: ['id', 'model', 'img', 'price', 'stock'],
+          include: {
+            model: Brand,
+            attributes: ['name']
+          }
         }
       }
     })
@@ -19,7 +23,7 @@ const getCart = async (id) => {
     if (!cart) {
       const user = User.findByPk(id)
       const cart = await user.createCart({ status: 'En proceso' })
-      return cart.id
+      return cart
     }
     return cart
   } catch ({ message: error }) {
@@ -38,7 +42,13 @@ const getOrders = async (id) => {
         attributes: { exclude: ['createdAt', 'updatedAt'] },
         include: {
           model: Product,
-          attributes: { exclude: ['createdAt', 'updatedAt'] }
+          attributes: ['id', 'model', 'img'],
+          exclude: ['createdAt', 'updatedAt'],
+          include: {
+            model: Brand,
+            atributes: ['name'],
+            exclude: ['createdAt', 'updatedAt'] 
+          }
         }
       }
     })

@@ -1,5 +1,5 @@
 const store = require('./store')
-
+// brand listo
 const addFav = async (user, prod) => store.addFav(user, prod)
 
 const getFavs = async (user) => {
@@ -7,7 +7,7 @@ const getFavs = async (user) => {
   const respuesta = data.map(obj => {
     return {
       id: obj.id,
-      brand: obj.brand,
+      brand: obj.brand.name,
       model: obj.model,
       img: obj.img,
       price: obj.price,
