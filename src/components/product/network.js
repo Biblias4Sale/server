@@ -13,6 +13,7 @@ router.get('/best/:qty', (req, res) => {
 })
 
 router.get('/detail/:id', (req, res) => {
+  console.log('id', req.params.id)
   getDetail(req.params.id)
     .then(message => responses.success(req, res, 201, message))
     .catch(error => responses.error(req, res, 404, error, 'No se pudo obtener los detalles del producto'))
@@ -73,6 +74,5 @@ router.post('/reviews/:productSoldId', (req, res) => {
     .then(message => responses.success(req, res, 201, message))
     .catch(error => responses.error(req, res, 400, error, 'No se pudo agregar el review'))
 })
-
 
 module.exports = router
