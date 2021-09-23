@@ -34,7 +34,8 @@ const getOrders = async (id) => {
           brand: product.product.brand.name,
           model: product.product.model,
           img: product.product.img,
-          price: product.price
+          price: product.price,
+          idProductSold: product.id
         }
       })
       return {
