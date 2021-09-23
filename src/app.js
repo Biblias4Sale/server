@@ -1,4 +1,4 @@
-require('./passport/passportGoogle.js')
+// require('./passport/passportGoogle.js')
 const express = require('express')
 const cookieParser = require('cookie-parser')
 const morgan = require('morgan')
@@ -9,8 +9,8 @@ require('colors')
 const { frontEndHost } = require('../config.js')
 
 const routes = require('./routes')
-const passport = require('passport')
-const session = require('express-session')
+// const passport = require('passport')
+// const session = require('express-session')
 const server = express()
 
 server.name = 'NoiLan'
@@ -33,9 +33,9 @@ server.use(fileUpload())
 server.use(express.static('files'))
 
 server.use(cookieParser())
-server.use(session({ secret: 'anythinglol' }))
-server.use(passport.initialize())
-server.use(passport.session())
+// server.use(session({ secret: 'anythinglol' }))
+// server.use(passport.initialize())
+// server.use(passport.session())
 server.use('/', routes)
 
 // Error catching endware.
