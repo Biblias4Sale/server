@@ -64,7 +64,7 @@ const confirmCart = async (cartId, userId, price) => {
     const cart = await Cart.findByPk(cartId, {
       include: {
         model: ProductSold,
-        attributes: ['qty'],
+        attributes: ['qty', 'id'],
         include: {
           model: Product,
           attributes: ['id']
@@ -84,6 +84,10 @@ const confirmCart = async (cartId, userId, price) => {
       const qtyToDecrease = pSold[i].qty
       Product.findByPk(pSold[i].product.id)
         .then(prod => {
+          // console.log(pSold[i].id)
+
+          pSold[i].price = prod.price
+          pSold[i].save()
           if (prod.stock >= qtyToDecrease) {
             prod.stock = prod.stock - qtyToDecrease
             prod.save()
