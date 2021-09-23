@@ -1,14 +1,15 @@
 const { newBrand } = require('../components/brand/store')
 const { products } = require('./dataStore')
-const { Brand } = require('../db')
 
 const brandLoader = async () => {
-  await products.forEach(p => {
-    return newBrand(p.brand)
-  })
-  let brands = await Brand.findAll()
-  if (brands) {
-    console.log('brands loaded')
+  try {
+    products.forEach(p => {
+      newBrand(p.brand)
+        .then(message => message)
+        .catch(error => error.message)
+    })
+  } catch (e) {
+    return e.message
   }
 }
 

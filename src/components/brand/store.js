@@ -14,24 +14,21 @@ const getBrandByName = async (name) => {
   return brand
 }
 
-const newBrand = async (name) => {
-  try {
-    const exist = await Brand.findOne({
-      where: {
-        name: name
+const newBrand = (name) => {
+  const brand = Brand.findOne({ where: { name } })
+    .then(brand => {
+      if (brand === null) {
+        Brand.create({ name })
+          .then(brandCreated => {
+            return brandCreated.name
+          })
+          .catch(e => { throw new Error(e.message) })
+      } else {
+        throw new Error(`${name} already exist`)
       }
-    })
-    if (exist === null) {
-      const newBrand = await Brand.findOrCreate({
-        where: {
-          name: name
-        }
-      })
-      return newBrand
-    }
-  } catch (error) {
-    console.log(error)
-  }
+    }).catch(e => { throw new Error(e.message) })
+
+  return brand
 }
 
 module.exports = {

@@ -9,7 +9,7 @@ const { subCategoryCamaras, subCategoryLentes, subCategoryLuces, subCategoryAcce
 
 const { conn } = require('./src/db.js')
 const { force } = require('./config.js')
-const PORT = process.env.PORT || 3001
+const PORT = process.env.PORT || 3002
 
 process.stdout.write('\u001b[2J\u001b[0;0H') // clear the screen on the console
 
