@@ -2,9 +2,11 @@ const validation = require('../../helpers/marketingValidators')
 const mail = require('../marketing/handler/mailing')
 const sms = require('../marketing/handler/sms')
 const store = require('./store')
+const { getAllPayments } = require('../mercadoPago/store')
 
 const getCart = async (id) => {
   try {
+    await getAllPayments()
     const cart = await store.getCart(id)
     const productSolds = cart.ProductSolds.map(product => (
       {
@@ -25,6 +27,7 @@ const getCart = async (id) => {
 
 const getOrders = async (id) => {
   try {
+
     const cart = await store.getOrders(id)
     const res = cart.map(cart => {
       const productSolds = cart.ProductSolds.map(product => {
