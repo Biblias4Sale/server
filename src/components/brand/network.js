@@ -1,6 +1,7 @@
 const express = require('express')
 const { newBrand, getBrandByName, getAllBrands } = require('./controllers')
 const router = express.Router()
+const responses = require('../../responses')
 
 router.get('/', async (req, res) => {
   if (req.query.name) {
@@ -9,9 +10,11 @@ router.get('/', async (req, res) => {
   return res.send(await getAllBrands())
 })
 
-router.post('/', async (req, res) => {
+router.post('/', (req, res) => {
   const { name } = req.body
-  res.json(await newBrand(name))
+  newBrand(name)
+    .then(message => responses.success(req, res, 201, message))
+    .catch(error => responses.error(req, res, 400, error, 'No se pudo agregar la marca'))
 })
 
 module.exports = router

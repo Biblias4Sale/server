@@ -23,7 +23,7 @@ const getCart = async (id) => {
     if (!cart) {
       const user = User.findByPk(id)
       const cart = await user.createCart({ status: 'En proceso' })
-      return cart.id
+      return cart
     }
     return cart
   } catch ({ message: error }) {
@@ -47,7 +47,7 @@ const getOrders = async (id) => {
           include: {
             model: Brand,
             atributes: ['name'],
-            exclude: ['createdAt', 'updatedAt'] 
+            exclude: ['createdAt', 'updatedAt']
           }
         }
       }
@@ -61,13 +61,42 @@ const getOrders = async (id) => {
 
 const confirmCart = async (cartId, userId, price) => {
   try {
-    const cart = await Cart.findByPk(cartId)
+    const cart = await Cart.findByPk(cartId, {
+      include: {
+        model: ProductSold,
+        attributes: ['qty', 'id'],
+        include: {
+          model: Product,
+          attributes: ['id']
+        }
+      }
+    })
+
     cart.status = 'Pendiente de confirmación de pago'
     cart.confirmationPending = new Date()
     cart.totalAmount = price
     cart.save()
     const user = await User.findByPk(userId)
     const newCart = await user.createCart({ status: 'En proceso' })
+
+    const pSold = cart.ProductSolds
+    for (let i = 0; i < cart.ProductSolds.length; i++) {
+      const qtyToDecrease = pSold[i].qty
+      Product.findByPk(pSold[i].product.id)
+        .then(prod => {
+          // console.log(pSold[i].id)
+
+          pSold[i].price = prod.price
+          pSold[i].save()
+          if (prod.stock >= qtyToDecrease) {
+            prod.stock = prod.stock - qtyToDecrease
+            prod.save()
+          } else {
+            throw new Error('No hay suficiente stock')
+          }
+        })
+    }
+
     // return { message: 'Cart confirmed', CartInProgress: newCart.id }
     return [user, { message: 'Cart confirmed', CartInProgress: newCart.id }]
   } catch ({ message: error }) {
@@ -111,6 +140,7 @@ const addProduct = async (cartId, productId, qty = 1) => {
     } else {
       throw new Error('Producto sin stock')
     }
+
     productSold.save()
     return ({ message: 'Increased amount', qty: ProductSold.qty })
   } catch ({ message: error }) {

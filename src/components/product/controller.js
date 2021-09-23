@@ -37,17 +37,21 @@ const getBest = (qty) => {
 const getDetail = async (id) => {
   try {
     const data = await store.getDetail(id)
-
-    const reviews = data.dataValues.ProductSolds.map(obj => {
-      const fecha = obj.dataValues.Review.dataValues.createdAt
-      const fechaMoment = moment(fecha).format('L')
-      return {
-        user: obj.Cart.dataValues.User.name,
-        rating: obj.dataValues.Review.dataValues.rating,
-        description: obj.dataValues.Review.dataValues.description,
-        fecha: fechaMoment
-      }
-    })
+    let reviews = []
+    data.Review !== undefined
+      ? (
+          reviews = data.dataValues.ProductSolds.map(obj => {
+            const fecha = obj.dataValues.Review.dataValues.createdAt
+            const fechaMoment = moment(fecha).format('L')
+            return {
+              user: obj.Cart.dataValues.User.name,
+              rating: obj.dataValues.Review.dataValues.rating,
+              description: obj.dataValues.Review.dataValues.description,
+              fecha: fechaMoment
+            }
+          })
+        )
+      : reviews = []
 
     const response = {
       id: data.id,
