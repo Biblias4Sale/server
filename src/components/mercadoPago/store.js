@@ -1,6 +1,7 @@
 require('dotenv').config()
 const axios = require('axios')
 const mercadopago = require('mercadopago')
+const moment = require('moment')
 const { Cart } = require('../../db')
 
 const { ACCESS_TOKEN } = process.env
@@ -39,9 +40,48 @@ const getPaymentLink = async (request) => {
 }
 
 const getAllPayments = async () => {
-  const response = await axios.get('https://api.mercadopago.com/v1/payments/search', { headers: { Authorization: `Bearer ${ACCESS_TOKEN}` } })
+  try{
+    const response = await axios.get('https://api.mercadopago.com/v1/payments/search', { headers: { Authorization: `Bearer ${ACCESS_TOKEN}` } })
+    let data = response.data.results
+    if(response){
+      const newResponse = data.map((r) => {
+      let details = { 
+          user_email: r.payer.email,
+          order_id: r.id,
+          payment_status:{
+            approved_date: r.date_approved,
+            payment_market_status: r.status_detail,
+            status: r.status
+          },
+          transaction_amount: r.transaction_amount,
+          info: r.additional_info.items,
+          client_cart: r.additional_info.items[0].description
+        }
+        return details
+      })
+      newResponse.map(async (p) => {
+        if(p.payment_status.status && p.payment_status.status === 'approved'){
+            let changeStatus = await Cart.findOne({
+              where:{
+                id: p.client_cart
+              }
+            })
+            changeStatus.status = 'En preparación'
+            changeStatus.confirmationDate = moment().format('YYYY-MM-DD HH:mm')
+            changeStatus.save()
+            console.log(changeStatus)
+        }
+      })
+      return newResponse
+    }
+  } catch (error){
+    console.log(error)
+  }
 
-  return response.data
+
+
+
+
 }
 
 const getPaymentById = async (id) => {

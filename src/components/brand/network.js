@@ -11,7 +11,6 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
   const { name } = req.body
-  console.log(name)
   res.json(await newBrand(name))
 })
 
