@@ -59,7 +59,7 @@ router.delete('/delProduct/:cartId/:productId', (req, res) => {
 
 router.put('/update/:id', (req, res) => {
   controller
-    .updateState(req.params.id)
+    .updateState(req.params.id, req.query.status)
     .then(message => response.success(req, res, 200, message))
     .catch(e => response.error(req, res, 400, e, 'Cart not updated'))
 })

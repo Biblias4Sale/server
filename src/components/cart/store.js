@@ -1,6 +1,6 @@
 const { Cart, Product, User, ProductSold, Brand } = require('../../db')
 const { Op } = require('sequelize')
-// brand listo
+
 const getCart = async (id) => {
   try {
     const cart = await Cart.findOne({
@@ -179,18 +179,83 @@ const delProduct = async (cartId, productId) => {
   }
 }
 
-const updateState = async (cartID) => {
-  await Cart.update(
-    {
-      status: 'Pendiente de confirmación de pago',
-      confirmationDate: new Date()
-    },
-    { where: { id: cartID } }
-  )
+const updateState = async (cartID, status) => {
+  const values = ['Pendiente nuevo pago', 'En preparación', 'Despachado', 'Entregado', 'Cancelado']
 
-  const cart = await Cart.findByPk(cartID)
+  if (values.includes(status)) {
+    switch (status) {
+      case 'Pendiente nuevo pago':
 
-  return cart
+        await Cart.update(
+          {
+            status: 'Pendiente nuevo pago',
+            paymentPending: new Date()
+          },
+          { where: { id: cartID } }
+        )
+        break
+      case 'En preparación':
+        Cart.findByPk(cartID).then(cart => {
+          if (cart.preparationDate === null) {
+            Cart.update(
+              {
+                status: 'En preparación',
+                preparationDate: new Date()
+              },
+              { where: { id: cartID } }
+            )
+          }
+        })
+        break
+      case 'Despachado':
+        Cart.findByPk(cartID).then(cart => {
+          if (cart.dispatchDate === null) {
+            Cart.update(
+              {
+                status: 'Despachado',
+                dispatchDate: new Date()
+              },
+              { where: { id: cartID } }
+            )
+          }
+        })
+        break
+      case 'Entregado':
+        Cart.findByPk(cartID).then(cart => {
+          if (cart.deliveryDate === null) {
+            Cart.update(
+              {
+                status: 'Entregado',
+                deliveryDate: new Date()
+              },
+              { where: { id: cartID } }
+            )
+          }
+        })
+        break
+      case 'Cancelado':
+        Cart.findByPk(cartID).then(cart => {
+          if (cart.cancelDate === null) {
+            Cart.update(
+              {
+                status: 'Cancelado',
+                cancelDate: new Date()
+              },
+              { where: { id: cartID } }
+            )
+          }
+        })
+        break
+      default:
+
+        break
+    }
+
+    const cart = await Cart.findByPk(cartID)
+    return cart
+  } else {
+    throw new Error('Debes enviar un status válido')
+  }
 }
 
 module.exports = {
