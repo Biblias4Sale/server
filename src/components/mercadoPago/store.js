@@ -40,15 +40,15 @@ const getPaymentLink = async (request) => {
 }
 
 const getAllPayments = async () => {
-  try{
+  try {
     const response = await axios.get('https://api.mercadopago.com/v1/payments/search', { headers: { Authorization: `Bearer ${ACCESS_TOKEN}` } })
-    let data = response.data.results
-    if(response){
+    const data = response.data.results
+    if (response) {
       const newResponse = data.map((r) => {
-      let details = { 
+        const details = {
           user_email: r.payer.email,
           order_id: r.id,
-          payment_status:{
+          payment_status: {
             approved_date: r.date_approved,
             payment_market_status: r.status_detail,
             status: r.status
@@ -60,28 +60,23 @@ const getAllPayments = async () => {
         return details
       })
       newResponse.map(async (p) => {
-        if(p.payment_status.status && p.payment_status.status === 'approved'){
-            let changeStatus = await Cart.findOne({
-              where:{
-                id: p.client_cart
-              }
-            })
-            changeStatus.status = 'En preparación'
-            changeStatus.confirmationDate = moment().format('YYYY-MM-DD HH:mm')
-            changeStatus.save()
-            console.log(changeStatus)
+        if (p.payment_status.status && p.payment_status.status === 'approved') {
+          const changeStatus = await Cart.findOne({
+            where: {
+              id: p.client_cart
+            }
+          })
+          changeStatus.status = 'En preparación'
+          changeStatus.confirmationDate = moment().format('YYYY-MM-DD HH:mm')
+          changeStatus.save()
+          console.log(changeStatus)
         }
       })
       return newResponse
     }
-  } catch (error){
+  } catch (error) {
     console.log(error)
   }
-
-
-
-
-
 }
 
 const getPaymentById = async (id) => {
