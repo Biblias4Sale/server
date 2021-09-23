@@ -92,7 +92,7 @@ const getDetail = async (productId) => {
     if (!producto) throw new Error('Producto no encontrado')
     return producto
   } catch ({ message: error }) {
-    throw new Error(error)
+    console.log('El error'.inverse.red)
   }
 }
 

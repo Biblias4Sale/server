@@ -1,5 +1,17 @@
 const bcriptjs = require('bcryptjs')
-const { User } = require('../../db')
+const { User, Product } = require('../../db')
+
+const getStatistic = async ({ data }) => {
+  if (data === 'customers') {
+    const res = await User.findAndCountAll()
+    return res.count
+  }
+
+  if (data === 'products') {
+    const res = await Product.findAndCountAll()
+    return res.count
+  }
+}
 
 const getUsers = async () => {
   try {
@@ -104,6 +116,7 @@ const usersToCSV = async () => {
 }
 
 module.exports = {
+  getStatistic,
   getUsers,
   newUser,
   delUser,
