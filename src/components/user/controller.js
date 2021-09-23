@@ -12,11 +12,11 @@ const newUser = async ({ name, lastName, email, password }) => {
     name,
     lastName,
     email,
-    type: 'Super',
+    type: 'User',
     password: bcryptjs.hashSync(password, salt)
   }
 
-  await store.newUser(userInfo)
+  const cart = await store.newUser(userInfo)
   try {
     const tokenValidation = await tokenValidators(email, password)
     if (tokenValidation) return tokenValidation
@@ -24,7 +24,7 @@ const newUser = async ({ name, lastName, email, password }) => {
     if (await validation.mailCreateAccount()) mail.createAccount(user)
     if (await validation.smsCreateAccount()) sms.createAccount(user)
 
-    return ({ user, token })
+    return ({ user, token, cartID: cart.id })
   } catch (error) {
     throw new Error(error)
   }
