@@ -6,7 +6,7 @@ const { subCategoriesLoader } = require('./src/loaders/subcategoriesLoader')
 const { productLoader } = require('./src/loaders/productLoader')
 const { brandLoader } = require('./src/loaders/brandLoader')
 const { subCategoryCamaras, subCategoryLentes, subCategoryLuces, subCategoryAccesorios, subCategoryCargaYbat } = require('./config')
-
+const { newAdminUser} = require('./src/loaders/newAdmin')
 const { conn } = require('./src/db.js')
 const { force } = require('./config.js')
 const PORT = process.env.PORT || 3002
@@ -22,6 +22,7 @@ const runServer = async () => {
   } catch (error) {
     console.log(error)
   }
+  await newAdminUser()
   await settingsMarketingLoader()
   await categoriesLoader()
   await brandLoader()

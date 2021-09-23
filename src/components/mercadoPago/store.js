@@ -66,10 +66,12 @@ const getAllPayments = async () => {
               id: p.client_cart
             }
           })
-          changeStatus.status = 'En preparación'
-          changeStatus.confirmationDate = moment().format('YYYY-MM-DD HH:mm')
-          changeStatus.save()
-          console.log(changeStatus)
+          if (changeStatus && changeStatus === 'Pendiente de confirmación de pago') {
+            changeStatus.status = 'En preparación'
+            changeStatus.preparationDate = moment().format('YYYY-MM-DD HH:mm')
+            changeStatus.save()
+            console.log(changeStatus)
+          }
         }
       })
       return newResponse
