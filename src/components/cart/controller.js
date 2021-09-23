@@ -2,6 +2,7 @@ const validation = require('../../helpers/marketingValidators')
 const mail = require('../marketing/handler/mailing')
 const sms = require('../marketing/handler/sms')
 const store = require('./store')
+const moment = require('moment')
 
 const getCart = async (id) => {
   try {
@@ -44,7 +45,7 @@ const getOrders = async (id) => {
         totalAmount: cart.totalAmount,
         productSolds,
         paymentPendingDate: cart.paymentPending,
-        confirmationDate: cart.confirmationPending,
+        confirmationDate: moment(cart.confirmationPending).format('L'),
         preparationDate: cart.preparationDate,
         dispatchDate: cart.dispatchDate,
         deliveryDate: cart.deliveryDate,
