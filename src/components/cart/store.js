@@ -1,5 +1,8 @@
 const { Cart, Product, User, ProductSold, Brand } = require('../../db')
 const { Op } = require('sequelize')
+const mail = require('../marketing/handler/mailing')
+const sms = require('../marketing/handler/sms')
+const validation = require('../../helpers/marketingValidators')
 
 const getCart = async (id) => {
   try {
@@ -208,6 +211,8 @@ const updateState = async (cartID, status) => {
         })
         break
       case 'Despachado':
+        if (await validation.mailConfirmCart()) mail.confirmCart('amigo')
+        if (await validation.smsConfirmCart()) sms.confirmCart('amigo')
         Cart.findByPk(cartID).then(cart => {
           if (cart.dispatchDate === null) {
             Cart.update(
@@ -221,6 +226,8 @@ const updateState = async (cartID, status) => {
         })
         break
       case 'Entregado':
+        if (await validation.mailConfirmCart()) mail.confirmCart('amigo')
+        if (await validation.smsConfirmCart()) sms.confirmCart('amigo')
         Cart.findByPk(cartID).then(cart => {
           if (cart.deliveryDate === null) {
             Cart.update(
@@ -234,6 +241,8 @@ const updateState = async (cartID, status) => {
         })
         break
       case 'Cancelado':
+        if (await validation.mailConfirmCart()) mail.confirmCart('amigo')
+        if (await validation.smsConfirmCart()) sms.confirmCart('amigo')
         Cart.findByPk(cartID).then(cart => {
           if (cart.cancelDate === null) {
             Cart.update(

@@ -24,6 +24,15 @@ const getOrders = async () => {
   }
 }
 
+const getUser = async (id) => {
+  try {
+    return await User.findByPk(id)
+  } catch ({ message: error }) {
+    console.log(error)
+    throw new Error(error)
+  }
+}
+
 const getUsers = async () => {
   try {
     return await User.findAll()
@@ -128,6 +137,7 @@ const usersToCSV = async () => {
 
 module.exports = {
   getOrders,
+  getUser,
   getUsers,
   newUser,
   delUser,

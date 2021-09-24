@@ -16,7 +16,31 @@ const confirmCart = ({ name, email }) => {
     .catch((error) => { console.error(error) })
 }
 
+const dispatchedOrder = ({ name, email }) => {
+  sgMail
+    .send(mail.confirmCart(name, email))
+    .then(() => { console.log('Email sent') })
+    .catch((error) => { console.error(error) })
+}
+
+const deliveredOrder = ({ name, email }) => {
+  sgMail
+    .send(mail.confirmCart(name, email))
+    .then(() => { console.log('Email sent') })
+    .catch((error) => { console.error(error) })
+}
+
+const canceledOrder = ({ name, email }) => {
+  sgMail
+    .send(mail.confirmCart(name, email))
+    .then(() => { console.log('Email sent') })
+    .catch((error) => { console.error(error) })
+}
+
 module.exports = {
   createAccount,
-  confirmCart
+  confirmCart,
+  dispatchedOrder,
+  deliveredOrder,
+  canceledOrder
 }
