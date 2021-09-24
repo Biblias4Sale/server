@@ -16,6 +16,7 @@ const createAccount = (name, email) => {
           <li>Accesorios</>
         </ul>
       </p>
+      <footer>NoiLoan Camera Store</footer>
       `
     }
   )
@@ -38,6 +39,78 @@ const confirmCart = (name, email) => {
           <li>Producto 2</>
         </ul>
       </p>
+      <footer>NoiLoan Camera Store</footer>
+      `
+    }
+  )
+}
+
+const dispatchedOrder = (name, email) => {
+  return (
+    {
+      to: `${email}`, // Change to your recipient
+      from: 'contact@diegonaranjo.co', // Change to your verified sender
+      subject: `Hola ${name}, tu pedido ha sido despachado`,
+      text: 'and easy to do anywhere, even with Node.js',
+      html: `
+      <h2><strong>${name}</strong> en un máximo de 3 días hábiles recibirás tu pedido</h2>
+      <hr>
+      <h3>Resumen del pedido</h3>
+      <p>
+        <ul>
+          <li>Producto 1</>
+          <li>Producto 2</>
+        </ul>
+      </p>
+      <footer>NoiLoan Camera Store</footer>
+      `
+    }
+  )
+}
+
+const deliveredOrder = (name, email) => {
+  return (
+    {
+      to: `${email}`, // Change to your recipient
+      from: 'contact@diegonaranjo.co', // Change to your verified sender
+      subject: `Hola ${name}, tu pedido ha sido entregado`,
+      text: 'and easy to do anywhere, even with Node.js',
+      html: `
+      <h2><strong>${name}</strong> tu pedido ya está en tus manos</h2>
+      <hr>
+      <h3>Resumen del pedido</h3>
+      <p>
+        <ul>
+          <li>Producto 1</>
+          <li>Producto 2</>
+        </ul>
+      </p>
+      <p>Recuerda dirigirte a tu historial y evaluar tus productos</p>
+      <footer>NoiLoan Camera Store</footer>
+      `
+    }
+  )
+}
+
+const canceledOrder = (name, email) => {
+  return (
+    {
+      to: `${email}`, // Change to your recipient
+      from: 'contact@diegonaranjo.co', // Change to your verified sender
+      subject: `Hola ${name}, tu pedido ha sido cancelado`,
+      text: 'and easy to do anywhere, even with Node.js',
+      html: `
+      <h2><strong>${name}</strong> lamentablemente tenemos que cancelar tu pedido.</h2>
+      <hr>
+      <h3>Resumen del pedido</h3>
+      <p>
+        <ul>
+          <li>Producto 1</>
+          <li>Producto 2</>
+        </ul>
+      </p>
+      <p>Nuestro equipo de soporte se comunicara contigo para coordinar la devolución del dinero</p>
+      <footer>NoiLoan Camera Store</footer>
       `
     }
   )
@@ -45,5 +118,8 @@ const confirmCart = (name, email) => {
 
 module.exports = {
   createAccount,
-  confirmCart
+  confirmCart,
+  dispatchedOrder,
+  deliveredOrder,
+  canceledOrder
 }
