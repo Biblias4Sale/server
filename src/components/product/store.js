@@ -87,8 +87,16 @@ const getDetail = async (productId) => {
       }, {
         model: Brand,
         exclude: ['createdAt', 'updatedAt']
+      }, {
+        model: SubCategory,
+        exclude: ['createdAt', 'updatedAt'],
+        include: {
+          model: Category,
+          exclude: ['createdAt', 'updatedAt']
+        }
       }]
     })
+
     if (!producto) throw new Error('Producto no encontrado')
     return producto
   } catch ({ message: error }) {

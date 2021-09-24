@@ -61,6 +61,8 @@ const getDetail = async (id) => {
       price: data.price,
       rating: data.rating,
       stock: data.stock,
+      category: data.subCategory.dataValues.category.dataValues.name,
+      subCategory: data.subCategory.dataValues.name,
       reviews
     }
     return response
