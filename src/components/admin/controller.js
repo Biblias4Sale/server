@@ -4,6 +4,37 @@ const stringify = require('csv-stringify')
 const path = require('path')
 const bcryptjs = require('bcryptjs')
 const store = require('./store')
+const moment = require('moment')
+
+const getOrders = async () => {
+  const carts = await store.getOrders()
+  const res = carts.map(cart => {
+    const productSolds = cart.ProductSolds.map(product => {
+      return {
+        idProduct: product.product.id,
+        price: product.price,
+        qty: product.qty,
+        brand: product.product.brand.name,
+        model: product.product.model,
+        img: product.product.img
+      }
+    })
+    return {
+      userId: cart.UserId,
+      cartId: cart.id,
+      status: cart.status,
+      totalAmount: cart.totalAmount,
+      productSolds,
+      paymentPendingDate: moment(cart.paymentPending).format('YYYY-MM-DD HH:mm'),
+      confirmationPending: moment(cart.confirmationPending).format('YYYY-MM-DD HH:mm'),
+      preparationDate: moment(cart.preparationDate).format('YYYY-MM-DD HH:mm'),
+      dispatchDate: moment(cart.dispatchDate).format('YYYY-MM-DD HH:mm'),
+      deliveryDate: moment(cart.deliveryDate).format('YYYY-MM-DD HH:mm'),
+      cancelDate: moment(cart.cancelDate).format('YYYY-MM-DD HH:mm')
+    }
+  })
+  return res
+}
 
 const getUsers = async () => await store.getUsers()
 
@@ -68,6 +99,7 @@ const usersToCSV = async () => {
 }
 
 module.exports = {
+  getOrders,
   getUsers,
   newUser,
   delUser,

@@ -1,5 +1,13 @@
 const { Marketing } = require('../../db')
 
+const getSettingsMarketing = async () => {
+  try {
+    return await Marketing.findByPk(1)
+  } catch ({ message: error }) {
+    throw new Error(error)
+  }
+}
+
 const settingsMarketing = async (settings) => {
   try {
     const options = await Marketing.findByPk(1)
@@ -24,5 +32,6 @@ const settingsMarketing = async (settings) => {
 }
 
 module.exports = {
+  getSettingsMarketing,
   settingsMarketing
 }
