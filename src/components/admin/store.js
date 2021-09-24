@@ -1,5 +1,28 @@
 const bcriptjs = require('bcryptjs')
-const { User } = require('../../db')
+const { User, Cart, ProductSold, Product, Brand } = require('../../db')
+
+const getOrders = async () => {
+  try {
+    const carts = await Cart.findAll({
+      attributes: { exclude: ['createdAt', 'updatedAt'] },
+      include: {
+        model: ProductSold,
+        attributes: ['qty', 'price'],
+        include: {
+          model: Product,
+          attributes: ['id', 'model', 'img'],
+          include: {
+            model: Brand,
+            attributes: ['name']
+          }
+        }
+      }
+    })
+    return carts
+  } catch ({ message: error }) {
+    throw new Error(error)
+  }
+}
 
 const getUsers = async () => {
   try {
@@ -104,6 +127,7 @@ const usersToCSV = async () => {
 }
 
 module.exports = {
+  getOrders,
   getUsers,
   newUser,
   delUser,
