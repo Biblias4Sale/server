@@ -19,6 +19,10 @@ router.get('/orders/:id', (req, res) => {
     .catch(e => response.error(req, res, 404, e, 'Cart not found'))
 })
 
+router.get('/allOrders', (req, res) => {
+  res.json(controller.getAllOrders())
+})
+
 router.post('/confirmCart/:cartId/:id', [
   statusCartValidation,
   validation

@@ -32,6 +32,28 @@ const getCart = async (id) => {
   }
 }
 
+const getAllOrders = async () => {
+  try {
+    const orders = await User.findAll({
+      include: {
+        model: Cart,
+        attributes: { exclude: ['createdAt', 'updatedAt'] },
+        include: {
+          model: ProductSold,
+          attributes: { exclude: ['createdAt', 'updatedAt'] },
+          include: {
+            model: Product,
+            attributes: { exclude: ['createdAt', 'updatedAt'] }
+          }
+        }
+      }
+    })
+    return orders
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 const getOrders = async (id) => {
   try {
     const cart = await Cart.findAll({
@@ -266,5 +288,6 @@ module.exports = {
   addProduct,
   subProduct,
   delProduct,
-  updateState
+  updateState,
+  getAllOrders
 }

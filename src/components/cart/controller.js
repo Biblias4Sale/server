@@ -26,6 +26,15 @@ const getCart = async (id) => {
   }
 }
 
+const getAllOrders = async () => {
+  try {
+    const result = await store.getAllOrders()
+    return result
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 const getOrders = async (id) => {
   try {
     getAllPayments()
@@ -120,5 +129,6 @@ module.exports = {
   addProduct,
   subProduct,
   delProduct,
-  updateState
+  updateState,
+  getAllOrders
 }
