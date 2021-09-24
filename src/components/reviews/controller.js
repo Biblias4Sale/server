@@ -9,7 +9,8 @@ const getReview = async (productId) => {
       const fechaMoment = moment(fecha).format('L')
       return {
         user: obj.Cart.dataValues.User.name,
-        points: obj.dataValues.Review.dataValues.rating,
+        title: obj.Review.title,
+        rating: obj.Review.rating,
         description: obj.dataValues.Review.dataValues.description,
         fecha: fechaMoment
       }
