@@ -39,11 +39,11 @@ const getDetail = async (id) => {
     const data = await store.getDetail(id)
     const reviews = []
     data.ProductSolds.forEach(obj => {
-      if (obj.dataValues.Review !== null) {
-        const fecha = obj.dataValues.Review.createdAt
+      if (obj.Review !== null) {
+        const fecha = obj.Review.createdAt
         const fechaMoment = moment(fecha).format('L')
         reviews.push({
-          user: obj.Cart.dataValues.User.name,
+          user: obj.Cart.User.name,
           title: obj.Review.title,
           rating: obj.Review.rating,
           description: obj.Review.description,
