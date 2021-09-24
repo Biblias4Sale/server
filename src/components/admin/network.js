@@ -12,6 +12,13 @@ const response = require('../../responses')
 // roleValidation,
 // validation
 // ]
+router.get('/getorders', (req, res) => {
+  controller
+    .getOrders()
+    .then(message => response.success(req, res, 200, message))
+    .catch(e => response.error(req, res, 404, e, 'Not users'))
+})
+
 router.get('/', (req, res) => {
   controller
     .getUsers()
