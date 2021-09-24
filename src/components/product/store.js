@@ -101,14 +101,14 @@ const getReview = () => {
 }
 
 const editProduct = async (prod) => {
-  const { id, model, img, description, price, points, brand, category, subCategory } = prod
+  const { id, model, img, description, price, rating, brand, category, subCategory } = prod
 
   await Product.update(
     {
       model: model,
       img: img,
       description: description,
-      points: points,
+      rating: rating,
       price: price
     }, { where: { id: id } })
 
@@ -293,6 +293,7 @@ const addReview = async (productSoldId, review) => {
             for (let i = 0; i < ratings.length; i++) {
               console.log(ratings[i].Review.rating)
               rank = rank + parseInt(ratings[i].Review.rating)
+              console.log(rank)
             }
             const promedio = Math.floor(rank / ratings.length)
             productSold.product.rating = promedio
