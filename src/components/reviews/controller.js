@@ -4,8 +4,8 @@ const moment = require('moment')
 const getReview = async (productId) => {
   try {
     const response = await store.getReview(productId)
-    return response.dataValues.ProductSolds.map(obj => {
-      const fecha = obj.dataValues.Review.dataValues.createdAt
+    return response.ProductSolds.map(obj => {
+      const fecha = obj.Review.createdAt
       const fechaMoment = moment(fecha).format('L')
       return {
         user: obj.Cart.User.name,
