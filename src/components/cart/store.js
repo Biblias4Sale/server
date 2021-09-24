@@ -11,11 +11,7 @@ const getCart = async (id) => {
         attributes: ['id', 'qty'],
         include: {
           model: Product,
-          attributes: ['id', 'model', 'img', 'price', 'stock'],
-          include: {
-            model: Brand,
-            attributes: ['name']
-          }
+          attributes: ['id', 'brand', 'model', 'img', 'price', 'stock']
         }
       }
     })
@@ -23,7 +19,7 @@ const getCart = async (id) => {
     if (!cart) {
       const user = User.findByPk(id)
       const cart = await user.createCart({ status: 'En proceso' })
-      return cart
+      return cart.id
     }
     return cart
   } catch ({ message: error }) {
