@@ -92,7 +92,7 @@ const getDetail = async (productId) => {
     if (!producto) throw new Error('Producto no encontrado')
     return producto
   } catch ({ message: error }) {
-    throw new Error(error)
+    console.log('El error'.inverse.red)
   }
 }
 
@@ -269,7 +269,7 @@ const addReview = async (productSoldId, review) => {
 
     const hasReview = await productSold.getReview()
 
-    if (productSold.Cart.status !== 'Entregado ') {
+    if (productSold.Cart.status !== 'Entregado') {
       throw new Error('No puedes hacer un review a un producto que no fue entregado')
     }
 

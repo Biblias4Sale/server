@@ -12,6 +12,7 @@ const getReview = async (productId) => {
         rating: obj.Review.rating,
         title: obj.Review.title,
         description: obj.Review.description,
+
         fecha: fechaMoment
       }
     })
