@@ -8,9 +8,10 @@ const getReview = async (productId) => {
       const fecha = obj.dataValues.Review.dataValues.createdAt
       const fechaMoment = moment(fecha).format('L')
       return {
-        user: obj.Cart.dataValues.User.name,
-        points: obj.dataValues.Review.dataValues.rating,
-        description: obj.dataValues.Review.dataValues.description,
+        user: obj.Cart.User.name,
+        rating: obj.Review.rating,
+        title: obj.Review.title,
+        description: obj.Review.description,
         fecha: fechaMoment
       }
     })
