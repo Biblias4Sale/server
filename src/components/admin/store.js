@@ -2,15 +2,11 @@ const bcriptjs = require('bcryptjs')
 const { User, Product } = require('../../db')
 
 const getStatistic = async ({ data }) => {
-  if (data === 'customers') {
-    const res = await User.findAndCountAll()
-    return res.count
+  const statistic = {
+    customers: await User.findAndCountAll(),
+    products: await Product.findAndCountAll()
   }
-
-  if (data === 'products') {
-    const res = await Product.findAndCountAll()
-    return res.count
-  }
+  return statistic[data].count
 }
 
 const getUsers = async () => {
