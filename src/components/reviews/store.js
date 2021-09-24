@@ -28,7 +28,7 @@ const addReview = async (productSoldId, review) => {
 
     const hasReview = await productSold.getReview()
 
-    if (productSold.Cart.status !== 'Entregado ') {
+    if (productSold.Cart.status !== 'Entregado') {
       throw new Error('No puedes hacer un review a un producto que no fue entregado')
     }
 
