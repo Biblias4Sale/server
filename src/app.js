@@ -13,7 +13,7 @@ const routes = require('./routes')
 // const session = require('express-session')
 const server = express()
 
-server.name = 'NoiLan'
+server.name = 'NoiLoan'
 // server.use(cors())
 // server.use(cors({ credentials: true }))
 
